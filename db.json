@@ -1,0 +1,28 @@
+{
+  "users": [
+    {
+      "id": "u_000",
+      "role": "ADMIN",
+      "name": "Administrador General",
+      "email": "admin@example.com",
+      "password": "Admin#123",
+      "phone": "+51 999 111 222"
+    },
+    {
+      "id": "u_001",
+      "role": "HOUSEHOLD_HEAD",
+      "name": "Ana Hogar",
+      "email": "hogar@example.com",
+      "password": "Secret#123",
+      "phone": "+51 987 654 321"
+    },
+    {
+      "id": "u_002",
+      "role": "BREWMASTER",
+      "name": "Luis Maestro",
+      "email": "cerveza@example.com",
+      "password": "Secret#123",
+      "phone": "+51 912 345 678"
+    }
+  ]
+}
