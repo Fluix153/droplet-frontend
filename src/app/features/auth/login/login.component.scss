@@ -4,9 +4,12 @@
 $color-text-strong: #111827;
 $color-text-muted: #4B5563;
 $color-primary: #06B6D4;
-$color-border: #E5E7EB;
-$radius-card: 16px;
+$color-border: #D1D5DB;
 $radius-input: 10px;
+
+// Variables de fuentes
+$font-heading: 'Poppins', sans-serif;
+$font-body: 'Roboto', sans-serif;
 
 // Contenedor principal
 .login-container {
@@ -23,7 +26,7 @@ $radius-input: 10px;
   height: 698px;
   max-width: 448px;
   opacity: 1;
-  background: transparent !important;
+  background: none;
   box-shadow: none !important;
   border: none !important;
 }
@@ -43,7 +46,6 @@ $radius-input: 10px;
   height: auto;
   display: block;
   margin-bottom: 1rem;
-
 }
 
 // Header del formulario dentro de mat-card-header
@@ -53,6 +55,7 @@ $radius-input: 10px;
   width: 100%;
 
   .login-title {
+    font-family: $font-heading;
     font-size: 30px;
     font-weight: 600;
     color: $color-text-strong;
@@ -61,6 +64,7 @@ $radius-input: 10px;
   }
 
   .login-subtitle {
+    font-family: $font-body;
     font-size: 16px;
     color: $color-text-muted;
     margin: 0;
@@ -70,40 +74,26 @@ $radius-input: 10px;
 
 // Contenedor del form
 .card-content {
-  box-shadow: 8px 10px -6px #0000001A;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
+  box-shadow: 0 8px 10px -6px hsla(0, 0%, 0%, 0.1),
+  0px 20px 25px -5px hsla(0, 0%, 0%, 0.1);
+  border-radius: 16px;
   background: #fff;
   padding: 2rem;
 }
 
 // Formulario
 .login-form {
+  font-family: $font-body;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 0.6rem;
 
   // Campos del formulario
   .form-field {
-    width: 100%;
 
-    .mat-mdc-form-field-wrapper {
-      height: 48px;
-    }
-
-    .mat-mdc-text-field-wrapper {
-      border-radius: $radius-input !important;
-    }
-
-    .mat-mdc-form-field-outline {
-      border-radius: $radius-input !important;
-    }
-
-    // Input focus state
-    &.mat-focused {
-      .mat-mdc-form-field-outline-thick {
-        color: $color-primary !important;
-      }
+    input::placeholder {
+      color: #9CA3AF !important;
+      opacity: 1;
     }
   }
 
@@ -114,14 +104,17 @@ $radius-input: 10px;
     align-items: center;
     margin-top: -8px;
 
+
     .remember-checkbox {
+
       .mat-mdc-checkbox-label {
+        font-family: $font-body;
         color: $color-text-muted;
-        font-size: 14px;
       }
     }
 
     .forgot-link {
+      font-family: $font-body;
       color: $color-primary;
       text-decoration: none;
       font-size: 14px;
@@ -135,15 +128,17 @@ $radius-input: 10px;
 
   // Botón de inicio de sesión
   .signin-button {
+    font-family: $font-heading;
     width: 100%;
     height: 48px;
     border-radius: $radius-input;
     font-size: 16px;
     font-weight: 600;
-    background-color: $color-primary !important;
+    background-color: $color-primary;
+    color: #fff;
 
     &:hover {
-      background-color: color.adjust($color-primary, $lightness: -8%) !important;
+      background-color: color.adjust($color-primary, $lightness: -8%);
     }
   }
 
@@ -151,41 +146,52 @@ $radius-input: 10px;
   .divider-section {
     display: flex;
     align-items: center;
-    gap: 16px;
-    margin: 8px 0;
+    width: 100%;
+    margin: 16px 0;
 
-    .mat-mdc-divider {
+    .divider-mat {
       flex: 1;
-      border-color: $color-border !important;
+      min-width: 0;
+      border-top-width: 1px !important;
+      border-color: #6B7280 !important;
+      opacity: 0.3;
+      margin: 0 !important;
     }
 
     .divider-text {
+      font-family: $font-body;
       color: $color-text-muted;
       font-size: 14px;
       white-space: nowrap;
+      padding: 0 8px;
+      text-align: center;
     }
   }
 
   // Botones sociales
   .social-buttons {
     display: flex;
-    gap: 16px;
+    column-gap: 1rem;
 
     .social-button {
+      font-family: $font-body;
       flex: 1;
-      height: 48px;
+      height: 2.4rem;
       border-radius: $radius-input;
-      border-color: $color-border !important;
-      color: $color-text-muted !important;
+      border-color: $color-border;
+      color: $color-text-muted;
       font-weight: 500;
 
-      .mat-icon {
+      .social-icon {
+        width: 24px;
+        height: 24px;
         margin-right: 8px;
+        vertical-align: middle;
       }
 
       &:hover {
         background-color: #f9fafb !important;
-        border-color: color.adjust($color-border, $lightness: -10%) !important;
+        border-color: color.adjust($color-border, $lightness: 10%) !important;
       }
     }
   }
@@ -196,11 +202,13 @@ $radius-input: 10px;
     margin-top: 8px;
 
     .signup-text {
+      font-family: $font-body;
       color: $color-text-muted;
       font-size: 14px;
     }
 
     .signup-anchor {
+      font-family: $font-body;
       color: $color-primary;
       text-decoration: none;
       font-weight: 600;

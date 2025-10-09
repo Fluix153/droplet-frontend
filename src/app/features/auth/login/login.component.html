@@ -2,10 +2,8 @@
     <mat-card class="login-card">
         <mat-card-header class="mat-card-header">
             <!-- Logo -->
-            <div class="droplet-logo-container">
-                <img src="/icons/droplet-logo.svg" alt="Droplet Logo" class="droplet-svg">
-            </div>
-            <!-- Header -->
+            <img ngSrc="/icons/droplet-login.svg" width="64" height="64" alt="Droplet Logo" class="droplet-svg">
+            <!-- Welcome -->
             <div class="login-header">
                 <h1 class="login-title">Welcome to Droplet</h1>
                 <p class="login-subtitle">Sign in to your liquid management dashboard</p>
@@ -16,8 +14,8 @@
             <!-- Form -->
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit($event)" class="login-form">
                 <!-- Email Field -->
+                <mat-label>Email</mat-label>
                 <mat-form-field appearance="outline" class="form-field">
-                    <mat-label>Email</mat-label>
                     <input
                             matInput
                             type="email"
@@ -25,12 +23,11 @@
                             placeholder="Enter your email"
                             autocomplete="email"
                     >
-                    <mat-icon matSuffix>email</mat-icon>
                 </mat-form-field>
 
                 <!-- Password Field -->
+                <mat-label>Password</mat-label>
                 <mat-form-field appearance="outline" class="form-field">
-                    <mat-label>Password</mat-label>
                     <input
                             matInput
                             [type]="hidePassword ? 'password' : 'text'"
@@ -73,13 +70,13 @@
                 <!-- Sign Up Link -->
                 <div class="signup-link">
                     <span class="signup-text">Don't have an account?</span>
-                    <a routerLink="/auth/register" class="signup-anchor">Sign up</a>
+                    <a [routerLink]="['/auth/register']" class="signup-anchor">Sign up</a>
                 </div>
-                <!-- Divider -->
+                <!-- Divider variante con mat-divider -->
                 <div class="divider-section">
-                    <mat-divider></mat-divider>
+                    <mat-divider class="divider-mat" role="presentation"></mat-divider>
                     <span class="divider-text">Or continue with</span>
-                    <mat-divider></mat-divider>
+                    <mat-divider class="divider-mat" role="presentation"></mat-divider>
                 </div>
                 <!-- Social Buttons -->
                 <div class="social-buttons">
@@ -89,7 +86,7 @@
                             type="button"
                             (click)="$event.preventDefault()"
                     >
-                        <mat-icon>login</mat-icon>
+                        <img ngSrc="/icons/google.svg" width="24" height="24" alt="Google" class="social-icon">
                         Google
                     </button>
                     <button
@@ -98,12 +95,10 @@
                             type="button"
                             (click)="$event.preventDefault()"
                     >
-                        <mat-icon>alternate_email</mat-icon>
+                        <img ngSrc="/icons/twitter.svg" width="24" height="24" alt="Twitter" class="social-icon">
                         Twitter
                     </button>
                 </div>
-
-
             </form>
         </mat-card-content>
     </mat-card>
