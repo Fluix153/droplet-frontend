@@ -1,0 +1,260 @@
+@use 'sass:color';
+
+//Variables globales
+$color-primary: #10B981;
+$color-text-strong: #111827;
+$color-text-muted: #4B5563;
+$color-border: #6B7280;
+$radius-input: 10px;
+
+// Fuentes
+$font-heading: 'Poppins', sans-serif;
+$font-body-register: 'Roboto', sans-serif;
+
+// Contenedor principal
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #F3F4F6 0%, #F0FDF4 100%);
+}
+
+// Card principal de registro
+.register-card {
+  width: 448px;
+  height: 698px;
+  max-width: 448px;
+  opacity: 1;
+  background: none;
+  box-shadow: none;
+  border: none;
+}
+
+.mat-card-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.register-svg {
+  width: 20vw;
+  max-width: 11rem;
+  min-width: 3rem;
+  height: auto;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.register-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  width: 100%;
+
+  .register-title {
+    font-family: $font-heading;
+    font-size: 30px;
+    font-weight: 600;
+    color: $color-text-strong;
+    margin: 0 0 8px 0;
+    line-height: 1.2;
+  }
+
+  .register-subtitle {
+    font-family: $font-body-register;
+    font-size: 16px;
+    color: $color-text-muted;
+    margin: 0;
+    line-height: 1.5;
+  }
+}
+
+.card-content-register {
+  box-shadow: 0 8px 10px -6px hsla(0, 0%, 0%, 0.1),
+  0px 20px 25px -5px hsla(0, 0%, 0%, 0.1);
+  border-radius: 16px;
+  background: #fff;
+  padding: 2rem;
+}
+
+.mat-card-header .register-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  width: 100%;
+
+  .register-title {
+    font-family: $font-heading;
+    font-size: 30px;
+    font-weight: 600;
+    color: $color-text-strong;
+    margin: 0 0 8px 0;
+    padding-top: 1rem;
+  }
+
+  .register-subtitle {
+    font-family: $font-body-register;
+    font-size: 16px;
+    color: $color-text-muted;
+    line-height: 1.5;
+  }
+
+}
+
+// Formulario de registro
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  background-color: #FFFFFF;
+
+  .form-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 1rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+
+    mat-label {
+      font-family: $font-body-register;
+      color: $color-text-muted;
+      font-size: 0.875rem;
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  .form-field {
+
+
+    input::placeholder {
+      color: #9CA3AF;
+      opacity: 1;
+    }
+  }
+
+  //Checkbox de términos y condiciones
+  .terms-checkbox {
+    .terms-link {
+      font-family: $font-heading;
+      color: $color-primary;
+      text-decoration: none;
+      font-weight: 600;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+  }
+
+  //Boton registrar
+  .create-account-button {
+    font-family: $font-heading;
+    width: 100%;
+    height: 48px;
+    border-radius: $radius-input;
+    font-size: 16px;
+    font-weight: 600;
+    background-color: $color-primary;
+    color: #FFFFFF;
+  }
+
+  // Divider
+  .divider-section-register {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin: 16px 0;
+
+    .divider-mat {
+      flex: 1;
+      min-width: 0;
+      border-top-width: 1px !important;
+      border-color: $color-border;
+      opacity: 0.3;
+      margin: 0 !important;
+    }
+
+    .divider-text {
+      font-family: $font-body-register;
+      color: $color-text-muted;
+      font-size: 14px;
+      white-space: nowrap;
+      padding: 0 8px;
+      text-align: center;
+    }
+  }
+
+  //Link de inicio de sesión
+  .signin-link {
+    text-align: center;
+    margin-top: 8px;
+
+    .signin-text {
+      font-family: $font-body-register;
+      color: $color-text-muted;
+      font-size: 14px;
+    }
+
+    .signin-anchor {
+      font-family: $font-body-register;
+      color: $color-primary;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 14px;
+      margin-left: 4px;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+
+  // Social buttons
+  .container-social-buttons {
+    display: flex;
+    column-gap: 1rem;
+
+    .social-button {
+      font-family: $font-body-register;
+      flex: 1;
+      height: 2.4rem;
+      border-radius: $radius-input;
+      border-color: $color-border;
+      color: $color-text-muted;
+      font-weight: 500;
+
+      .social-icon {
+        width: 24px;
+        height: 24px;
+        margin-right: 8px;
+        vertical-align: middle;
+      }
+
+      &:hover {
+        background-color: #f9fafb;
+        border-color: color.adjust($color-border, $lightness: -10%);
+      }
+    }
+  }
+
+  // Mensajes de error
+  .error-message {
+    color: #b91c1c;
+    background: #fee2e2;
+    border: 1px solid #fca5a5;
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    margin: 12px 0 16px 0;
+    font-size: 15px;
+    text-align: center;
+    font-weight: 500;
+  }
+}
