@@ -1,0 +1,20 @@
+<div class="page-container">
+    <header class="page-header">
+        <h1>Alerts & Notifications</h1>
+        <p>Monitor and manage your water system alerts and notification preferences.</p>
+    </header>
+
+    <app-alerts-summary [summary]="(alertsSummary$ | async)"></app-alerts-summary>
+
+    <main class="main-content">
+        <div class="alerts-section">
+            <app-alerts-list
+                    [alerts]="(activeAlerts$ | async)"
+                    (alertDismissed)="handleDismiss($event)">
+            </app-alerts-list>
+        </div>
+        <aside class="settings-section">
+            <app-notification-settings [settings]="(notificationSettings$ | async)"></app-notification-settings>
+        </aside>
+    </main>
+</div>

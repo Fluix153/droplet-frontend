@@ -1,0 +1,55 @@
+@if (settings) {
+    <div class="settings-container">
+        <h3>Notification Settings</h3>
+
+        <div class="setting-group">
+            <h4>Alert Types</h4>
+            <label class="checkbox-item" for="critical">
+                <input type="checkbox" id="critical"
+                       [ngModel]="settings.alertTypes?.criticalAlerts"
+                       (ngModelChange)="settings.alertTypes && (settings.alertTypes.criticalAlerts = $event)">
+                <span>Critical Alerts</span>
+            </label>
+
+            <label class="checkbox-item" for="usage">
+                <input type="checkbox" id="usage"
+                       [ngModel]="settings.alertTypes?.usageWarnings"
+                       (ngModelChange)="settings.alertTypes && (settings.alertTypes.usageWarnings = $event)">
+                <span>Usage Warnings</span>
+            </label>
+
+            <label class="checkbox-item" for="maintenance">
+                <input type="checkbox" id="maintenance"
+                       [ngModel]="settings.alertTypes?.maintenanceReminders"
+                       (ngModelChange)="settings.alertTypes && (settings.alertTypes.maintenanceReminders = $event)">
+                <span>Maintenance Reminders</span>
+            </label>
+        </div>
+
+        <div class="setting-group">
+            <h4>Delivery Methods</h4>
+            <label class="checkbox-item" for="push">
+                <input type="checkbox" id="push"
+                       [ngModel]="settings.deliveryMethods?.pushNotifications"
+                       (ngModelChange)="settings.deliveryMethods && (settings.deliveryMethods.pushNotifications = $event)">
+                <span>Push Notifications</span>
+            </label>
+
+            <label class="checkbox-item" for="email">
+                <input type="checkbox" id="email"
+                       [ngModel]="settings.deliveryMethods?.email"
+                       (ngModelChange)="settings.deliveryMethods && (settings.deliveryMethods.email = $event)">
+                <span>Email</span>
+            </label>
+
+            <label class="checkbox-item" for="sms">
+                <input type="checkbox" id="sms"
+                       [ngModel]="settings.deliveryMethods?.sms"
+                       (ngModelChange)="settings.deliveryMethods && (settings.deliveryMethods.sms = $event)">
+                <span>SMS</span>
+            </label>
+        </div>
+
+        <button class="save-button" (click)="onSave()">Save Settings</button>
+    </div>
+}

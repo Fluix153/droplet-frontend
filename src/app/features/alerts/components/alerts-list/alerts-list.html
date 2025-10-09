@@ -1,0 +1,23 @@
+<div class="alerts-container">
+    <h3>Active Alerts</h3>
+
+    @if (alerts && alerts.length > 0) {
+        @for (alert of alerts; track alert.id) {
+            <div class="alert-item" [ngClass]="alert.type">
+                <div class="alert-icon">
+                    <span>⚠️</span>
+                </div>
+                <div class="alert-content">
+                    <p class="message">{{ alert.message }}</p>
+                    <p class="description">{{ alert.description }}</p>
+                </div>
+                <div class="alert-meta">
+                    <span class="timestamp">{{ alert.timestamp }}</span>
+                    <button class="dismiss-btn" title="Dismiss alert" (click)="onDismiss(alert.id)">&times;</button>
+                </div>
+            </div>
+        }
+    } @else {
+        <p class="no-alerts-message">No active alerts at the moment. Well done!</p>
+    }
+</div>

@@ -1,0 +1,63 @@
+.summary-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.summary-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 1.2rem 1.5rem; // Ajuste de padding
+border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); // Sombra más pronunciada
+border-left: none; // No usamos borde izquierdo en este diseño
+position: relative; // Para posicionar el icono de fondo
+overflow: hidden; // Para que el icono no se salga
+}
+
+.card-content {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    z-index: 1; // Asegura que el texto esté encima del icono
+}
+
+.count {
+    display: block;
+    font-size: 2.2rem; // Tamaño de fuente más grande
+font-weight: 700;
+    line-height: 1.2;
+    color: #1a202c; // Color de texto más oscuro
+}
+
+.label {
+    font-size: 0.9rem;
+    color: #718096;
+    font-weight: 500;
+}
+
+.card-icon {
+    font-size: 2.5rem; // Tamaño del icono
+opacity: 0.2; // Opacidad reducida
+position: absolute; // Posicionamiento absoluto para el icono de fondo
+right: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #cbd5e0; // Color neutro para los iconos de fondo
+z-index: 0; // Detrás del contenido
+}
+
+/* Colores de texto para cada tipo de alerta si el diseño lo indica */
+.summary-card.critical .count { color: #e53e3e; }
+.summary-card.warnings .count { color: #dd6b20; }
+.summary-card.info .count { color: #3182ce; }
+.summary-card.resolved .count { color: #38a169; }
+
+/* Si quieres que el icono de fondo cambie de color */
+.summary-card.critical .card-icon { color: #e53e3e; opacity: 0.1; }
+.summary-card.warnings .card-icon { color: #dd6b20; opacity: 0.1; }
+.summary-card.info .card-icon { color: #3182ce; opacity: 0.1; }
+.summary-card.resolved .card-icon { color: #38a169; opacity: 0.1; }

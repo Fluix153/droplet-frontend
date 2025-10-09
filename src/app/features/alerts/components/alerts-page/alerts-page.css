@@ -1,0 +1,24 @@
+:host {
+    display: block;
+    padding: 2rem;
+    background-color: #f4f7fa;
+}
+
+.page-header {
+    margin-bottom: 2rem;
+    h1 {
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: #1a202c;
+    }
+    p {
+        font-size: 1rem;
+        color: #718096;
+    }
+}
+
+.main-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+}

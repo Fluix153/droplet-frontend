@@ -1,0 +1,96 @@
+.alerts-container {
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); // Sombra consistente
+
+h3 {
+    font-size: 1.6rem; // Encabezado más grande
+font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 1.8rem; // Más espacio debajo del título
+color: #1a202c;
+}
+}
+
+.alert-item {
+    display: flex;
+    align-items: center; // Centrar verticalmente
+padding: 1rem 0; // Padding horizontal 0 para el margen del icono
+border-bottom: 1px solid #edf2f7; // Borde inferior suave
+margin-bottom: 0.5rem; // Espacio entre ítems
+
+&:last-child {
+    border-bottom: none; // Eliminar borde del último ítem
+margin-bottom: 0;
+}
+}
+
+.alert-icon {
+    width: 40px; // Tamaño fijo para el círculo
+height: 40px;
+    border-radius: 50%; // Forma de círculo
+display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem; // Tamaño del icono dentro del círculo
+margin-right: 1rem;
+    flex-shrink: 0; // Previene que el icono se comprima
+
+    /* Colores de fondo y borde para los iconos */
+&.critical { background-color: #fcebeb; color: #e53e3e; border: 1px solid #e53e3e; }
+    &.warning { background-color: #fffaf0; color: #dd6b20; border: 1px solid #dd6b20; }
+    &.info { background-color: #ebf8ff; color: #3182ce; border: 1px solid #3182ce; }
+
+    /* Si estás usando SVG para los iconos, podrías necesitar ajustar el tamaño de los SVG */
+    svg {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+.alert-content {
+    flex-grow: 1;
+    .message {
+        font-weight: 600;
+        margin: 0 0 0.2rem 0; // Ajuste de margen
+    color: #1a202c;
+    }
+    .description {
+        font-size: 0.85rem; // Tamaño de fuente más pequeño
+    color: #718096;
+        margin: 0;
+    }
+}
+
+.alert-meta {
+    text-align: right;
+    display: flex;
+    align-items: center;
+    gap: 1rem; // Espacio entre el timestamp y el botón
+flex-shrink: 0; // Previene que este bloque se comprima
+
+.timestamp {
+    font-size: 0.75rem; // Tamaño de fuente más pequeño
+color: #a0aec0;
+    display: block;
+    margin-bottom: 0; // Ajuste de margen
+}
+    .dismiss-btn {
+        background: none;
+        border: none;
+        font-size: 1.2rem; // Tamaño del icono de la 'x'
+    line-height: 1;
+        cursor: pointer;
+        color: #a0aec0; // Color gris para la 'x'
+    transition: color 0.2s;
+        &:hover { color: #e53e3e; } // Rojo al pasar el ratón
+    }
+}
+
+.no-alerts-message {
+    text-align: center;
+    color: #718096;
+    padding: 2rem;
+    font-style: italic;
+}
