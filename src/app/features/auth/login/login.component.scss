@@ -1,0 +1,248 @@
+@use 'sass:color';
+
+// Variables de diseño (provisionales)
+$color-text-strong: #111827;
+$color-text-muted: #4B5563;
+$color-primary: #06B6D4;
+$color-border: #E5E7EB;
+$radius-card: 16px;
+$radius-input: 10px;
+
+// Contenedor principal
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #F3F4F6 0%, #F0FDF4 100%);
+}
+
+// Card principal de login
+.login-card {
+  width: 448px;
+  height: 698px;
+  max-width: 448px;
+  opacity: 1;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.mat-card-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+// Logo SVG dentro del header
+.droplet-svg {
+  width: 20vw;
+  max-width: 80px;
+  min-width: 40px;
+  height: auto;
+  display: block;
+  margin-bottom: 1rem;
+
+}
+
+// Header del formulario dentro de mat-card-header
+.mat-card-header .login-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  width: 100%;
+
+  .login-title {
+    font-size: 30px;
+    font-weight: 600;
+    color: $color-text-strong;
+    margin: 0 0 8px 0;
+    line-height: 1.2;
+  }
+
+  .login-subtitle {
+    font-size: 16px;
+    color: $color-text-muted;
+    margin: 0;
+    line-height: 1.5;
+  }
+}
+
+// Contenedor del form
+.card-content {
+  box-shadow: 8px 10px -6px #0000001A;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background: #fff;
+  padding: 2rem;
+}
+
+// Formulario
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  // Campos del formulario
+  .form-field {
+    width: 100%;
+
+    .mat-mdc-form-field-wrapper {
+      height: 48px;
+    }
+
+    .mat-mdc-text-field-wrapper {
+      border-radius: $radius-input !important;
+    }
+
+    .mat-mdc-form-field-outline {
+      border-radius: $radius-input !important;
+    }
+
+    // Input focus state
+    &.mat-focused {
+      .mat-mdc-form-field-outline-thick {
+        color: $color-primary !important;
+      }
+    }
+  }
+
+  // Opciones del formulario (Remember me y Forgot password)
+  .form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: -8px;
+
+    .remember-checkbox {
+      .mat-mdc-checkbox-label {
+        color: $color-text-muted;
+        font-size: 14px;
+      }
+    }
+
+    .forgot-link {
+      color: $color-primary;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  // Botón de inicio de sesión
+  .signin-button {
+    width: 100%;
+    height: 48px;
+    border-radius: $radius-input;
+    font-size: 16px;
+    font-weight: 600;
+    background-color: $color-primary !important;
+
+    &:hover {
+      background-color: color.adjust($color-primary, $lightness: -8%) !important;
+    }
+  }
+
+  // Sección del divisor
+  .divider-section {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 8px 0;
+
+    .mat-mdc-divider {
+      flex: 1;
+      border-color: $color-border !important;
+    }
+
+    .divider-text {
+      color: $color-text-muted;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+  }
+
+  // Botones sociales
+  .social-buttons {
+    display: flex;
+    gap: 16px;
+
+    .social-button {
+      flex: 1;
+      height: 48px;
+      border-radius: $radius-input;
+      border-color: $color-border !important;
+      color: $color-text-muted !important;
+      font-weight: 500;
+
+      .mat-icon {
+        margin-right: 8px;
+      }
+
+      &:hover {
+        background-color: #f9fafb !important;
+        border-color: color.adjust($color-border, $lightness: -10%) !important;
+      }
+    }
+  }
+
+  // Enlace de registro
+  .signup-link {
+    text-align: center;
+    margin-top: 8px;
+
+    .signup-text {
+      color: $color-text-muted;
+      font-size: 14px;
+    }
+
+    .signup-anchor {
+      color: $color-primary;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      margin-left: 4px;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 480px) {
+  .login-container {
+    padding: 16px;
+  }
+
+  .login-card {
+    .mat-mdc-card-content {
+      padding: 24px !important;
+    }
+  }
+
+  .login-header {
+    .login-title {
+      font-size: 24px;
+    }
+  }
+
+  .social-buttons {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+// Accesibilidad - Focus visible
+.mat-mdc-button:focus,
+.mat-mdc-text-field-wrapper:focus-within {
+  outline: 2px solid $color-primary;
+  outline-offset: 2px;
+}
+
+// TODO: Módulo 3 - Añadir estilos para validaciones y mensajes de error

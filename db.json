@@ -23,6 +23,14 @@
       "email": "cerveza@example.com",
       "password": "Secret#123",
       "phone": "+51 912 345 678"
+    },
+    {
+      "id": "u_1759899771949",
+      "name": "Juan",
+      "email": "juan@correo.com",
+      "password": "1234",
+      "role": "user",
+      "phone": null
     }
   ]
 }
