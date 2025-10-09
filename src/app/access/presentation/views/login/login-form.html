@@ -1,0 +1,107 @@
+<div class="login-container">
+    <mat-card class="login-card">
+        <mat-card-header class="mat-card-header">
+            <!-- Logo -->
+            <img ngSrc="/icons/droplet_logo.svg" width="156" height="56" alt="Droplet Logo" class="droplet-svg">
+            <!-- Welcome -->
+            <div class="login-header">
+                <h1 class="login-title">Welcome to Droplet</h1>
+                <p class="login-subtitle">Sign in to your liquid management dashboard</p>
+            </div>
+        </mat-card-header>
+
+        <mat-card-content class="card-content">
+            <!-- Form -->
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+                <!-- Email Field -->
+                <mat-label>Email</mat-label>
+                <mat-form-field appearance="outline" class="form-field">
+                    <input
+                            matInput
+                            type="email"
+                            formControlName="email"
+                            placeholder="Enter your email"
+                            autocomplete="email"
+                    >
+                </mat-form-field>
+
+                <!-- Password Field -->
+                <mat-label>Password</mat-label>
+                <mat-form-field appearance="outline" class="form-field">
+                    <input
+                            matInput
+                            [type]="hidePassword ? 'password' : 'text'"
+                            formControlName="password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                    >
+                    <button
+                            mat-icon-button
+                            matSuffix
+                            (click)="togglePasswordVisibility()"
+                            [attr.aria-label]="'Hide password'"
+                            [attr.aria-pressed]="hidePassword"
+                            type="button"
+                    >
+                        <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+                    </button>
+                </mat-form-field>
+
+                <!-- Remember Me and Forgot Password -->
+                <div class="form-options">
+                    <mat-checkbox formControlName="remember" class="remember-checkbox">
+                        Remember me
+                    </mat-checkbox>
+                    <a routerLink="/auth/forgot-password" class="forgot-link">
+                        Forgot password?
+                    </a>
+                </div>
+
+                <!-- Error Message -->
+                <div *ngIf="error$ | async as error" class="error-message">{{ error }}</div>
+
+                <!-- Submit Button -->
+                <button
+                        mat-raised-button
+                        color="primary"
+                        type="submit"
+                        class="signin-button"
+                >
+                    Sign In
+                </button>
+                <!-- Sign Up Link -->
+                <div class="signup-link">
+                    <span class="signup-text">Don't have an account?</span>
+                    <a [routerLink]="['/auth/register']" class="signup-anchor">Sign up</a>
+                </div>
+                <!-- Divider variante con mat-divider -->
+                <div class="divider-section">
+                    <mat-divider class="divider-mat" role="presentation"></mat-divider>
+                    <span class="divider-text">Or continue with</span>
+                    <mat-divider class="divider-mat" role="presentation"></mat-divider>
+                </div>
+                <!-- Social Buttons -->
+                <div class="social-buttons">
+                    <button
+                            mat-stroked-button
+                            class="social-button"
+                            type="button"
+                            (click)="$event.preventDefault()"
+                    >
+                        <img ngSrc="/icons/google.svg" width="24" height="24" alt="Google" class="social-icon">
+                        Google
+                    </button>
+                    <button
+                            mat-stroked-button
+                            class="social-button"
+                            type="button"
+                            (click)="$event.preventDefault()"
+                    >
+                        <img ngSrc="/icons/twitter.svg" width="24" height="24" alt="Twitter" class="social-icon">
+                        Twitter
+                    </button>
+                </div>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

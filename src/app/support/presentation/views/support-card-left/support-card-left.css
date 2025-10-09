@@ -1,0 +1,279 @@
+/* Contenedor principal */
+.support-container {
+    padding: 2rem;
+    background-color: #f8fafc;
+    min-height: 100vh;
+}
+
+.support-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Sección del formulario */
+.form-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.support-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    padding: 1.5rem;
+}
+
+.support-card mat-card-header {
+    margin-bottom: 1.5rem;
+}
+
+.support-card mat-card-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #111827;
+}
+
+/* Campos del formulario */
+.rounded-field {
+    margin-bottom: 1rem;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.rounded-field .mat-mdc-form-field-outline {
+    border-radius: 8px;
+}
+
+.rounded-field .mat-mdc-form-field-focus-overlay {
+    border-radius: 8px;
+}
+
+/* Botón de envío */
+.send-wrap {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1.5rem;
+}
+
+.send-btn {
+    background-color: #10B981;
+    color: white;
+    border-radius: 8px;
+    padding: 0.75rem 2rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    min-width: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.send-btn:hover {
+    background-color: #059669;
+}
+
+.send-btn:disabled {
+    background-color: #9CA3AF;
+    cursor: not-allowed;
+}
+
+/* Sección de tickets */
+.tickets-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.tickets-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    padding: 1.5rem;
+    height: fit-content;
+}
+
+.tickets-card mat-card-header {
+    margin-bottom: 1.5rem;
+}
+
+.tickets-card mat-card-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #111827;
+}
+
+/* Lista de tickets */
+.no-tickets {
+    text-align: center;
+    padding: 2rem;
+    color: #6B7280;
+}
+
+.no-tickets p {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    margin: 0;
+}
+
+.ticket-item {
+    margin-bottom: 1rem;
+}
+
+.ticket-card {
+    border: 1px solid #E5E7EB;
+    border-radius: 8px;
+    padding: 0;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.2s ease;
+}
+
+.ticket-card:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.ticket-card mat-card-content {
+    padding: 1rem;
+}
+
+.ticket-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.75rem;
+}
+
+.ticket-subject {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #111827;
+    margin: 0;
+    flex: 1;
+    margin-right: 0.5rem;
+}
+
+.ticket-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.ticket-info p {
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.875rem;
+    color: #6B7280;
+    margin: 0;
+}
+
+.ticket-number {
+    font-weight: 500;
+    color: #374151;
+}
+
+.ticket-priority {
+    font-weight: 500;
+}
+
+.ticket-date {
+    font-style: italic;
+}
+
+/* Loading */
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    gap: 1rem;
+}
+
+.loading-container p {
+    font-family: 'Roboto', sans-serif;
+    color: #6B7280;
+    margin: 0;
+}
+
+/* Icono de select personalizado */
+.select-icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+/* Chips de estado */
+mat-chip {
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 12px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .support-layout {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .support-container {
+        padding: 1rem;
+    }
+
+    .support-card,
+    .tickets-card {
+        padding: 1rem;
+    }
+
+    .ticket-header {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .ticket-subject {
+        margin-right: 0;
+    }
+}
+
+/* Estilos para Material Form Fields */
+.mat-mdc-form-field {
+    font-family: 'Roboto', sans-serif;
+}
+
+.mat-mdc-form-field .mat-mdc-floating-label {
+    color: #6B7280;
+}
+
+.mat-mdc-form-field.mat-focused .mat-mdc-floating-label {
+    color: #10B981;
+}
+
+.mat-mdc-form-field .mat-mdc-outline {
+    color: #D1D5DB;
+}
+
+.mat-mdc-form-field.mat-focused .mat-mdc-outline {
+    color: #10B981;
+}
+
+/* Textarea específico */
+textarea {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.5;
+    resize: vertical;
+}
+
+/* Error messages */
+.mat-mdc-form-field-error {
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.75rem;
+    color: #DC2626;
+}

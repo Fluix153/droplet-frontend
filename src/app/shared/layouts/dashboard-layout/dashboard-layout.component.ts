@@ -1,4 +1,4 @@
-import {Component, OnInit, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnInit, OnDestroy, ViewChild, inject} from '@angular/core';
 import {Router, RouterOutlet, RouterLink, RouterLinkActive} from '@angular/router';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
@@ -8,8 +8,8 @@ import {MatListModule} from '@angular/material/list';
 import {CommonModule} from '@angular/common';
 import {Subject, takeUntil} from 'rxjs';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
-import {AuthService} from '../../../features/auth/auth.service';
-import {User} from '../../../features/auth/models/user.model';
+import {AccessStore} from '../../../access/application/access.store';
+import {User} from '../../../access/domain/models/user.entity';
 
 @Component({
     selector: 'app-dashboard-layout',
@@ -31,22 +31,20 @@ import {User} from '../../../features/auth/models/user.model';
 export class DashboardLayoutComponent implements OnInit, OnDestroy {
     @ViewChild('sidenav') sidenav!: MatSidenav;
 
+    // Inyección de dependencias usando inject()
+    private readonly store = inject(AccessStore);
+    private readonly router = inject(Router);
+    private readonly breakpointObserver = inject(BreakpointObserver);
+
     currentUser: User | null = null;
     isMobile = false;
     private destroy$ = new Subject<void>();
 
-    constructor(
-        private authService: AuthService,
-        private router: Router,
-        private breakpointObserver: BreakpointObserver
-    ) {
-    }
-
     ngOnInit(): void {
-        // Suscribirse a cambios del usuario actual
-        this.authService.currentUser$
+        // Suscribirse a cambios del usuario actual desde el AccessStore
+        this.store.currentUser$
             .pipe(takeUntil(this.destroy$))
-            .subscribe(user => {
+            .subscribe((user: User | null) => {
                 this.currentUser = user;
             });
 
@@ -78,7 +76,8 @@ export class DashboardLayoutComponent implements OnInit, OnDestroy {
     }
 
     logout(): void {
-        this.authService.logout();
+        // Usar el AccessStore para logout en lugar del AuthService
+        this.store.logout();
         this.router.navigate(['/auth/login']);
     }
 

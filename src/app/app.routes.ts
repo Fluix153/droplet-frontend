@@ -1,6 +1,6 @@
 import {Routes} from '@angular/router';
-import {authGuard} from './core/guards/auth.guard';
-import {roleGuard} from './core/guards/role.guard';
+import {authGuard} from './access/infrastructure/guards/auth.guard';
+import {roleGuard} from './access/infrastructure/guards/role.guard';
 
 export const routes: Routes = [
     {
@@ -9,16 +9,8 @@ export const routes: Routes = [
         pathMatch: 'full'
     },
     {
-        path: 'auth/login',
-        loadComponent: () => import('./features/auth/login/login.component').then(c => c.LoginComponent)
-    },
-    {
-        path: 'auth/register',
-        loadComponent: () => import('./features/auth/register/register.component').then(c => c.RegisterComponent)
-    },
-    {
-        path: 'auth/forgot-password',
-        loadComponent: () => import('./features/auth/forgot-password/forgot-password.component').then(c => c.ForgotPasswordComponent)
+        path: 'auth',
+        loadChildren: () => import('./access/presentation/views/access.routes').then(r => r.ACCESS_ROUTES)
     },
     {
         path: 'dashboard',
@@ -50,7 +42,7 @@ export const routes: Routes = [
             },
             {
                 path: 'support',
-                loadComponent: () => import('./features/support/support.component').then(c => c.SupportComponent)
+                loadComponent: () => import('./support/presentation/views/support.component').then(c => c.SupportComponent)
             }
         ]
     }
