@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "api": "node server.js"
+    "api": "node server.js",
+    "api:dev": "nodemon --watch db.json --watch server.js server.js"
   },
   "prettier": {
     "printWidth": 100,

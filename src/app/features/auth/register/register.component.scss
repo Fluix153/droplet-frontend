@@ -40,8 +40,8 @@ $font-body-register: 'Roboto', sans-serif;
 
 .register-svg {
   width: 20vw;
-  max-width: 80px;
-  min-width: 40px;
+  max-width: 11rem;
+  min-width: 3rem;
   height: auto;
   display: block;
   margin-bottom: 1rem;
@@ -243,5 +243,18 @@ $font-body-register: 'Roboto', sans-serif;
         border-color: color.adjust($color-border, $lightness: -10%);
       }
     }
+  }
+
+  // Mensajes de error
+  .error-message {
+    color: #b91c1c;
+    background: #fee2e2;
+    border: 1px solid #fca5a5;
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    margin: 12px 0 16px 0;
+    font-size: 15px;
+    text-align: center;
+    font-weight: 500;
   }
 }

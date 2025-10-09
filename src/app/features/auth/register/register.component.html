@@ -1,7 +1,7 @@
 <div class="register-container">
     <mat-card class="register-card">
         <mat-card-header class="mat-card-header">
-            <img ngSrc="/icons/droplet-register.svg" width="64" height="64" alt="Droplet Register Logo"
+            <img ngSrc="/icons/droplet_logo.svg" width="156" height="56" alt="Droplet Register Logo"
                  class="register-svg">
             <div class="register-header">
                 <h1 class="register-title">Create your account</h1>
@@ -9,7 +9,7 @@
             </div>
         </mat-card-header>
         <mat-card-content class="card-content-register">
-            <form [formGroup]="registerForm" class="register-form">
+            <form [formGroup]="registerForm" class="register-form" (ngSubmit)="onSubmit()">
                 <div class="form-row">
                     <div class="form-group">
                         <mat-label>First Name</mat-label>
@@ -35,7 +35,7 @@
                 <!-- Phone Field -->
                 <mat-label>Phone</mat-label>
                 <mat-form-field appearance="outline" class="form-field">
-                    <input matInput type="tel" formControlName="phone" placeholder="+51 999 888 777"
+                    <input matInput type="tel" formControlName="phone" placeholder="999 888 777"
                            aria-label="Phone" aria-describedby="phoneError">
                 </mat-form-field>
                 <!-- Password Field -->
@@ -76,6 +76,8 @@
                     I agree to the <a href="#" class="terms-link">Terms Services</a> and <a href="#" class="terms-link">Privacy
                     Policy</a>
                 </mat-checkbox>
+                <!-- Error Message -->
+                <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
                 <!-- Submit Button -->
                 <button mat-raised-button color="primary" type="submit" class="create-account-button"
                         aria-label="Create Account" style="width: 100%;">

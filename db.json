@@ -2,35 +2,35 @@
   "users": [
     {
       "id": "u_000",
-      "role": "ADMIN",
       "name": "Administrador General",
       "email": "admin@example.com",
       "password": "Admin#123",
-      "phone": "+51 999 111 222"
+      "role": "ADMIN",
+      "phone": "999111222"
     },
     {
       "id": "u_001",
-      "role": "HOUSEHOLD_HEAD",
       "name": "Ana Hogar",
+      "role": "HOUSEHOLD_HEAD",
       "email": "hogar@example.com",
       "password": "Secret#123",
-      "phone": "+51 987 654 321"
+      "phone": "987654321"
     },
     {
       "id": "u_002",
-      "role": "BREWMASTER",
       "name": "Luis Maestro",
       "email": "cerveza@example.com",
       "password": "Secret#123",
-      "phone": "+51 912 345 678"
+      "role": "BREWMASTER",
+      "phone": "912345678"
     },
     {
-      "id": "u_1759899771949",
-      "name": "Juan",
-      "email": "juan@correo.com",
-      "password": "1234",
-      "role": "user",
-      "phone": null
+      "id": "u_1760035284707",
+      "name": "Angel Pariona",
+      "email": "angel@test.com",
+      "password": "Angel$567",
+      "role": "HOUSEHOLD_HEAD",
+      "phone": "999888777"
     }
   ]
 }

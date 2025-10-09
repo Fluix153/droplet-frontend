@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
-import {Router, RouterLink} from '@angular/router';
+import {Router, RouterLink, RouterModule} from '@angular/router';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
@@ -9,7 +9,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatCardModule} from '@angular/material/card';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {NgOptimizedImage} from '@angular/common';
+import {NgOptimizedImage, CommonModule} from '@angular/common';
 import {AuthService} from '../auth.service';
 import {TokenService} from '../../../core/services/token.service';
 
@@ -17,8 +17,10 @@ import {TokenService} from '../../../core/services/token.service';
     selector: 'app-login',
     standalone: true,
     imports: [
+        CommonModule,
         ReactiveFormsModule,
         RouterLink,
+        RouterModule,
         MatFormFieldModule,
         MatInputModule,
         MatButtonModule,
@@ -36,6 +38,7 @@ export class LoginComponent {
     loginForm: FormGroup;
     hidePassword = true;
     isLoading = false;
+    public errorMessage: string | null = null;
 
     constructor(
         private fb: FormBuilder,
@@ -56,27 +59,27 @@ export class LoginComponent {
 
     onSubmit(event: Event): void {
         event.preventDefault();
-
+        this.errorMessage = null;
         if (this.loginForm.valid) {
             this.isLoading = true;
-
             const {email, password, remember} = this.loginForm.value;
-
             this.authService.login({email, password}).subscribe({
                 next: (response) => {
-                    // Guardar token
                     this.tokenService.set(response.accessToken, remember);
-
-                    // Actualizar usuario actual en el servicio
                     this.authService.setCurrentUser(response.user);
-
-                    // Redirección basada en rol
                     this.redirectBasedOnRole(response.user.role);
-
                     this.isLoading = false;
+                    this.errorMessage = null;
                 },
                 error: (error) => {
-                    console.error('Error en el login:', error);
+                    // Mejor manejo de errores: mostrar mensaje del backend si existe
+                    if (error.error && error.error.message) {
+                        this.errorMessage = error.error.message;
+                    } else if (error.status === 401 || error.status === 400) {
+                        this.errorMessage = 'El correo o la contraseña son incorrectos.';
+                    } else {
+                        this.errorMessage = 'Ocurrió un error inesperado.';
+                    }
                     this.isLoading = false;
                 }
             });

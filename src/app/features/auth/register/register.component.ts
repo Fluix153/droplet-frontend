@@ -11,12 +11,14 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {NgOptimizedImage} from '@angular/common';
 import {MatDivider} from "@angular/material/divider";
 import {AuthService} from '../auth.service';
+import {CommonModule} from '@angular/common';
 
 
 @Component({
     selector: 'app-register',
     standalone: true,
     imports: [
+        CommonModule,
         RouterLink,
         MatCardModule,
         MatButtonModule,
@@ -37,6 +39,7 @@ export class RegisterComponent {
     hidePassword = true;
     hideConfirmPassword: boolean = true;
     isLoading = false;
+    public errorMessage: string | null = null;
 
     constructor(
         private fb: FormBuilder,
@@ -64,21 +67,37 @@ export class RegisterComponent {
     }
 
     onSubmit(): void {
+        this.errorMessage = null;
         if (this.registerForm.valid) {
             this.isLoading = true;
-
             const formData = this.registerForm.value;
-            // Remover campos que no necesita el backend
-            const {confirmPassword, terms, ...userData} = formData;
-
+            const {firstName, lastName, email, phone, password, role} = formData;
+            // Combinar firstName y lastName en name y enviar solo los campos esperados
+            const userData = {
+                name: `${firstName} ${lastName}`.trim(),
+                email,
+                phone,
+                password,
+                role
+            };
             this.authService.register(userData).subscribe({
-                next: (user) => {
-                    console.log('Registro exitoso', user);
-                    this.router.navigate(['/auth/login']);
-                    this.isLoading = false;
+                next: () => {
+                    this.errorMessage = null;
+                    this.router.navigate(['/auth/login']).then(() => {
+                        this.isLoading = false;
+                    });
                 },
                 error: (error) => {
-                    console.error('Error en el registro:', error);
+                    // Si el backend envía un mensaje específico, mostrarlo
+                    if (error.error && error.error.message) {
+                        this.errorMessage = error.error.message;
+                    } else if (error.status === 409) {
+                        this.errorMessage = 'Este correo electrónico ya está en uso. Por favor, intenta con otro.';
+                    } else if (error.status === 400) {
+                        this.errorMessage = 'Datos inválidos o incompletos. Revisa los campos.';
+                    } else {
+                        this.errorMessage = 'Ocurrió un error inesperado. Por favor, intenta de nuevo más tarde.';
+                    }
                     this.isLoading = false;
                 }
             });
