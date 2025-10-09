@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, Validators, ReactiveFormsModule} from '@angular/forms';
-import {RouterLink} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -10,6 +10,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {NgOptimizedImage} from '@angular/common';
 import {MatDivider} from "@angular/material/divider";
+import {AuthService} from '../auth.service';
 
 
 @Component({
@@ -35,8 +36,13 @@ export class RegisterComponent {
     registerForm: FormGroup;
     hidePassword = true;
     hideConfirmPassword: boolean = true;
+    isLoading = false;
 
-    constructor(private fb: FormBuilder) {
+    constructor(
+        private fb: FormBuilder,
+        private authService: AuthService,
+        private router: Router
+    ) {
         this.registerForm = this.fb.group({
             firstName: ['', Validators.required],
             lastName: ['', Validators.required],
@@ -59,8 +65,23 @@ export class RegisterComponent {
 
     onSubmit(): void {
         if (this.registerForm.valid) {
-            // Handle successful registration logic here
-            console.log('Registration successful', this.registerForm.value);
+            this.isLoading = true;
+
+            const formData = this.registerForm.value;
+            // Remover campos que no necesita el backend
+            const {confirmPassword, terms, ...userData} = formData;
+
+            this.authService.register(userData).subscribe({
+                next: (user) => {
+                    console.log('Registro exitoso', user);
+                    this.router.navigate(['/auth/login']);
+                    this.isLoading = false;
+                },
+                error: (error) => {
+                    console.error('Error en el registro:', error);
+                    this.isLoading = false;
+                }
+            });
         }
     }
 }
