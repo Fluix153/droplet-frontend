@@ -1,0 +1,89 @@
+{
+  "alerts": [
+    {
+      "id": 1,
+      "UserId": 101,
+      "MetricType": "Nivel de agua",
+      "Severity": "Alta",
+      "Message": "Nivel de agua en tanque crítico. Se recomienda reabastecer antes de las 6 PM.",
+      "TriggeredAt": "2025-10-08T14:30:00"
+    },
+    {
+      "id": 2,
+      "UserId": 102,
+      "MetricType": "Consumo excesivo",
+      "Severity": "Media",
+      "Message": "Consumo de agua superior al promedio semanal. Verificar posibles fugas.",
+      "TriggeredAt": "2025-10-08T10:00:00"
+    },
+    {
+      "id": 3,
+      "UserId": 103,
+      "MetricType": "Temperatura de proceso",
+      "Severity": "Alta",
+      "Message": "Temperatura de fermentación fuera de rango. Ajuste necesario en las microcervecerías.",
+      "TriggeredAt": "2025-10-07T22:15:00"
+    },
+    {
+      "id": 4,
+      "UserId": 101,
+      "MetricType": "Fuga detectada",
+      "Severity": "Alta",
+      "Message": "Fuga en sistema de almacenamiento de agua detectada. Requiere intervención inmediata.",
+      "TriggeredAt": "2025-10-08T16:45:00"
+    },
+    {
+      "id": 5,
+      "UserId": 104,
+      "MetricType": "Agotamiento de insumos líquidos",
+      "Severity": "Crítica",
+      "Message": "Agujeros en inventario de agua de proceso, riesgo de parada de producción en microcervecería.",
+      "TriggeredAt": "2025-10-08T12:00:00"
+    }
+
+  ],
+  "sensors": [
+    {
+      "id": 1,
+      "DeviceCode": "DPR01",
+      "Type": "Cisterna",
+      "Location": "Jesus Maria, Lima",
+      "Status": "Active"
+    },
+    {
+      "id": 2,
+      "DeviceCode": "DPR02",
+      "Type": "Cisterna",
+      "Location": "Miraflores, Lima",
+      "Status": "Active"
+    },
+    {
+      "id": 3,
+      "DeviceCode": "DPR03",
+      "Type": "Cisterna",
+      "Location": "Pueblo Libre, Lima",
+      "Status": "Active"
+    },
+    {
+      "id": 4,
+      "DeviceCode": "DPR04",
+      "Type": "Calidad",
+      "Location": "San Isidro, Lima",
+      "Status": "Active"
+    },
+    {
+      "id": 5,
+      "DeviceCode": "DPR05",
+      "Type": "Calidad",
+      "Location": "Surco, Lima",
+      "Status": "Active"
+    },
+    {
+      "id": 6,
+      "DeviceCode": "DPR06",
+      "Type": "Calidad",
+      "Location": "Lince, Lima",
+      "Status": "Inactive"
+    }
+  ]
+}
