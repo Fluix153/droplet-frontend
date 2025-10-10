@@ -58,7 +58,7 @@ export class LoginAssembler extends BaseAssembler<any, User> {
   /**
    * Valida que la entidad User sea válida
    */
-  protected override isValidEntity(entity: User): boolean {
+  protected isValidEntity(entity: User): boolean {
     return entity &&
            typeof entity.id === 'string' && entity.id.length > 0 &&
            typeof entity.email === 'string' && entity.email.length > 0 &&

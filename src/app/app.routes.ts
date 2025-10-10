@@ -2,6 +2,7 @@ import {Routes} from '@angular/router';
 import {ACCESS_ROUTES} from './access/presentation/views/access.routes';
 import {authGuard} from './access/infrastructure/guards/auth.guard';
 import {roleGuard} from './access/infrastructure/guards/role.guard';
+import { SUPPORT_ROUTES } from './support/presentation/views/support.routes';
 
 export const routes: Routes = [
     {
@@ -41,6 +42,10 @@ export const routes: Routes = [
                 loadComponent: () => import('./shared/components/placeholder.component').then(c => c.PlaceholderComponent),
                 canActivate: [roleGuard],
                 data: {title: 'Bienvenido Usuario', role: 'jefe de hogar', roles: ['HOUSEHOLD_HEAD']}
+            },
+            {
+                path: 'support',
+                children: SUPPORT_ROUTES
             }
         ]
     }
