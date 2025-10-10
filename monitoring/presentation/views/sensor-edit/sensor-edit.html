@@ -1,0 +1,39 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <mat-form-field>
+    <mat-label>Device Code</mat-label>
+    <input matInput formControlName="DeviceCode" required>
+    @if (form.get('DeviceCode')!.touched && form.get('DeviceCode')!.hasError('required')) {
+      <mat-error>Device Code is required</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Type</mat-label>
+    <input matInput formControlName="Type" required>
+    @if (form.get('Type')!.touched && form.get('Type')!.hasError('required')) {
+      <mat-error>Type is required</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Location</mat-label>
+    <input matInput formControlName="Location" required>
+    @if (form.get('Location')!.touched && form.get('Location')!.hasError('required')) {
+      <mat-error>Location is required</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Status</mat-label>
+    <input matInput formControlName="Status" required>
+    @if (form.get('Status')!.touched && form.get('Status')!.hasError('required')) {
+      <mat-error>Status is required</mat-error>
+    }
+  </mat-form-field>
+
+
+
+  <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+    {{ isEditMode ? 'Update' : 'Add' }} Sensor
+  </button>
+</form>
