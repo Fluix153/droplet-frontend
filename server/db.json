@@ -1,0 +1,40 @@
+{
+  "tanks": [
+    {
+      "id": "1",
+      "name": "Tank 1",
+      "level": 75,
+      "needRefill": false
+    },
+    {
+      "id": "2",
+      "name": "Tank 2",
+      "level": 20,
+      "needRefill": true
+    },
+    {
+      "id": "3",
+      "name": "Tank 3",
+      "level": 50,
+      "needRefill": false
+    },
+    {
+      "id": "4",
+      "name": "Tank 4",
+      "level": 10,
+      "needRefill": true
+    },
+    {
+      "id": 0,
+      "name": "Tank 3",
+      "level": 14,
+      "needRefill": false
+    },
+    {
+      "id": 0,
+      "name": "tank ejemplo",
+      "level": 55,
+      "needRefill": true
+    }
+  ]
+}
