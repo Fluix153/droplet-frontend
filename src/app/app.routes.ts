@@ -39,10 +39,6 @@ export const routes: Routes = [
                 loadComponent: () => import('./shared/components/placeholder.component').then(c => c.PlaceholderComponent),
                 canActivate: [roleGuard],
                 data: {title: 'Bienvenido Usuario', role: 'jefe de hogar', roles: ['HOUSEHOLD_HEAD']}
-            },
-            {
-                path: 'support',
-                loadComponent: () => import('./support/presentation/views/support.component').then(c => c.SupportComponent)
             }
         ]
     }
