@@ -1,0 +1,18 @@
+<div class="metrics-panel">
+    <div class="metric">
+        <label>Consumo total</label>
+        <strong>{{ metrics.totalConsumption | formatLiters }}</strong>
+    </div>
+    <div class="metric">
+        <label>Flujo actual</label>
+        <strong>{{ metrics.flowRate | formatLiters }}</strong>
+    </div>
+    <div class="metric">
+        <label>Temperatura</label>
+        <strong>{{ metrics.temperature | formatTemperature }}</strong>
+    </div>
+    <div class="metric">
+        <label>Dispositivos activos</label>
+        <strong>{{ metrics.activeDevices }}</strong>
+    </div>
+</div>

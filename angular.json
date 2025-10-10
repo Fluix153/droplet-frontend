@@ -49,6 +49,18 @@
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
+            },
+            "developments": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.developments.ts"
+                }
+              ],
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "outputHashing": "none"
             }
           },
           "defaultConfiguration": "production"
@@ -61,6 +73,9 @@
             },
             "development": {
               "buildTarget": "master:build:development"
+            },
+            "developments": {
+              "buildTarget": "master:build:developments"
             }
           },
           "defaultConfiguration": "development"

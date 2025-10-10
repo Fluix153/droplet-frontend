@@ -1,0 +1,6 @@
+<div class="device-card">
+    <h3>{{ device.name }}</h3>
+    <p>Flujo actual: {{ device.currentFlow | formatLiters }}</p>
+    <p>Uso total: {{ device.usage | formatLiters }}</p>
+    <p>Batería: {{ device.battery | batteryStatus }}</p>
+</div>

@@ -1,3 +1,13 @@
-import { Routes } from '@angular/router';
+import { Route } from '@angular/router';
 
-export const routes: Routes = [];
+export const appRoutes: Route[] = [
+    {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full'
+    },
+    {
+        path: 'dashboard',
+        loadChildren: () => import('./dashboard/dashboard.routes').then(m => m.dashboardRoutes)
+    }
+];

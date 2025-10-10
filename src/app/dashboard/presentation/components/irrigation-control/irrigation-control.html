@@ -1,0 +1,8 @@
+<div class="irrigation-control">
+    <h3>Control de Riego Inteligente</h3>
+
+    <p>Humedad del suelo: {{ status.soilMoisture }}%</p>
+    <p>Auto-programación: {{ status.autoScheduleEnabled ? 'Activada' : 'Desactivada' }}</p>
+
+    <button (click)="toggleManualOverride()">Programar ahora</button>
+</div>

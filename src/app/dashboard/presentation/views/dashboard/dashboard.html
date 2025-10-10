@@ -1,0 +1,20 @@
+<shared-loading-spinner *ngIf="store.loading()" />
+
+<shared-card-wrapper>
+    <dashboard-metrics-panel [metrics]="store.metrics()" />
+</shared-card-wrapper>
+
+<shared-card-wrapper>
+    <dashboard-irrigation-control
+            [status]="store.irrigation()"
+            (scheduleNow)="store.scheduleIrrigation(new Date().toISOString())"
+    />
+</shared-card-wrapper>
+
+<shared-card-wrapper>
+    <h3>Dispositivos</h3>
+    <dashboard-device-card
+            *ngFor="let device of store.devices()"
+            [device]="device"
+    />
+</shared-card-wrapper>
