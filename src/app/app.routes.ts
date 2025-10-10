@@ -1,6 +1,8 @@
 import {Routes} from '@angular/router';
-import {authGuard} from './core/guards/auth.guard';
-import {roleGuard} from './core/guards/role.guard';
+import {ACCESS_ROUTES} from './access/presentation/views/access.routes';
+import {authGuard} from './access/infrastructure/guards/auth.guard';
+import {roleGuard} from './access/infrastructure/guards/role.guard';
+import { SUPPORT_ROUTES } from './support/presentation/views/support.routes';
 
 export const routes: Routes = [
     {
@@ -9,16 +11,8 @@ export const routes: Routes = [
         pathMatch: 'full'
     },
     {
-        path: 'auth/login',
-        loadComponent: () => import('./features/auth/login/login.component').then(c => c.LoginComponent)
-    },
-    {
-        path: 'auth/register',
-        loadComponent: () => import('./features/auth/register/register.component').then(c => c.RegisterComponent)
-    },
-    {
-        path: 'auth/forgot-password',
-        loadComponent: () => import('./features/auth/forgot-password/forgot-password.component').then(c => c.ForgotPasswordComponent)
+        path: 'auth',
+        children: ACCESS_ROUTES
     },
     {
         path: 'dashboard',
@@ -30,6 +24,7 @@ export const routes: Routes = [
                 redirectTo: 'household',
                 pathMatch: 'full'
             },
+
             {
                 path: 'admin',
                 loadComponent: () => import('./shared/components/placeholder.component').then(c => c.PlaceholderComponent),
@@ -47,6 +42,10 @@ export const routes: Routes = [
                 loadComponent: () => import('./shared/components/placeholder.component').then(c => c.PlaceholderComponent),
                 canActivate: [roleGuard],
                 data: {title: 'Bienvenido Usuario', role: 'jefe de hogar', roles: ['HOUSEHOLD_HEAD']}
+            },
+            {
+                path: 'support',
+                children: SUPPORT_ROUTES
             }
         ]
     }

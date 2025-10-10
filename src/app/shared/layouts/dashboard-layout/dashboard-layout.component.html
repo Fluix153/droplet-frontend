@@ -1,0 +1,52 @@
+<div class="dashboard-layout">
+    <mat-toolbar color="primary" class="dashboard-header">
+        <button mat-icon-button (click)="toggleSidenav()" class="menu-btn">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <span class="logo">Droplet</span>
+        <span class="spacer"></span>
+        <span class="user-info" *ngIf="currentUser">
+            Bienvenido, {{ currentUser.name }}
+        </span>
+        <button mat-icon-button (click)="logout()" class="logout-btn" title="Cerrar Sesión">
+            <mat-icon>logout</mat-icon>
+        </button>
+    </mat-toolbar>
+
+    <mat-sidenav-container class="sidenav-container">
+        <mat-sidenav #sidenav mode="side" opened class="sidenav">
+            <mat-nav-list>
+                <a mat-list-item
+                   routerLink="/dashboard/household"
+                   routerLinkActive="active-link">
+                    <mat-icon matListItemIcon>home</mat-icon>
+                    <span matListItemTitle>Dashboard</span>
+                </a>
+                <a mat-list-item
+                   routerLink="/dashboard/support"
+                   routerLinkActive="active-link">
+                    <mat-icon matListItemIcon>support</mat-icon>
+                    <span matListItemTitle>Support</span>
+                </a>
+                <a mat-list-item
+                   routerLink="/dashboard/admin"
+                   routerLinkActive="active-link"
+                   *ngIf="currentUser?.role === 'ADMIN'">
+                    <mat-icon matListItemIcon>admin_panel_settings</mat-icon>
+                    <span matListItemTitle>Admin</span>
+                </a>
+                <a mat-list-item
+                   routerLink="/dashboard/brewmaster"
+                   routerLinkActive="active-link"
+                   *ngIf="currentUser?.role === 'BREWMASTER'">
+                    <mat-icon matListItemIcon>local_drink</mat-icon>
+                    <span matListItemTitle>Brewmaster</span>
+                </a>
+            </mat-nav-list>
+        </mat-sidenav>
+
+        <mat-sidenav-content class="dashboard-content">
+            <router-outlet></router-outlet>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>
