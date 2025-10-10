@@ -23,7 +23,7 @@ interface SupportTicket {
 }
 
 @Component({
-  selector: 'app-support-card-left',
+  selector: 'app-support-card',
   standalone: true,
   imports: [
     CommonModule,
@@ -36,8 +36,8 @@ interface SupportTicket {
     MatProgressSpinnerModule,
     MatChipsModule
   ],
-  templateUrl: './support-card-left.html',
-  styleUrls: ['./support-card-left.css']
+  templateUrl: './support-card.html',
+  styleUrls: ['./support-card.css']
 })
 export class SupportCardLeftComponent implements OnInit {
   private formBuilder = inject(FormBuilder);
