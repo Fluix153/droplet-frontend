@@ -1,36 +1,36 @@
 import { Injectable } from '@angular/core';
 import { BaseAssembler } from '../../shared/infrastructure/base-assembler';
 import { User } from '../domain/models/user.entity';
-import { LoginResponseDto } from './login-response';
 
 /**
- * Assembler que convierte entre DTOs de login y entidades User
+ * Assembler que convierte entre datos de usuario de la base de datos y entidades User
  */
 @Injectable({
   providedIn: 'root'
 })
-export class LoginAssembler extends BaseAssembler<LoginResponseDto['user'], User> {
+export class LoginAssembler extends BaseAssembler<any, User> {
 
   /**
-   * Convierte un DTO de usuario en una entidad de dominio User
+   * Convierte un usuario de la base de datos en una entidad de dominio User
    */
-  toEntity(dto: LoginResponseDto['user']): User {
-    if (!this.isValidDto(dto)) {
+  toEntity(userData: any): User {
+    if (!this.isValidUserData(userData)) {
       throw new Error('DTO de usuario inválido');
     }
 
     return new User(
-      dto.id,
-      dto.email,
-      dto.name,
-      dto.role
+      userData.id,
+      userData.name,
+      userData.email,
+      userData.role,
+      userData.phone
     );
   }
 
   /**
-   * Convierte una entidad User en un DTO
+   * Convierte una entidad User en datos para la base de datos
    */
-  toDto(entity: User): LoginResponseDto['user'] {
+  toDto(entity: User): any {
     if (!this.isValidEntity(entity)) {
       throw new Error('Entidad User inválida');
     }
@@ -39,17 +39,30 @@ export class LoginAssembler extends BaseAssembler<LoginResponseDto['user'], User
       id: entity.id,
       email: entity.email,
       name: entity.name,
-      role: entity.role
+      role: entity.role,
+      phone: entity.phone
     };
   }
 
   /**
-   * Valida que el DTO tenga los campos mínimos requeridos
+   * Valida que los datos del usuario tengan los campos mínimos requeridos
    */
-  protected override isValidDto(dto: LoginResponseDto['user']): boolean {
-    return super.isValidDto(dto) &&
-           !!dto.id &&
-           !!dto.email &&
-           !!dto.name;
+  private isValidUserData(userData: any): boolean {
+    return userData &&
+           typeof userData.id === 'string' && userData.id.length > 0 &&
+           typeof userData.email === 'string' && userData.email.length > 0 &&
+           typeof userData.name === 'string' && userData.name.length > 0 &&
+           typeof userData.role === 'string' && userData.role.length > 0;
+  }
+
+  /**
+   * Valida que la entidad User sea válida
+   */
+  protected override isValidEntity(entity: User): boolean {
+    return entity &&
+           typeof entity.id === 'string' && entity.id.length > 0 &&
+           typeof entity.email === 'string' && entity.email.length > 0 &&
+           typeof entity.name === 'string' && entity.name.length > 0 &&
+           typeof entity.role === 'string' && entity.role.length > 0;
   }
 }

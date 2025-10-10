@@ -151,6 +151,37 @@ export class AccessStore {
   }
 
   /**
+   * Implementa el caso de uso de registro
+   * @param credentials - Datos del nuevo usuario (name, email, password, role, phone)
+   */
+  register(credentials: { name: string; email: string; password: string; role: string; phone: string }): void {
+    // 1. Actualizar el estado para indicar que la carga ha comenzado
+    this.updateState({ isLoading: true, error: null });
+
+    this.accessApiService.register(credentials).subscribe({
+      next: (user) => {
+        // 2. Si el registro es exitoso:
+        // - Actualizar el estado con el nuevo usuario registrado
+        this.updateState({
+          currentUser: user,
+          isLoading: false,
+          error: null
+        });
+      },
+      error: (error) => {
+        // 3. Si el registro falla:
+        // - Actualizar el estado con un error y pon isLoading en false
+        const errorMessage = error?.error?.message || error?.message || 'Error durante el registro';
+        this.updateState({
+          currentUser: null,
+          isLoading: false,
+          error: errorMessage
+        });
+      }
+    });
+  }
+
+  /**
    * Limpia el error del estado
    */
   clearError(): void {

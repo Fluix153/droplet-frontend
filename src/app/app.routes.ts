@@ -1,4 +1,5 @@
 import {Routes} from '@angular/router';
+import {ACCESS_ROUTES} from './access/presentation/views/access.routes';
 import {authGuard} from './access/infrastructure/guards/auth.guard';
 import {roleGuard} from './access/infrastructure/guards/role.guard';
 
@@ -10,7 +11,7 @@ export const routes: Routes = [
     },
     {
         path: 'auth',
-        loadChildren: () => import('./access/presentation/views/access.routes').then(r => r.ACCESS_ROUTES)
+        children: ACCESS_ROUTES
     },
     {
         path: 'dashboard',
@@ -22,6 +23,7 @@ export const routes: Routes = [
                 redirectTo: 'household',
                 pathMatch: 'full'
             },
+
             {
                 path: 'admin',
                 loadComponent: () => import('./shared/components/placeholder.component').then(c => c.PlaceholderComponent),

@@ -77,7 +77,7 @@
                     Policy</a>
                 </mat-checkbox>
                 <!-- Error Message -->
-                <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+                <div *ngIf="error$ | async as error" class="error-message">{{ error }}</div>
                 <!-- Submit Button -->
                 <button mat-raised-button color="primary" type="submit" class="create-account-button"
                         aria-label="Create Account" style="width: 100%;">

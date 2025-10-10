@@ -2,7 +2,6 @@
   "users": [
     {
       "id": "u_000",
-
       "name": "Administrador General",
       "email": "admin@example.com",
       "password": "Admin#123",
@@ -32,6 +31,30 @@
       "password": "Angel$567",
       "role": "HOUSEHOLD_HEAD",
       "phone": "999888777"
+    },
+    {
+      "name": "Jafeth Worren",
+      "email": "123@test.com",
+      "password": "12345678",
+      "role": "ADMIN",
+      "phone": "987654321",
+      "id": "ZZoCUlD"
+    },
+    {
+      "name": "Carlos pepe",
+      "email": "123@est.com",
+      "password": "12345678",
+      "role": "BREWMASTER",
+      "phone": "123456789",
+      "id": "n3RfeQx"
+    },
+    {
+      "name": "nova 123",
+      "email": "123@asd.com",
+      "password": "123456789",
+      "role": "HOUSEHOLD_HEAD",
+      "phone": "123456789",
+      "id": "TL7ZSN8"
     }
   ],
   "supportTickets": [
