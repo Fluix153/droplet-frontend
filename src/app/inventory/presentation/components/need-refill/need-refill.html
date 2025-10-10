@@ -1,0 +1,9 @@
+<div class="refill-list">
+  <h3>Tanques que Necesitan Recarga</h3>
+  <ul>
+    @for (tank of tanksToRefill; track tank.id) {
+      <li>{{ tank.name }} - Nivel: {{ tank.level }}%</li>
+
+    }
+  </ul>
+</div>
