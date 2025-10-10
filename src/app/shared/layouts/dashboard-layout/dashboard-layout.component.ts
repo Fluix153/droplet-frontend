@@ -1,12 +1,15 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
-import {Router, RouterOutlet} from '@angular/router';
+import {Component, OnInit, OnDestroy, ViewChild, inject} from '@angular/core';
+import {Router, RouterOutlet, RouterLink, RouterLinkActive} from '@angular/router';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
+import {MatSidenavModule, MatSidenav} from '@angular/material/sidenav';
+import {MatListModule} from '@angular/material/list';
 import {CommonModule} from '@angular/common';
 import {Subject, takeUntil} from 'rxjs';
-import {AuthService} from '../../../features/auth/auth.service';
-import {User} from '../../../features/auth/models/user.model';
+import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
+import {AccessStore} from '../../../access/application/access.store';
+import {User} from '../../../access/domain/models/user.entity';
 
 @Component({
     selector: 'app-dashboard-layout',
@@ -14,81 +17,50 @@ import {User} from '../../../features/auth/models/user.model';
     imports: [
         CommonModule,
         RouterOutlet,
+        RouterLink,
+        RouterLinkActive,
         MatToolbarModule,
         MatButtonModule,
-        MatIconModule
+        MatIconModule,
+        MatSidenavModule,
+        MatListModule
     ],
-    template: `
-        <div class="dashboard-layout">
-            <mat-toolbar color="primary" class="dashboard-header">
-                <span class="logo">Droplet</span>
-                <span class="spacer"></span>
-                <span class="user-info" *ngIf="currentUser">
-          Bienvenido, {{ currentUser.name }}
-        </span>
-                <button mat-icon-button (click)="logout()" class="logout-btn" title="Cerrar Sesión">
-                    <mat-icon>logout</mat-icon>
-                </button>
-            </mat-toolbar>
-
-            <main class="dashboard-content">
-                <router-outlet></router-outlet>
-            </main>
-        </div>
-    `,
-    styles: [`
-        .dashboard-layout {
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-        }
-
-        .dashboard-header {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .spacer {
-            flex: 1 1 auto;
-        }
-
-        .user-info {
-            margin-right: 16px;
-            font-size: 14px;
-        }
-
-        .logout-btn {
-            margin-left: 8px;
-        }
-
-        .dashboard-content {
-            flex: 1;
-            overflow-y: auto;
-            background-color: #f5f5f5;
-        }
-
-        .logo {
-            font-weight: bold;
-            font-size: 18px;
-        }
-    `]
+    templateUrl: './dashboard-layout.component.html',
+    styleUrls: ['./dashboard-layout.component.scss']
 })
 export class DashboardLayoutComponent implements OnInit, OnDestroy {
+    @ViewChild('sidenav') sidenav!: MatSidenav;
+
+    // Inyección de dependencias usando inject()
+    private readonly store = inject(AccessStore);
+    private readonly router = inject(Router);
+    private readonly breakpointObserver = inject(BreakpointObserver);
+
     currentUser: User | null = null;
+    isMobile = false;
     private destroy$ = new Subject<void>();
 
-    constructor(
-        private authService: AuthService,
-        private router: Router
-    ) {
-    }
-
     ngOnInit(): void {
-        this.authService.currentUser$
+        // Suscribirse a cambios del usuario actual desde el AccessStore
+        this.store.currentUser$
             .pipe(takeUntil(this.destroy$))
-            .subscribe(user => {
+            .subscribe((user: User | null) => {
                 this.currentUser = user;
+            });
+
+        // Detectar cambios de viewport para responsividad
+        this.breakpointObserver.observe([Breakpoints.Handset])
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(result => {
+                this.isMobile = result.matches;
+                // En móvil, el sidenav debe estar cerrado por defecto
+                if (this.sidenav && this.isMobile) {
+                    this.sidenav.mode = 'over';
+                    this.sidenav.close();
+                } else if (this.sidenav && !this.isMobile) {
+                    this.sidenav.mode = 'side';
+                    this.sidenav.open();
+                }
             });
     }
 
@@ -97,8 +69,22 @@ export class DashboardLayoutComponent implements OnInit, OnDestroy {
         this.destroy$.complete();
     }
 
+    toggleSidenav(): void {
+        if (this.sidenav) {
+            this.sidenav.toggle();
+        }
+    }
+
     logout(): void {
-        this.authService.logout();
+        // Usar el AccessStore para logout en lugar del AuthService
+        this.store.logout();
         this.router.navigate(['/auth/login']);
+    }
+
+    // Cerrar sidenav en móvil cuando se navega a una ruta
+    onNavigate(): void {
+        if (this.isMobile && this.sidenav) {
+            this.sidenav.close();
+        }
     }
 }
