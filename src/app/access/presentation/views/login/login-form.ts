@@ -21,7 +21,6 @@ import { User } from '../../../domain/models/user.entity';
  */
 @Component({
   selector: 'app-login-form',
-  standalone: true,
   imports: [
     CommonModule,
     NgOptimizedImage,

@@ -8,8 +8,8 @@ import {MatListModule} from '@angular/material/list';
 import {CommonModule} from '@angular/common';
 import {Subject, takeUntil} from 'rxjs';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
-import {AccessStore} from '../../../access/application/access.store';
-import {User} from '../../../access/domain/models/user.entity';
+import {AccessStore} from '../../../../access/application/access.store';
+import {User} from '../../../../access/domain/models/user.entity';
 
 @Component({
     selector: 'app-dashboard-layout',

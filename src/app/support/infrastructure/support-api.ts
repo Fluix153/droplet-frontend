@@ -1,48 +1,64 @@
-// src/app/support/infrastructure/support-api.ts
-
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Injectable, inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, map } from 'rxjs';
 import { BaseApiEndpointService } from '../../shared/infrastructure/base-api-endpoint.service';
-import { SupportAssembler } from './support-assembler';
 import { SupportTicket } from '../domain/models/support.entity';
 import { SupportTicketDto, CreateTicketDto } from './support-response';
+import { SupportAssembler } from './support-assembler';
+import { BaseResource, BaseResponse } from '../../shared/infrastructure/base-response';
+import { environment } from '../../../environments/environment.dev';
+
+interface SupportResource extends BaseResource {
+  userId: string;
+  subject: string;
+  priority: string;
+  description: string;
+  status: string;
+  createdAt: string;
+}
+
+interface SupportResponse extends BaseResponse {
+  data: SupportResource[];
+}
 
 /**
- * Servicio de API para gestionar tickets de soporte.
- * Hereda de BaseApiEndpointService e inyecta SupportAssembler para
- * convertir DTOs en entidades de dominio.
+ * Servicio de API para operaciones de soporte
  */
-@Injectable({ providedIn: 'root' })
-export class SupportApiService extends BaseApiEndpointService {
-
-  constructor(
-    private supportAssembler: SupportAssembler
-  ) {
-    super();
+@Injectable({
+  providedIn: 'root'
+})
+export class SupportApiService extends BaseApiEndpointService<
+  SupportTicket,
+  SupportResource,
+  SupportResponse,
+  SupportAssembler
+> {
+  constructor(http: HttpClient, assembler: SupportAssembler) {
+    super(http, `${environment.apiBaseUrl}/supportTickets`, assembler);
   }
 
   /**
-   * Obtiene todos los tickets de soporte de un usuario específico.
-   * @param userId - ID del usuario
-   * @returns Observable con array de tickets convertidos a entidades de dominio
+   * Obtiene todos los tickets de un usuario específico
    */
   getTicketsByUserId(userId: string): Observable<SupportTicket[]> {
-    return this._get<SupportTicketDto[]>(`supportTickets?userId=${userId}`)
-      .pipe(
-        map((ticketDtos: SupportTicketDto[]) => this.supportAssembler.toEntityList(ticketDtos))
-      );
+    return this.http.get<SupportTicketDto[]>(`${this.endpointUrl}?userId=${userId}`).pipe(
+      map(tickets => tickets.map(ticket => this.assembler.toEntity(ticket)))
+    );
   }
 
   /**
-   * Crea un nuevo ticket de soporte.
-   * @param ticketData - Datos del ticket a crear
-   * @returns Observable con el ticket creado convertido a entidad de dominio
+   * Crea un nuevo ticket de soporte
    */
   createTicket(ticketData: CreateTicketDto): Observable<SupportTicket> {
-    return this._post<SupportTicketDto>('supportTickets', ticketData)
-      .pipe(
-        map((ticketDto: SupportTicketDto) => this.supportAssembler.toEntity(ticketDto))
-      );
+    const newTicket = {
+      ...ticketData,
+      status: 'Open',
+      createdAt: new Date().toISOString()
+    };
+
+    return this.http.post<SupportTicketDto>(this.endpointUrl, newTicket).pipe(
+      map(ticket => this.assembler.toEntity(ticket))
+    );
   }
 }
+

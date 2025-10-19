@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiBaseUrl: 'http://localhost:3001'
+  apiBaseUrl: 'https://droplet-fake-api.onrender.com'
 };

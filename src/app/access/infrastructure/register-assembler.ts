@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { BaseAssembler } from '../../shared/infrastructure/base-assembler';
 import { User } from '../domain/models/user.entity';
 
 /**
@@ -9,7 +8,7 @@ import { User } from '../domain/models/user.entity';
 @Injectable({
   providedIn: 'root'
 })
-export class RegisterAssembler extends BaseAssembler<any, User> {
+export class RegisterAssembler {
 
   /**
    * Convierte de DTO a entidad de dominio

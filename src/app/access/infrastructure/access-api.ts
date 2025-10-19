@@ -1,23 +1,32 @@
 import { Injectable, inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
-import { BaseApiEndpointService } from '../../shared/infrastructure/base-api-endpoint.service';
 import { User } from '../domain/models/user.entity';
-import { LoginResponseDto, LoginCredentialsDto } from './login-response';
-import { RegisterResponseDto, RegisterCredentialsDto } from './register-response';
+import { LoginCredentialsDto } from './login-response';
+import { RegisterCredentialsDto } from './register-response';
 import { LoginAssembler } from './login-assembler';
 import { RegisterAssembler } from './register-assembler';
 import { HttpParams } from '@angular/common/http';
+import { environment } from '../../../environments/environment.dev';
 
 /**
  * Servicio de API para operaciones de acceso/autenticación
- * Implementa la capa de infraestructura heredando de BaseApiEndpointService
+ *
+ * NOTA: Este servicio se mantiene por compatibilidad con tests existentes.
+ * Para nuevas implementaciones, usar LoginApiEndpoint y RegisterApiEndpoint directamente.
+ *
+ * Este servicio NO hereda de BaseApiEndpointService porque las operaciones de login/register
+ * no son operaciones CRUD estándar y tienen lógica de negocio específica.
  */
 @Injectable({
   providedIn: 'root'
 })
-export class AccessManagementApiService extends BaseApiEndpointService {
+export class AccessManagementApiService {
+  private readonly apiUrl = environment.apiBaseUrl;
   private readonly loginAssembler = inject(LoginAssembler);
   private readonly registerAssembler = inject(RegisterAssembler);
+
+  constructor(private http: HttpClient) {}
 
   /**
    * Realiza el login del usuario simulado con json-server
@@ -30,7 +39,7 @@ export class AccessManagementApiService extends BaseApiEndpointService {
       .set('email', credentials.email)
       .set('password', credentials.password);
 
-    return this._get<any[]>('users', params).pipe(
+    return this.http.get<any[]>(`${this.apiUrl}/users`, { params }).pipe(
       map(users => {
         if (!users || users.length === 0) {
           throw new Error('Credenciales inválidas');
@@ -71,37 +80,41 @@ export class AccessManagementApiService extends BaseApiEndpointService {
    * @returns Observable con el usuario actual
    */
   getCurrentUser(): Observable<User> {
-    return this._get<LoginResponseDto['user']>('auth/profile').pipe(
-      map(userDto => this.loginAssembler.toEntity(userDto))
-    );
-  }
-
-  /**
-   * Verifica si el token actual es válido
-   * @returns Observable con el resultado de la verificación
-   */
-  verifyToken(): Observable<boolean> {
-    return this._get<{ valid: boolean }>('auth/verify').pipe(
-      map(response => response.valid)
-    );
-  }
-
-  /**
-   * Refresca el token de acceso
-   * @returns Observable con el nuevo token
-   */
-  refreshToken(): Observable<{ accessToken: string }> {
-    return this._post<{ accessToken: string }>('auth/refresh', {});
+    // TODO: Implementar cuando el backend soporte este endpoint
+    return new Observable(observer => {
+      observer.error(new Error('getCurrentUser no implementado'));
+    });
   }
 
   /**
    * Registra un nuevo usuario
-   * @param credentials - Datos del nuevo usuario (name, email, password, role, phone)
-   * @returns Observable con el usuario creado
+   * @param credentials - Datos del nuevo usuario (name, email, password, role)
+   * @returns Observable con el usuario creado y su token
    */
-  register(credentials: RegisterCredentialsDto): Observable<User> {
-    return this._post<RegisterResponseDto>('users', credentials).pipe(
-      map(response => this.registerAssembler.toEntity(response))
+  register(credentials: RegisterCredentialsDto): Observable<{ accessToken: string; user: User }> {
+    const newUser = {
+      name: credentials.name,
+      email: credentials.email,
+      password: credentials.password,
+      role: credentials.role || 'user'
+    };
+
+    return this.http.post<any>(`${this.apiUrl}/users`, newUser).pipe(
+      map(userData => {
+        // Validar que el usuario se creó correctamente
+        if (!userData.id || !userData.name || !userData.email || !userData.role) {
+          throw new Error('Error al crear el usuario');
+        }
+
+        // Simular un token de acceso
+        const fakeToken = btoa(`${userData.email}:${Date.now()}`);
+
+        return {
+          accessToken: fakeToken,
+          user: this.registerAssembler.toEntity(userData)
+        };
+      })
     );
   }
 }
+

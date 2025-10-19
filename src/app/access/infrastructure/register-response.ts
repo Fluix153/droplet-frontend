@@ -5,8 +5,8 @@ export interface RegisterCredentialsDto {
   name: string;
   email: string;
   password: string;
-  role: string;
-  phone: string;
+  role?: string;
+  phone?: string; // Hacer opcional
 }
 
 /**
@@ -17,5 +17,5 @@ export interface RegisterResponseDto {
   name: string;
   email: string;
   role: string;
-  phone: string;
+  phone?: string; // Hacer opcional
 }
