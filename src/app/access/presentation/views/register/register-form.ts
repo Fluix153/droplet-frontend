@@ -16,6 +16,7 @@ import { NgOptimizedImage } from '@angular/common';
 
 import { AccessStore } from '../../../application/access.store';
 import { User } from '../../../domain/models/user.entity';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-register-form',
@@ -32,7 +33,8 @@ import { User } from '../../../domain/models/user.entity';
     MatSelectModule,
     MatCheckboxModule,
     MatDividerModule,
-    RouterModule
+    RouterModule,
+    TranslatePipe
   ],
   templateUrl: './register-form.html',
   styleUrls: ['./register-form.css']
@@ -69,6 +71,7 @@ export class RegisterFormComponent implements OnInit, OnDestroy {
       firstName: ['', [Validators.required, Validators.minLength(2)]],
       lastName: ['', [Validators.required, Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.email]],
+      phone: ['', [Validators.required, Validators.pattern(/^[0-9]{9,15}$/)]],
       password: ['', [Validators.required, Validators.minLength(8)]],
       confirmPassword: ['', [Validators.required]],
       role: ['', [Validators.required]],

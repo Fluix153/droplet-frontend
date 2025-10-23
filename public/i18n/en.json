@@ -1,4 +1,70 @@
 {
-  "WELCOME_MESSAGE": "Welcome to Droplet",
-  "LOGIN_SUBTITLE": "Sign in to your liquid management dashboard"
+  "auth": {
+    "login": {
+      "title": "Welcome to Droplet",
+      "subtitle": "Sign in to your liquid management dashboard",
+      "labelEmail": "Email Address",
+      "inputEmail": "Enter your email",
+      "labelPassword": "Password",
+      "inputPassword": "Enter your password",
+      "rememberMe": "Remember Me",
+      "forgotPassword": "Forgot Password?",
+      "signInButton": "Sign In",
+      "noAccount": "Don't have an account? ",
+      "regLink": "Sign Up",
+      "divText": "Or continue with"
+    },
+    "register": {
+      "title": "Register to Droplet",
+      "subtitle": "Create your account",
+      "labelName": "First Name",
+      "inputName": "Enter your first name",
+      "labelLastName": "Last Name",
+      "inputLastName": "Enter your last name",
+      "labelEmail": "Email Address",
+      "inputEmail": "Enter your email",
+      "labelPhone": "Phone Number",
+      "inputPhone": "Enter your phone number",
+      "labelPassword": "Password",
+      "inputPassword": "Create a password",
+      "labelConfirmPassword": "Confirm Password",
+      "inputConfirmPassword": "Confirm your password",
+      "labelRole": "Account Type",
+      "inputRole": "Select your account type",
+      "roleHoldHead": "Household Head",
+      "roleBrewmaster": "Brewmaster",
+      "roleAdmin": "Admin",
+      "text1T": "I agree to the",
+      "link1T": "Terms of Service",
+      "text2T": "and ",
+      "link2T": "Privacy Policy",
+      "btn": "Create Account",
+      "haveAccount": "Already have an account? ",
+      "loginLink": "Sign In",
+      "divText": "Or register with"
+    },
+    "forgot": {
+      "title": "Recover your password",
+      "subtitle": "Enter your email address and we'll send you a link to reset your password",
+      "labelEmail": "Email",
+      "inputEmail": "Enter your email address",
+      "forgotBtn": "Send Link",
+      "backToLogin": "Back to Login"
+    }
+  },
+  "dashboard": {
+    "welcome": "Welcome to the Dashboard",
+    "logout": "Logout"
+  },
+  "shared": {
+    "buttons": {
+      "save": "Save",
+      "cancel": "Cancel",
+      "delete": "Delete"
+    },
+    "messages": {
+      "loading": "Loading...",
+      "error": "An error occurred. Please try again."
+    }
+  }
 }

@@ -1,30 +1,35 @@
-import { Component, inject } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-import { MatButtonToggleGroup, MatButtonToggle, MatButtonToggleModule } from '@angular/material/button-toggle';
-import { CommonModule } from '@angular/common';
+import {Component, inject} from '@angular/core';
+import {I18nFacade} from '../../../application/i18n/i18n.facade';
+import {MatButtonToggle, MatButtonToggleGroup} from '@angular/material/button-toggle';
 
 @Component({
   selector: 'app-language-switcher',
   standalone: true,
   imports: [
     MatButtonToggleGroup,
-    MatButtonToggle,
+    MatButtonToggle
   ],
   templateUrl: './language-switcher.html',
   styleUrls: ['./language-switcher.css']
 })
-export class LanguageSwitcherComponent {
-  currentLang = 'en';
-  languages = ['en', 'es'];
+export class LanguageSwitcher {
+  /** Idioma actual */
+  currentLang: string;
 
-  private translate = inject(TranslateService);
+  /** Idiomas disponibles */
+  languages: string[];
+
+  /** Inyección del facade */
+  private i18nFacade = inject(I18nFacade);
 
   constructor() {
-    this.currentLang = this.translate.getDefaultLang() || 'en';
+    // Inicializar las propiedades después de inyectar el facade
+    this.currentLang = this.i18nFacade.currentLang();
+    this.languages = this.i18nFacade.availableLangs;
   }
 
+  /** Cambiar el idioma */
   useLanguage(language: string): void {
-    this.translate.use(language);
-    this.currentLang = language;
+    this.i18nFacade.changeLanguage(language);
   }
 }

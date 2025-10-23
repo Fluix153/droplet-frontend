@@ -1,12 +1,3 @@
-/* Contenedor principal */
-.register-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: linear-gradient(135deg, #F3F4F6 0%, #F0FDF4 100%);
-}
-
 /* Card principal de registro */
 .register-card {
     width: 448px;

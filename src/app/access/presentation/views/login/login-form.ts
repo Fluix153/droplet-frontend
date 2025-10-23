@@ -11,6 +11,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDividerModule } from '@angular/material/divider';
 import { RouterModule } from '@angular/router';
 import { Subject, takeUntil, Observable } from 'rxjs';
+import { TranslatePipe } from '@ngx-translate/core';
 
 import { AccessStore } from '../../../application/access.store';
 import { User } from '../../../domain/models/user.entity';
@@ -32,7 +33,8 @@ import { User } from '../../../domain/models/user.entity';
     MatButtonModule,
     MatIconModule,
     MatCheckboxModule,
-    MatDividerModule
+    MatDividerModule,
+    TranslatePipe
   ],
   templateUrl: './login-form.html',
   styleUrls: ['./login-form.css']
@@ -177,4 +179,5 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     return 'Campo inválido';
   }
+
 }

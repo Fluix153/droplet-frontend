@@ -1,34 +1,18 @@
-/* Variables CSS personalizadas */
-:root {
-  --color-text-strong: #111827;
-  --color-text-muted: #4B5563;
-  --color-primary: #06B6D4;
-  --color-border: #D1D5DB;
-  --radius-input: 10px;
-}
-
-/* Contenedor principal */
-.login-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #F3F4F6 0%, #F0FDF4 100%);
-}
-
 /* Card principal de login */
-.login-card {
-  width: 28rem;
+.login-container {
   height: 43.625rem;
-  max-width: 28rem;
+  width: 28rem;
   background: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.mat-card-header {
+.login-header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 0.5rem;
+
 }
 
 /* Logo SVG dentro del header */
@@ -38,40 +22,22 @@
   min-width: 3rem;
   height: auto;
   display: block;
-  margin-bottom: 1rem;
 }
 
-/* Header del formulario dentro de mat-card-header */
-.mat-card-header .login-header {
-  text-align: center;
-  margin-bottom: 1.5rem;
-  width: 100%;
-}
-
-.login-header .login-title {
-
+.login-title {
   font-size: 30px;
   font-weight: 600;
   color: var(--color-text-strong);
-  margin: 0 0 8px 0;
-  line-height: 1.2;
-}
-
-.login-header .login-subtitle {
-  font-size: 16px;
-  color: var(--color-text-muted);
-  margin: 0;
-  line-height: 1.5;
 }
 
 /* Contenedor del form */
-.card-content {
+.login-card {
   box-shadow: 0 8px 10px -6px hsla(0, 0%, 0%, 0.1),
-              0 20px 25px -5px hsla(0, 0%, 0%, 0.1);
-  border-radius: 16px;
+  0 20px 25px -5px hsla(0, 0%, 0%, 0.1);
+  border-radius: 1rem;
   background: #fff;
   padding: 2rem;
-    margin-bottom: 2rem;
+  gap: 1.5rem;
 }
 
 /* Formulario */
@@ -79,13 +45,13 @@
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
+  font-family: 'Roboto', sans-serif;
 }
 
-/* Campos del formulario */
-.form-field input::placeholder {
-  color: #9CA3AF !important;
-  opacity: 1;
+.custom-input{
+  font-family: 'Roboto', sans-serif !important;
 }
+
 
 /* Opciones del formulario (Remember me y Forgot password) */
 .form-options {
@@ -95,15 +61,14 @@
   margin-top: -8px;
 }
 
-.remember-checkbox .mat-mdc-checkbox-label {
-  color: var(--color-text-muted);
+.remember-checkbox {
+  font-family: 'Roboto', sans-serif !important;
 }
 
 .forgot-link {
-  color: var(--color-primary);
+  color: #06B6D4;
   text-decoration: none;
   font-size: 14px;
-  font-weight: 500;
 }
 
 .forgot-link:hover {
@@ -112,18 +77,29 @@
 
 /* Botón de inicio de sesión */
 .signin-button {
-
   width: 100%;
-  height: 48px;
-  border-radius: var(--radius-input);
-  font-size: 16px;
-  font-weight: 600;
-  background-color: var(--color-primary);
-  color: #fff;
+  height: 3rem;
+  background: #06B6D4 !important;
+  border-radius: 0.5rem;
 }
 
 .signin-button:hover {
   background-color: #0891b2; /* Versión más oscura de #06B6D4 */
+}
+
+.signup-link {
+  text-align: center;
+  margin-top: 8px;
+}
+
+.signup-link a {
+  color: #06B6D4;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.signup-link a:hover {
+  text-decoration: underline;
 }
 
 /* Sección del divisor */
@@ -158,10 +134,9 @@
 }
 
 .social-button {
-
   flex: 1;
   height: 2.4rem;
-  border-radius: var(--radius-input);
+  border-radius: 0.5rem;
   border-color: var(--color-border);
   color: var(--color-text-muted);
   font-weight: 500;
@@ -176,31 +151,6 @@
 
 .social-button:hover {
   background-color: #f9fafb !important;
-  border-color: #e5e7eb !important; /* Versión más clara de #D1D5DB */
-}
-
-/* Enlace de registro */
-.signup-link {
-  text-align: center;
-  margin-top: 8px;
-}
-
-.signup-text {
-
-  color: var(--color-text-muted);
-  font-size: 14px;
-}
-
-.signup-anchor {
-  color: var(--color-primary);
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 14px;
-  margin-left: 4px;
-}
-
-.signup-anchor:hover {
-  text-decoration: underline;
 }
 
 /* Mensajes de error */
@@ -215,6 +165,7 @@
   text-align: center;
   font-weight: 500;
 }
+
 
 /* Responsive design */
 @media (max-width: 480px) {

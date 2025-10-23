@@ -2,13 +2,11 @@
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Poppins', sans-serif;
   font-weight: 600;
-  color: var(--mat-sys-on-surface);
 }
 
 p, span, li {
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
-  color: var(--mat-sys-on-surface);
 }
 
 /* Define hierarchy with contrasting sizes */
@@ -31,7 +29,3 @@ h6 {
   font-size: 1rem;
 }
 
-p {
-  font-size: 1rem;
-  line-height: 1.5;
-}

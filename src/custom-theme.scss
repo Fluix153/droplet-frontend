@@ -16,12 +16,10 @@ html {
       primary: mat.$cyan-palette,
       tertiary: mat.$orange-palette,
     ),
-    typography: Poppis,
+    typography: Roboto,
     density: 0,
   ));
 }
-
-
 
 body {
   // Default the application to a light color theme. This can be changed to
