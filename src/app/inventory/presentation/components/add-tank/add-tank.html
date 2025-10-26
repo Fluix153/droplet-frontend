@@ -1,0 +1,29 @@
+<div class="add-tank-form">
+  <h3>Agregar Nuevo Tanque</h3>
+  <form (ngSubmit)="addTank()">
+    <label for="name">Nombre del Tanque:</label>
+    <input id="name" [(ngModel)]="newTank.name" name="name" required />
+
+    <label for="level">Nivel del Tanque (%):</label>
+    <input
+      id="level"
+      [(ngModel)]="newTank.level"
+      name="level"
+      type="number"
+      min="0"
+      max="100"
+      required
+    />
+
+    <label for="needRefill">¿Necesita Recarga?</label>
+    <input
+      id="needRefill"
+      type="checkbox"
+      [(ngModel)]="newTank.needRefill"
+      name="needRefill"
+    />
+
+    <button type="submit">Agregar Tanque</button>
+  </form>
+</div>
+
