@@ -3,57 +3,44 @@
 import { Injectable } from '@angular/core';
 import { BaseAssembler } from '../../shared/infrastructure/base-assembler';
 import { SupportTicket } from '../domain/models/support.entity';
-import { SupportTicketDto } from './support-response';
+import { SupportTicketDto, SupportTicketsResponse } from './support-response';
 
 /**
  * Assembler para convertir SupportTicketDto en entidades SupportTicket.
  */
 @Injectable({ providedIn: 'root' })
-export class SupportAssembler implements BaseAssembler<SupportTicket, SupportTicketDto, any> {
+export class SupportAssembler implements BaseAssembler<SupportTicket, SupportTicketDto, SupportTicketsResponse> {
+  toEntityFromResource(resource: SupportTicketDto): SupportTicket {
+    return SupportTicket.create({
+      ...resource,
+      id: String(resource.id)
+    });
+  }
 
-    /**
-     * Convierte un SupportTicketDto en una instancia de SupportTicket.
-     * Transforma la propiedad createdAt de string a Date.
-     *
-     * @param dto - El DTO de ticket de soporte a convertir
-     * @returns Una nueva instancia de SupportTicket
-     */
-    toEntity(dto: SupportTicketDto): SupportTicket {
-        return new SupportTicket(
-            dto.id,
-            dto.userId,
-            dto.subject,
-            dto.priority,
-            dto.description,
-            dto.status,
-            new Date(dto.createdAt) // Conversión de string a Date
-        );
-    }
+  toResourceFromEntity(entity: SupportTicket): SupportTicketDto {
+    return {
+      id: entity.id,
+      userId: entity.userId,
+      subject: entity.subject,
+      priority: entity.priority,
+      description: entity.description,
+      status: entity.status,
+      createdAt: entity.createdAt.toISOString(),
+      ticketNumber: entity.ticketNumber
+    };
+  }
 
-    toEntityFromResource(resource: SupportTicketDto): SupportTicket {
-        return this.toEntity(resource);
-    }
+  toEntitiesFromResponse(response: SupportTicketsResponse): SupportTicket[] {
+    const maybeArray = response as unknown as SupportTicketDto[];
+    const collection = Array.isArray(response?.data)
+      ? response.data!
+      : Array.isArray(maybeArray)
+        ? maybeArray
+        : [];
+    return collection.map(resource => this.toEntityFromResource(resource));
+  }
 
-    toResourceFromEntity(entity: SupportTicket): SupportTicketDto {
-        return {
-            id: entity.id,
-            userId: entity.userId,
-            subject: entity.subject,
-            priority: entity.priority,
-            description: entity.description,
-            status: entity.status,
-            createdAt: entity.createdAt.toISOString()
-        };
-    }
-
-    toEntitiesFromResponse(response: any): SupportTicket[] {
-        if (Array.isArray(response)) {
-            return response.map(dto => this.toEntity(dto));
-        }
-        return [];
-    }
-
-    toDto(entity: SupportTicket): SupportTicketDto {
-        return this.toResourceFromEntity(entity);
-    }
+  toDto(entity: SupportTicket): SupportTicketDto {
+    return this.toResourceFromEntity(entity);
+  }
 }

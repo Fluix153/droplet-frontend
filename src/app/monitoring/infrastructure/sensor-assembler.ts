@@ -1,26 +1,28 @@
 
-import {BaseAssembler} from '../../shared/infrastructure/base-assembler';
+import { Injectable } from '@angular/core';
+import { BaseAssembler } from '../../shared/infrastructure/base-assembler';
+import { Sensor } from '../domain/model/sensor.entity';
+import { SensorResource, SensorsResponse } from './sensors-response';
 
-import {Sensor} from '../domain/model/sensor.entity';
-import {SensorResource, SensorsResponse} from './sensors-response';
-
-
-export class SensorAssembler implements BaseAssembler<Sensor, SensorResource, SensorsResponse>{
-
-
+@Injectable({
+  providedIn: 'root'
+})
+export class SensorAssembler implements BaseAssembler<Sensor, SensorResource, SensorsResponse> {
   toEntitiesFromResponse(response: SensorsResponse): Sensor[] {
-    console.log(response);
-    return response.sensors.map(resource => this.toEntityFromResource(resource as SensorResource));
+    if (!response?.sensors) {
+      return [];
+    }
+    return response.sensors.map(resource => this.toEntityFromResource(resource));
   }
 
   toEntityFromResource(resource: SensorResource): Sensor {
-    return new Sensor({
-      id: resource.id,
+    return Sensor.create({
+      id: Number(resource.id),
       DeviceCod: resource.DeviceCode,
       Type: resource.Type,
       Location: resource.Location,
-      Status: resource.Status,
-    })
+      Status: resource.Status
+    });
   }
 
   toResourceFromEntity(entity: Sensor): SensorResource {
@@ -30,8 +32,6 @@ export class SensorAssembler implements BaseAssembler<Sensor, SensorResource, Se
       Type: entity.Type,
       Location: entity.Location,
       Status: entity.Status
-    } as SensorResource;
+    };
   }
-
-
 }

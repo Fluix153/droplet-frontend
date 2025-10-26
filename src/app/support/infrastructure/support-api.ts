@@ -3,23 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { BaseApiEndpointService } from '../../shared/infrastructure/base-api-endpoint.service';
 import { SupportTicket } from '../domain/models/support.entity';
-import { SupportTicketDto, CreateTicketDto } from './support-response';
+import { SupportTicketDto, CreateTicketDto, SupportTicketsResponse } from './support-response';
 import { SupportAssembler } from './support-assembler';
-import { BaseResource, BaseResponse } from '../../shared/infrastructure/base-response';
-import { environment } from '../../../environments/environment.dev';
-
-interface SupportResource extends BaseResource {
-  userId: string;
-  subject: string;
-  priority: string;
-  description: string;
-  status: string;
-  createdAt: string;
-}
-
-interface SupportResponse extends BaseResponse {
-  data: SupportResource[];
-}
+import { environment } from '../../../environments/environment';
 
 /**
  * Servicio de API para operaciones de soporte
@@ -29,12 +15,12 @@ interface SupportResponse extends BaseResponse {
 })
 export class SupportApiService extends BaseApiEndpointService<
   SupportTicket,
-  SupportResource,
-  SupportResponse,
+  SupportTicketDto,
+  SupportTicketsResponse,
   SupportAssembler
 > {
   constructor(http: HttpClient, assembler: SupportAssembler) {
-    super(http, `${environment.apiBaseUrl}/supportTickets`, assembler);
+    super(http, `${environment.support.apiBaseUrl}${environment.support.ticketsEndpoint}`, assembler);
   }
 
   /**
@@ -42,7 +28,7 @@ export class SupportApiService extends BaseApiEndpointService<
    */
   getTicketsByUserId(userId: string): Observable<SupportTicket[]> {
     return this.http.get<SupportTicketDto[]>(`${this.endpointUrl}?userId=${userId}`).pipe(
-      map(tickets => tickets.map(ticket => this.assembler.toEntity(ticket)))
+      map(tickets => tickets.map(ticket => this.assembler.toEntityFromResource(ticket)))
     );
   }
 
@@ -58,7 +44,7 @@ export class SupportApiService extends BaseApiEndpointService<
     };
 
     return this.http.post<SupportTicketDto>(this.endpointUrl, newTicket).pipe(
-      map(ticket => this.assembler.toEntity(ticket))
+      map(ticket => this.assembler.toEntityFromResource(ticket))
     );
   }
 

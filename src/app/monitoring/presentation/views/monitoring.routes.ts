@@ -1,20 +1,13 @@
-import {Routes} from '@angular/router';
-//import {Monitoring} from './monitoring/monitoring';
+import { Routes } from '@angular/router';
 
+const monitoring = () =>
+  import('./monitoring/monitoring').then(m => m.Monitoring);
 
-const monitoring =()=> import('./monitoring/monitoring')
-  .then(m => m.Monitoring);
+const sensorEdit = () =>
+  import('./sensor-edit/sensor-edit').then(m => m.SensorEdit);
 
-
-const sensorList =()=> import('./sensor-list/sensor-list')
-  .then(m => m.SensorList);
-
-const sensorEdit =()=> import('./sensor-edit/sensor-edit')
-  .then(m => m.SensorEdit);
-
-
-
-export const monitoringRoutes: Routes = [
-  {path: 'sensors',loadComponent: sensorList},
-  {path: 'sensors/edit/:id', loadComponent: sensorEdit}
-]
+export const MONITORING_ROUTES: Routes = [
+  { path: '', redirectTo: 'sensors', pathMatch: 'full' },
+  { path: 'sensors', loadComponent: monitoring },
+  { path: 'sensors/edit/:id', loadComponent: sensorEdit }
+];

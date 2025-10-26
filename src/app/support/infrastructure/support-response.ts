@@ -1,11 +1,11 @@
 import { TicketStatus, TicketPriority } from '../domain/models/support.entity';
+import { BaseResource, BaseResponse } from '../../shared/infrastructure/base-response';
 
 /**
  * DTO para respuesta de tickets de soporte.
  * Idéntico a la clase SupportTicket, pero con createdAt como string para serialización JSON.
  */
-export interface SupportTicketDto {
-  readonly id: string;
+export interface SupportTicketDto extends BaseResource {
   readonly userId: string;
   readonly subject: string;
   readonly priority: TicketPriority;
@@ -13,6 +13,10 @@ export interface SupportTicketDto {
   readonly status: TicketStatus;
   readonly createdAt: string;
   readonly ticketNumber?: string;
+}
+
+export interface SupportTicketsResponse extends BaseResponse {
+  data?: SupportTicketDto[];
 }
 
 /**

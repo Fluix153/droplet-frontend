@@ -1,38 +1,38 @@
-import {BaseAssembler} from '../../shared/infrastructure/base-assembler';
-import {Alert} from '../domain/model/alert.entity';
-import {AlertResource, AlertsResponse} from './alerts-response';
+import { Injectable } from '@angular/core';
+import { BaseAssembler } from '../../shared/infrastructure/base-assembler';
+import { Alert } from '../domain/model/alert.entity';
+import { AlertResource, AlertsResponse } from './alerts-response';
 
-
-
-export class AlertAssembler implements BaseAssembler<Alert, AlertResource, AlertsResponse>{
-
-
+@Injectable({
+  providedIn: 'root'
+})
+export class AlertAssembler implements BaseAssembler<Alert, AlertResource, AlertsResponse> {
   toEntitiesFromResponse(response: AlertsResponse): Alert[] {
-    console.log(response);
-    return response.alerts.map(resource => this.toEntityFromResource(resource as AlertResource));
+    if (!response?.alerts) {
+      return [];
+    }
+    return response.alerts.map(resource => this.toEntityFromResource(resource));
   }
 
   toEntityFromResource(resource: AlertResource): Alert {
-    return new Alert({
-      id: resource.id,
+    return Alert.create({
+      id: Number(resource.id),
       UserId: resource.UserId,
       MetricType: resource.MetricType,
       Severity: resource.Severity,
       Message: resource.Message,
-      TriggeredAt: resource.TriggeredAt,
-    })
+      TriggeredAt: resource.TriggeredAt
+    });
   }
 
   toResourceFromEntity(entity: Alert): AlertResource {
     return {
       id: entity.id,
-      UserId: entity.userId,
+      UserId: entity.UserId,
       MetricType: entity.MetricType,
       Severity: entity.Severity,
       Message: entity.Message,
-      TriggeredAt: entity.TriggeredAt
-    } as AlertResource;
+      TriggeredAt: entity.TriggeredAt.toISOString()
+    };
   }
-
-
 }
