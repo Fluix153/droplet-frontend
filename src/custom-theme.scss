@@ -6,6 +6,10 @@
 // custom components at https://material.angular.dev/guide/theming
 @use '@angular/material' as mat;
 
+
+// Carga los estilos estructurales y base que todos los componentes necesitan.
+@include mat.core();
+
 html {
   @include mat.theme((
     color: (
@@ -16,6 +20,8 @@ html {
     density: 0,
   ));
 }
+
+
 
 body {
   // Default the application to a light color theme. This can be changed to

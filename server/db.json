@@ -85,5 +85,155 @@
       "Location": "Lince, Lima",
       "Status": "Inactive"
     }
+  ],
+  "tanks": [
+    {
+      "id": "1",
+      "name": "Tank 1",
+      "level": 75,
+      "needRefill": false
+    },
+    {
+      "id": "2",
+      "name": "Tank 2",
+      "level": 20,
+      "needRefill": true
+    },
+    {
+      "id": "3",
+      "name": "Tank 3",
+      "level": 50,
+      "needRefill": false
+    },
+    {
+      "id": "4",
+      "name": "Tank 4",
+      "level": 10,
+      "needRefill": true
+    },
+    {
+      "id": 0,
+      "name": "Tank 3",
+      "level": 14,
+      "needRefill": false
+    },
+    {
+      "id": 0,
+      "name": "tank ejemplo",
+      "level": 55,
+      "needRefill": true
+    }
+  ],
+  "users": [
+    {
+      "id": "u_000",
+      "name": "Administrador General",
+      "email": "admin@example.com",
+      "password": "Admin#123",
+      "role": "ADMIN",
+      "phone": "999111222"
+    },
+    {
+      "id": "u_001",
+      "name": "Ana Hogar",
+      "role": "HOUSEHOLD_HEAD",
+      "email": "hogar@example.com",
+      "password": "Secret#123",
+      "phone": "987654321"
+    },
+    {
+      "id": "u_002",
+      "name": "Luis Maestro",
+      "email": "cerveza@example.com",
+      "password": "Secret#123",
+      "role": "BREWMASTER",
+      "phone": "912345678"
+    },
+    {
+      "id": "u_1760035284707",
+      "name": "Angel Pariona",
+      "email": "angel@test.com",
+      "password": "Angel$567",
+      "role": "HOUSEHOLD_HEAD",
+      "phone": "999888777"
+    },
+    {
+      "name": "Jafeth Worren",
+      "email": "123@test.com",
+      "password": "12345678",
+      "role": "ADMIN",
+      "phone": "987654321",
+      "id": "ZZoCUlD"
+    },
+    {
+      "name": "Carlos pepe",
+      "email": "123@est.com",
+      "password": "12345678",
+      "role": "BREWMASTER",
+      "phone": "123456789",
+      "id": "n3RfeQx"
+    },
+    {
+      "name": "nova 123",
+      "email": "123@asd.com",
+      "password": "123456789",
+      "role": "HOUSEHOLD_HEAD",
+      "phone": "123456789",
+      "id": "TL7ZSN8"
+    }
+  ],
+  "supportTickets": [
+    {
+      "id": "tck_001",
+      "userId": "u_000",
+      "subject": "Device connection issue",
+      "ticketNumber": "289731",
+      "priority": "High",
+      "description": "My main sensor is not reporting data since this morning.",
+      "status": "Open",
+      "createdAt": "2025-10-08T14:00:00Z"
+    },
+    {
+      "id": "tck_002",
+      "userId": "u_000",
+      "subject": "Billing question",
+      "ticketNumber": "5128127",
+      "priority": "Medium",
+      "description": "I have a question about my last invoice.",
+      "status": "Solved",
+      "createdAt": "2025-10-07T11:30:00Z"
+    },
+    {
+      "userId": "u_1760035284707",
+      "subject": "Carlos",
+      "priority": "Medium",
+      "description": "IoT Fallando",
+      "status": "Open",
+      "createdAt": "2025-10-09T21:10:58.849Z",
+      "id": "25vQi6D"
+    },
+    {
+      "userId": "u_1760035284707",
+      "subject": "Error de angel-0---",
+      "priority": "Critical",
+      "description": "No commit",
+      "status": "Open",
+      "createdAt": "2025-10-09T22:03:57.902Z",
+      "id": "ies7Kin"
+    },
+    {
+      "subject": "Notdasd",
+      "priority": "Low",
+      "description": "Otro ticket",
+      "userId": "u_1760035284707",
+      "id": "vfCjwXW"
+    },
+    {
+      "subject": "Notdasd",
+      "priority": "Low",
+      "description": "Otro ticket",
+      "userId": "u_1760035284707",
+      "id": "W3R27j6"
+    }
   ]
 }

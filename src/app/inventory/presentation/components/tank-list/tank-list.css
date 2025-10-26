@@ -1,0 +1,55 @@
+.tank-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  background-color: #ffffff; /* color principal */
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.tank-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f5f5f5;
+  border: 2px solid #0891b2; /* color secundario */
+  border-radius: 8px;
+  padding: 1rem;
+  width: 180px;
+  transition: transform 0.2s;
+}
+
+.tank-card:hover {
+  transform: scale(1.05);
+}
+
+mat-card img {
+  width: 100px;
+  height: 100px;
+  border-radius: 4px;
+}
+
+.tank-info h4 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #0891b2;
+}
+
+.tank-info p {
+  margin: 0.2rem 0;
+  font-size: 0.9rem;
+}
+
+.tank-card img {
+  width: 100px;
+  height: 100px;
+  border-radius: 4px;
+}
+
+.refill-status {
+  font-weight: bold;
+}
+
+.refill-status.need-refill {
+  color: red;
+}

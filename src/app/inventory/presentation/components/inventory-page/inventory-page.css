@@ -1,0 +1,14 @@
+.inventory-dashboard {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: #f0f8ff;
+}
+
+
+
+h1, h3 {
+  text-align: center;
+  color: #34495e;
+}
