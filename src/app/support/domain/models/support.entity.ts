@@ -1,36 +1,87 @@
+import { BaseEntity } from '../../../shared/infrastructure/base-entity';
+
 export type TicketStatus = 'Open' | 'In Progress' | 'Solved' | 'Closed';
 export type TicketPriority = 'Low' | 'Medium' | 'High' | 'Critical';
 
+type SupportTicketProps = {
+  id: string;
+  userId: string;
+  subject: string;
+  priority: TicketPriority;
+  description: string;
+  status: TicketStatus;
+  createdAt: Date;
+  ticketNumber?: string;
+};
+
+type SupportTicketInit = Omit<SupportTicketProps, 'createdAt'> & { createdAt: string | Date };
+
 /**
  * Entidad de dominio que representa un Ticket de Soporte.
- * Es una clase que contiene las propiedades y lógica de negocio pura
- * relacionada con un ticket, independientemente de cómo se almacena o se muestra.
+ * Contiene las propiedades y lógica de negocio relacionadas con un ticket,
+ * independiente de su persistencia o representación.
  */
-export class SupportTicket {
-    constructor(
-        public readonly id: string,
-        public readonly userId: string,
-        public readonly subject: string,
-        public readonly priority: TicketPriority,
-        public readonly description: string,
-        public readonly status: TicketStatus,
-        public readonly createdAt: Date,
-        public readonly ticketNumber?: string,
-    ) {}
+export class SupportTicket implements BaseEntity {
+  private constructor(private readonly props: SupportTicketProps) {}
 
-    /**
-     * Lógica de negocio simple: Determina si un ticket se considera cerrado.
-     * @returns {boolean} True si el estado es 'Solved' o 'Closed'.
-     */
-    isClosed(): boolean {
-        return this.status === 'Solved' || this.status === 'Closed';
-    }
+  static create(init: SupportTicketInit): SupportTicket {
+    const createdAt =
+      init.createdAt instanceof Date ? init.createdAt : new Date(init.createdAt);
+    return new SupportTicket({
+      id: init.id,
+      userId: init.userId,
+      subject: init.subject,
+      priority: init.priority,
+      description: init.description,
+      status: init.status,
+      ticketNumber: init.ticketNumber,
+      createdAt
+    });
+  }
 
-    /**
-     * Lógica de negocio simple: Determina si un ticket tiene prioridad alta o crítica.
-     * @returns {boolean} True si la prioridad es 'High' o 'Critical'.
-     */
-    isUrgent(): boolean {
-        return this.priority === 'High' || this.priority === 'Critical';
-    }
+  get id(): string {
+    return this.props.id;
+  }
+
+  get userId(): string {
+    return this.props.userId;
+  }
+
+  get subject(): string {
+    return this.props.subject;
+  }
+
+  get priority(): TicketPriority {
+    return this.props.priority;
+  }
+
+  get description(): string {
+    return this.props.description;
+  }
+
+  get status(): TicketStatus {
+    return this.props.status;
+  }
+
+  get createdAt(): Date {
+    return this.props.createdAt;
+  }
+
+  get ticketNumber(): string | undefined {
+    return this.props.ticketNumber;
+  }
+
+  /**
+   * Determina si un ticket se considera cerrado.
+   */
+  isClosed(): boolean {
+    return this.status === 'Solved' || this.status === 'Closed';
+  }
+
+  /**
+   * Determina si un ticket tiene prioridad alta o crítica.
+   */
+  isUrgent(): boolean {
+    return this.priority === 'High' || this.priority === 'Critical';
+  }
 }

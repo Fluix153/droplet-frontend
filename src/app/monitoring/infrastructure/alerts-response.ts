@@ -7,7 +7,7 @@ export interface AlertResource extends BaseResource {
   MetricType: string;
   Severity: string;
   Message: string;
-  TriggeredAt: Date;
+  TriggeredAt: string;
 
 }
 

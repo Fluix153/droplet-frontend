@@ -1,7 +1,9 @@
+import { BaseEntity } from '../../../shared/infrastructure/base-entity';
+
 /**
  * Entidad de dominio que representa un usuario en el sistema
  */
-export class User {
+export class User implements BaseEntity {
   constructor(
     public readonly id: string,
     public readonly name: string,

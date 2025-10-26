@@ -57,7 +57,7 @@ export class SensorEdit {
 
   submit(){
     if(this.form.invalid) return;
-    const sensor: Sensor = new Sensor({
+    const sensor = Sensor.create({
       id: this.sensorId ?? 0,
       DeviceCod: this.form.value.DeviceCode!,
       Type: this.form.value.Type!,
@@ -73,8 +73,5 @@ export class SensorEdit {
     this.router.navigate(['/monitoring']).then();
 
   }
-
-
-
 
 }
