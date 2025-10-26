@@ -1,0 +1,20 @@
+<div class="tank-list">
+
+  @for (tank of tanks; track tank.id){
+    <div class="tank-card">
+      <img mat-card-image src="https://rotoplascentroamerica.com/wp-content/uploads/2019/02/Tanque-Rotoplas.jpg" alt="Imagen del sensor de calidad"/>
+      <div class="tank-info">
+        <h4>{{ tank.name }}</h4>
+        <p>Nivel: {{ tank.level }}%</p>
+        <p
+          class="refill-status"
+          [class.need-refill]="tank.needRefill"
+        >
+          {{ tank.needRefill ? 'Necesita recarga' : 'Suficiente' }}
+        </p>
+      </div>
+    </div>
+  }
+
+</div>
+

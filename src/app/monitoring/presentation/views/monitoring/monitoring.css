@@ -1,0 +1,17 @@
+.monitoring-container {
+  font-family: Arial, sans-serif;
+  background-color: white;
+  color: #2c3e50;
+  margin: 0;
+  padding: 20px;
+}
+h1, h3 {
+  text-align: center;
+  color: #34495e;
+}
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 30px;
+}
