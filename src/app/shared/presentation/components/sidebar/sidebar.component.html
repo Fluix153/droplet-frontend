@@ -3,7 +3,7 @@
 </div>
 <mat-nav-list>
   <mat-divider class="logo-divider"></mat-divider>
-  <a mat-list-item>
+  <a mat-list-item routerLink="/dashboard/home" routerLinkActive="active">
     <mat-icon aria-hidden="false" aria-label="Dashboard" fontIcon="home" matListItemIcon></mat-icon>
     <span matListItemTitle>Dashboard</span>
   </a>
@@ -19,28 +19,13 @@
     <mat-icon aria-hidden="false" aria-label="Alerts" fontIcon="inventory" matListItemIcon></mat-icon>
     <span matListItemTitle>Inventory</span>
   </a>
-  <a mat-list-item>
+  <a mat-list-item routerLink="/dashboard/support" routerLinkActive="active">
     <mat-icon matListItemIcon>support</mat-icon>
     <span matListItemTitle>Support</span>
   </a>
   <a mat-list-item>
     <mat-icon aria-hidden="false" aria-label="Alerts" fontIcon="credit_card" matListItemIcon></mat-icon>
     <span matListItemTitle>Billing</span>
-  </a>
-
-  <a mat-list-item
-     routerLink="/dashboard/admin"
-     routerLinkActive="active-link"
-     *ngIf="currentUser?.role === 'ADMIN'">
-      <mat-icon matListItemIcon>admin_panel_settings</mat-icon>
-      <span matListItemTitle>Admin</span>
-  </a>
-  <a mat-list-item
-     routerLink="/dashboard/brewmaster"
-     routerLinkActive="active-link"
-     *ngIf="currentUser?.role === 'BREWMASTER'">
-      <mat-icon matListItemIcon>local_drink</mat-icon>
-      <span matListItemTitle>Brewmaster</span>
   </a>
 </mat-nav-list>
 <mat-divider class="logo-divider"></mat-divider>

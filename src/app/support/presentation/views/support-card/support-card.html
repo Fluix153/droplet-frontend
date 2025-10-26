@@ -87,9 +87,9 @@
                                         </mat-chip>
                                     </div>
                                     <div class="ticket-info">
-                                        <p class="ticket-number">Ticket #{{ ticket.ticketNumber }}</p>
+                                        <p class="ticket-number">Ticket #{{ ticket.ticketNumber || 'N/A' }}</p>
                                         <p class="ticket-priority">Priority: {{ ticket.priority }}</p>
-                                        <p class="ticket-date">Created: {{ ticket.createdAt | date:'short' }}</p>
+                                        <p class="ticket-date">Created: {{ ticket.createdAt ? (ticket.createdAt | date:'short') : 'N/A' }}</p>
                                     </div>
                                 </mat-card-content>
                             </mat-card>

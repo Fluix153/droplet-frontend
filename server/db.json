@@ -81,6 +81,7 @@
     {
       "userId": "u_1760035284707",
       "subject": "Carlos",
+      "ticketNumber": "291845",
       "priority": "Medium",
       "description": "IoT Fallando",
       "status": "Open",
@@ -90,6 +91,7 @@
     {
       "userId": "u_1760035284707",
       "subject": "Error de angel-0---",
+      "ticketNumber": "291846",
       "priority": "Critical",
       "description": "No commit",
       "status": "Open",
@@ -98,16 +100,22 @@
     },
     {
       "subject": "Notdasd",
+      "ticketNumber": "291847",
       "priority": "Low",
       "description": "Otro ticket",
       "userId": "u_1760035284707",
+      "status": "Open",
+      "createdAt": "2025-10-10T10:15:00.000Z",
       "id": "vfCjwXW"
     },
     {
       "subject": "Notdasd",
+      "ticketNumber": "291848",
       "priority": "Low",
       "description": "Otro ticket",
       "userId": "u_1760035284707",
+      "status": "Open",
+      "createdAt": "2025-10-10T10:20:00.000Z",
       "id": "W3R27j6"
     }
   ]

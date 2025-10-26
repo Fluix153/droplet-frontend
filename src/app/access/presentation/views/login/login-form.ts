@@ -88,31 +88,17 @@ export class LoginComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe(user => {
         if (user) {
-          this.redirectBasedOnRole(user);
+          this.redirectToDashboard();
         }
       });
   }
 
   /**
-   * Redirige al usuario según su rol
+   * Redirige al usuario al dashboard
    */
-  private redirectBasedOnRole(user: User): void {
-    const role = user.role?.toUpperCase();
-
-    switch (role) {
-      case 'ADMIN':
-        this.router.navigate(['/dashboard/admin']);
-        break;
-      case 'BREWMASTER':
-        this.router.navigate(['/dashboard/brewmaster']);
-        break;
-      case 'HOUSEHOLD_HEAD':
-        this.router.navigate(['/dashboard/household']);
-        break;
-      default:
-        this.router.navigate(['/dashboard/household']);
-        break;
-    }
+  private redirectToDashboard(): void {
+    // Todos los usuarios autenticados van al dashboard home
+    this.router.navigate(['/dashboard/home']);
   }
 
   /**

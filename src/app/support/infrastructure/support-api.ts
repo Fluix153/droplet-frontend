@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { BaseApiEndpointService } from '../../shared/infrastructure/base-api-endpoint.service';
@@ -52,6 +52,7 @@ export class SupportApiService extends BaseApiEndpointService<
   createTicket(ticketData: CreateTicketDto): Observable<SupportTicket> {
     const newTicket = {
       ...ticketData,
+      ticketNumber: this.generateTicketNumber(),
       status: 'Open',
       createdAt: new Date().toISOString()
     };
@@ -59,6 +60,13 @@ export class SupportApiService extends BaseApiEndpointService<
     return this.http.post<SupportTicketDto>(this.endpointUrl, newTicket).pipe(
       map(ticket => this.assembler.toEntity(ticket))
     );
+  }
+
+  /**
+   * Genera un número de ticket aleatorio único
+   */
+  private generateTicketNumber(): string {
+    return Math.floor(100000 + Math.random() * 900000).toString();
   }
 }
 
