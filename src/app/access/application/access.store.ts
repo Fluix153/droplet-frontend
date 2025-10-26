@@ -4,6 +4,7 @@ import { User } from '../domain/models/user.entity';
 import { LoginApiEndpoint } from '../infrastructure/login-api-endpoint';
 import { RegisterApiEndpoint } from '../infrastructure/register-api-endpoint';
 import { TokenService } from '../infrastructure/services/token.service';
+import { CurrentUserApiEndpoint } from '../infrastructure/current-user-api-endpoint';
 
 /**
  * Interface que define el estado del módulo de acceso
@@ -33,7 +34,14 @@ const initialState: AccessState = {
 export class AccessStore {
   private readonly loginApiEndpoint = inject(LoginApiEndpoint);
   private readonly registerApiEndpoint = inject(RegisterApiEndpoint);
+  private readonly currentUserApiEndpoint = inject(CurrentUserApiEndpoint);
   private readonly tokenService = inject(TokenService);
+
+  constructor() {
+    if (this.tokenService.isAuthenticated()) {
+      this.loadCurrentUser();
+    }
+  }
 
   // Estado privado gestionado por BehaviorSubject
   private readonly state = new BehaviorSubject<AccessState>(initialState);
@@ -131,12 +139,39 @@ export class AccessStore {
 
     this.updateState({ isLoading: true, error: null });
 
-    // TODO: Implementar endpoint para obtener usuario actual
-    // Por ahora, solo limpiamos el estado
-    this.updateState({
-      currentUser: null,
-      isLoading: false,
-      error: null
+    const token = this.tokenService.get();
+    const email = token ? this.extractEmailFromToken(token) : null;
+
+    if (!email) {
+      this.tokenService.clear();
+      this.updateState({
+        currentUser: null,
+        isLoading: false,
+        error: 'Token inválido'
+      });
+      return;
+    }
+
+    this.currentUserApiEndpoint.getByEmail(email).subscribe({
+      next: (user) => {
+        this.updateState({
+          currentUser: user,
+          isLoading: false,
+          error: null
+        });
+      },
+      error: (error) => {
+        const errorMessage = error?.message || 'No se pudo cargar el usuario';
+        if (errorMessage === 'Usuario no encontrado') {
+          this.tokenService.clear();
+        }
+
+        this.updateState({
+          currentUser: null,
+          isLoading: false,
+          error: errorMessage
+        });
+      }
     });
   }
 
@@ -186,6 +221,16 @@ export class AccessStore {
     const currentState = this.state.value;
     const newState = { ...currentState, ...partial };
     this.state.next(newState);
+  }
+
+  private extractEmailFromToken(token: string): string | null {
+    try {
+      const decoded = atob(token);
+      const [email] = decoded.split(':');
+      return email?.trim() || null;
+    } catch {
+      return null;
+    }
   }
 
   /**

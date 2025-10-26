@@ -8,6 +8,8 @@ export const routes: Routes = [
       { path: '', redirectTo: 'home', pathMatch: 'full', },
       { path: 'home', loadChildren: () => import('./dashboard/presentation/views/dashboard.routes').then(m => m.DASHBOARD_ROUTES),
         title: 'Dashboard Home'},
+      { path: 'notifications', loadChildren: () => import('./notification/presentation/views/notification-center.routes').then(m => m.NOTIFICATION_ROUTES),
+        title: 'Notifications' },
       { path: 'support', loadChildren: () => import('./support/presentation/views/support.routes').then(m => m.SUPPORT_ROUTES),
         title: 'Support'},
     ],

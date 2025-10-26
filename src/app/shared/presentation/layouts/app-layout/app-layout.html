@@ -3,8 +3,10 @@
     <app-sidebar></app-sidebar>
   </mat-sidenav>
 
-  <mat-sidenav-content class="dashboard-content">
+  <mat-sidenav-content class="sidenav-content">
     <app-toolbar></app-toolbar>
-    <router-outlet></router-outlet>
+    <div class="main-content">
+      <router-outlet></router-outlet>
+    </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
