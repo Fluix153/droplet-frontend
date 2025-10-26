@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { BaseAssembler } from '../../shared/infrastructure/base-assembler';
 import { User } from '../domain/models/user.entity';
 
 /**
@@ -8,7 +7,7 @@ import { User } from '../domain/models/user.entity';
 @Injectable({
   providedIn: 'root'
 })
-export class LoginAssembler extends BaseAssembler<any, User> {
+export class LoginAssembler {
 
   /**
    * Convierte un usuario de la base de datos en una entidad de dominio User
@@ -49,20 +48,20 @@ export class LoginAssembler extends BaseAssembler<any, User> {
    */
   private isValidUserData(userData: any): boolean {
     return userData &&
-           typeof userData.id === 'string' && userData.id.length > 0 &&
-           typeof userData.email === 'string' && userData.email.length > 0 &&
-           typeof userData.name === 'string' && userData.name.length > 0 &&
-           typeof userData.role === 'string' && userData.role.length > 0;
+      userData.id !== undefined &&
+      typeof userData.name === 'string' &&
+      typeof userData.email === 'string' &&
+      typeof userData.role === 'string';
   }
 
   /**
    * Valida que la entidad User sea válida
    */
-  protected isValidEntity(entity: User): boolean {
-    return entity &&
-           typeof entity.id === 'string' && entity.id.length > 0 &&
-           typeof entity.email === 'string' && entity.email.length > 0 &&
-           typeof entity.name === 'string' && entity.name.length > 0 &&
-           typeof entity.role === 'string' && entity.role.length > 0;
+  private isValidEntity(entity: User): boolean {
+    return entity instanceof User &&
+      entity.id !== undefined &&
+      typeof entity.name === 'string' &&
+      typeof entity.email === 'string' &&
+      typeof entity.role === 'string';
   }
 }

@@ -11,6 +11,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDividerModule } from '@angular/material/divider';
 import { RouterModule } from '@angular/router';
 import { Subject, takeUntil, Observable } from 'rxjs';
+import { TranslatePipe } from '@ngx-translate/core';
 
 import { AccessStore } from '../../../application/access.store';
 import { User } from '../../../domain/models/user.entity';
@@ -21,7 +22,6 @@ import { User } from '../../../domain/models/user.entity';
  */
 @Component({
   selector: 'app-login-form',
-  standalone: true,
   imports: [
     CommonModule,
     NgOptimizedImage,
@@ -33,7 +33,8 @@ import { User } from '../../../domain/models/user.entity';
     MatButtonModule,
     MatIconModule,
     MatCheckboxModule,
-    MatDividerModule
+    MatDividerModule,
+    TranslatePipe
   ],
   templateUrl: './login-form.html',
   styleUrls: ['./login-form.css']
@@ -87,31 +88,17 @@ export class LoginComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe(user => {
         if (user) {
-          this.redirectBasedOnRole(user);
+          this.redirectToDashboard();
         }
       });
   }
 
   /**
-   * Redirige al usuario según su rol
+   * Redirige al usuario al dashboard
    */
-  private redirectBasedOnRole(user: User): void {
-    const role = user.role?.toUpperCase();
-
-    switch (role) {
-      case 'ADMIN':
-        this.router.navigate(['/dashboard/admin']);
-        break;
-      case 'BREWMASTER':
-        this.router.navigate(['/dashboard/brewmaster']);
-        break;
-      case 'HOUSEHOLD_HEAD':
-        this.router.navigate(['/dashboard/household']);
-        break;
-      default:
-        this.router.navigate(['/dashboard/household']);
-        break;
-    }
+  private redirectToDashboard(): void {
+    // Todos los usuarios autenticados van al dashboard home
+    this.router.navigate(['/dashboard/home']);
   }
 
   /**
@@ -178,4 +165,5 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     return 'Campo inválido';
   }
+
 }

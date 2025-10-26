@@ -1,4 +1,38 @@
-/* You can add global styles to this file, and also import other style files */
+/* Apply typography styles for titles and paragraphs */
+html {
+  box-sizing: border-box;
+  height: 100%;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+body {
+  height: 100%;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Títulos */
+h1, h2, h3, h4, h5, h6,
+.mat-typography h1, .mat-typography h2, .mat-typography h3,
+.mat-typography h4, .mat-typography h5, .mat-typography h6 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0;
+}
+
+p, span, li, label, .mat-mdc-form-field, .mat-mdc-button {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+}
+
+/* Define hierarchy with contrasting sizes */
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.75rem; }
+h4 { font-size: 1.5rem; }
+h5 { font-size: 1.25rem; }
+h6 { font-size: 1rem; }
+

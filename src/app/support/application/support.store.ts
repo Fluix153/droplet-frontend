@@ -1,9 +1,10 @@
 import { Injectable, inject } from '@angular/core';
-import { BehaviorSubject, Observable, map, switchMap, catchError, of, tap } from 'rxjs';
+import { BehaviorSubject, Observable, map, switchMap, catchError, of, tap, filter, take } from 'rxjs';
 import { SupportTicket } from '../domain/models/support.entity';
 import { SupportApiService } from '../infrastructure/support-api';
 import { AccessStore } from '../../access/application/access.store';
 import { CreateTicketDto } from '../infrastructure/support-response';
+import { User } from '../../access/domain/models/user.entity';
 
 /**
  * Interface que define el estado del módulo de soporte
@@ -64,12 +65,9 @@ export class SupportStore {
 
     // 2. Obtener el usuario actual del AccessStore y hacer la petición
     this.accessStore.currentUser$.pipe(
-      switchMap(currentUser => {
-        if (!currentUser) {
-          throw new Error('Usuario no autenticado');
-        }
-        return this.supportApiService.getTicketsByUserId(currentUser.id);
-      }),
+      filter((currentUser): currentUser is User => !!currentUser),
+      take(1),
+      switchMap(currentUser => this.supportApiService.getTicketsByUserId(currentUser.id)),
       catchError(error => {
         const errorMessage = error?.error?.message || error?.message || 'Error al cargar los tickets';
         this.updateState({
@@ -101,12 +99,9 @@ export class SupportStore {
 
     // 2. Obtener el usuario actual y crear el ticket
     this.accessStore.currentUser$.pipe(
+      filter((currentUser): currentUser is User => !!currentUser),
+      take(1),
       switchMap(currentUser => {
-        if (!currentUser) {
-          throw new Error('Usuario no autenticado');
-        }
-
-        // Crear el DTO completo con el userId
         const createTicketDto: CreateTicketDto = {
           ...ticketData,
           userId: currentUser.id

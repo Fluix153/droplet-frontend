@@ -1,0 +1,84 @@
+<div class="notification-container">
+  <header class="notification-header">
+    <div>
+      <h1>Alerts &amp; Notifications</h1>
+      <p>Monitor and manage your water system alerts and notification preferences</p>
+    </div>
+  </header>
+
+  <section class="summary-grid">
+    <article class="summary-card" *ngFor="let card of summaryCards" [class]="card.type">
+      <div class="summary-icon">
+        <span class="icon-symbol" aria-hidden="true">{{ card.symbol }}</span>
+      </div>
+      <div>
+        <h2>{{ card.value }}</h2>
+        <h3>{{ card.title }}</h3>
+        <p>{{ card.subtitle }}</p>
+      </div>
+    </article>
+  </section>
+
+  <div class="content-grid">
+    <section class="active-alerts-panel">
+      <header class="panel-header">
+        <h2>Active Alerts</h2>
+        <span class="panel-subtitle">Latest updates from your system</span>
+      </header>
+      <ul class="alert-list">
+        <li class="alert-item" *ngFor="let alert of activeAlerts" [class]="alert.type">
+          <div class="alert-icon">
+            <span class="icon-symbol" aria-hidden="true">{{ alert.symbol }}</span>
+          </div>
+          <div class="alert-details">
+            <div class="alert-title">{{ alert.title }}</div>
+            <div class="alert-description">{{ alert.description }}</div>
+            <div class="alert-meta">{{ alert.timeAgo }}</div>
+          </div>
+          <button class="alert-dismiss" type="button" aria-label="Dismiss alert">×</button>
+        </li>
+      </ul>
+    </section>
+
+    <aside class="settings-panel">
+      <header class="panel-header">
+        <h2>Notification Settings</h2>
+        <span class="panel-subtitle">Choose what you want to be notified about</span>
+      </header>
+
+      <div class="settings-group">
+        <h3>Alert Types</h3>
+        <div class="setting-items">
+          <button
+            type="button"
+            class="setting-item"
+            *ngFor="let type of alertTypes"
+            [class.active]="type.enabled"
+            [attr.aria-pressed]="type.enabled"
+            (click)="toggleAlertType(type)">
+            <span class="checkmark" aria-hidden="true"></span>
+            <span>{{ type.label }}</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="settings-group">
+        <h3>Delivery Methods</h3>
+        <div class="setting-items">
+          <button
+            type="button"
+            class="setting-item"
+            *ngFor="let method of deliveryMethods"
+            [class.active]="method.enabled"
+            [attr.aria-pressed]="method.enabled"
+            (click)="toggleDeliveryMethod(method)">
+            <span class="checkmark" aria-hidden="true"></span>
+            <span>{{ method.label }}</span>
+          </button>
+        </div>
+      </div>
+
+      <button type="button" class="save-button" (click)="save()">Save Settings</button>
+    </aside>
+  </div>
+</div>

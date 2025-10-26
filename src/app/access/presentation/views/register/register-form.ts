@@ -16,8 +16,7 @@ import { NgOptimizedImage } from '@angular/common';
 
 import { AccessStore } from '../../../application/access.store';
 import { User } from '../../../domain/models/user.entity';
-import { AccessManagementApiService } from '../../../infrastructure/access-api';
-import { TokenService } from '../../../infrastructure/services/token.service';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-register-form',
@@ -34,7 +33,8 @@ import { TokenService } from '../../../infrastructure/services/token.service';
     MatSelectModule,
     MatCheckboxModule,
     MatDividerModule,
-    RouterModule
+    RouterModule,
+    TranslatePipe
   ],
   templateUrl: './register-form.html',
   styleUrls: ['./register-form.css']
@@ -43,8 +43,6 @@ export class RegisterFormComponent implements OnInit, OnDestroy {
   private readonly formBuilder = inject(FormBuilder);
   private readonly router = inject(Router);
   private readonly store = inject(AccessStore);
-  private readonly accessApi = inject(AccessManagementApiService);
-  private readonly tokenService = inject(TokenService);
 
   // Subject para manejo de subscripciones
   private readonly destroy$ = new Subject<void>();
@@ -52,7 +50,6 @@ export class RegisterFormComponent implements OnInit, OnDestroy {
   registerForm!: FormGroup;
   hidePassword = true;
   hideConfirmPassword = true;
-  errorMessage: string | null = null;
 
   // Estado expuesto directamente desde el store
   public readonly currentUser$: Observable<User | null> = this.store.currentUser$;
@@ -61,8 +58,7 @@ export class RegisterFormComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.createForm();
-    // Comentamos handleUserRedirection ya que interfiere con el login automático
-    // this.handleUserRedirection();
+    this.setupUserRedirection();
   }
 
   ngOnDestroy(): void {
@@ -75,12 +71,26 @@ export class RegisterFormComponent implements OnInit, OnDestroy {
       firstName: ['', [Validators.required, Validators.minLength(2)]],
       lastName: ['', [Validators.required, Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.email]],
-      phone: ['', [Validators.required, Validators.pattern(/^\d{9}$/)]],
+      phone: ['', [Validators.required, Validators.pattern(/^[0-9]{9,15}$/)]],
       password: ['', [Validators.required, Validators.minLength(8)]],
       confirmPassword: ['', [Validators.required]],
       role: ['', [Validators.required]],
       terms: [false, [Validators.requiredTrue]]
     }, { validators: this.passwordMatchValidator });
+  }
+
+  /**
+   * Configura la redirección automática cuando el usuario se registra exitosamente
+   */
+  private setupUserRedirection(): void {
+    this.currentUser$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(user => {
+        if (user) {
+          console.log('Usuario registrado y logueado exitosamente:', user);
+          this.redirectBasedOnRole(user);
+        }
+      });
   }
 
   /**
@@ -140,50 +150,13 @@ export class RegisterFormComponent implements OnInit, OnDestroy {
       name: `${formData.firstName} ${formData.lastName}`,
       email: formData.email,
       password: formData.password,
-      role: formData.role,
-      phone: formData.phone
+      role: formData.role
     };
 
     console.log('Iniciando registro con credenciales:', credentials);
 
-    // Registrar usuario y luego login automático
-    this.accessApi.register(credentials).subscribe({
-      next: (registeredUser) => {
-        console.log('Usuario registrado exitosamente:', registeredUser);
-        this.errorMessage = null;
-
-        // Login automático tras registro
-        const loginCredentials = { email: formData.email, password: formData.password };
-        console.log('Iniciando login automático con:', loginCredentials);
-
-        this.accessApi.login(loginCredentials).subscribe({
-          next: (loginResult) => {
-            console.log('Login automático exitoso:', loginResult);
-            this.tokenService.set(loginResult.accessToken, true); // Guardar token
-
-            // Actualizar el store con el usuario logueado para que los guards funcionen
-            this.store.login({ email: formData.email, password: formData.password });
-
-            console.log('Redirigiendo a dashboard para rol:', loginResult.user.role);
-
-            // Esperar un momento para que el store se actualice antes de redirigir
-            setTimeout(() => {
-              this.redirectBasedOnRole(loginResult.user); // Redirigir según rol
-            }, 100);
-          },
-          error: (loginErr) => {
-            console.error('Error en login automático:', loginErr);
-            this.errorMessage = 'Usuario registrado. Error al iniciar sesión automáticamente. Intenta loguearte manualmente.';
-            // Redirigir al login si falla el login automático
-            this.router.navigate(['/auth/login']);
-          }
-        });
-      },
-      error: (registerErr) => {
-        console.error('Error en registro:', registerErr);
-        this.errorMessage = 'Error al registrar usuario: ' + (registerErr?.message || registerErr?.error?.message || 'Error desconocido');
-      }
-    });
+    // El store maneja el registro y actualiza el estado automáticamente
+    this.store.register(credentials);
   }
 
   /**

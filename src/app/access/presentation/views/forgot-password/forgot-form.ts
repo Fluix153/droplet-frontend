@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { TranslatePipe } from '@ngx-translate/core';
 
 /**
  * Componente visual para recuperación de contraseña
@@ -23,7 +24,8 @@ import { MatIconModule } from '@angular/material/icon';
         MatFormFieldModule,
         MatInputModule,
         MatIconModule,
-        NgOptimizedImage
+        NgOptimizedImage,
+        TranslatePipe
     ],
     templateUrl: './forgot-form.html',
     styleUrls: ['./forgot-form.css']

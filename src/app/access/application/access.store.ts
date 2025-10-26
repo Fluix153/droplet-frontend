@@ -1,8 +1,10 @@
 import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Observable, map } from 'rxjs';
 import { User } from '../domain/models/user.entity';
-import { AccessManagementApiService } from '../infrastructure/access-api';
+import { LoginApiEndpoint } from '../infrastructure/login-api-endpoint';
+import { RegisterApiEndpoint } from '../infrastructure/register-api-endpoint';
 import { TokenService } from '../infrastructure/services/token.service';
+import { CurrentUserApiEndpoint } from '../infrastructure/current-user-api-endpoint';
 
 /**
  * Interface que define el estado del módulo de acceso
@@ -30,8 +32,16 @@ const initialState: AccessState = {
   providedIn: 'root'
 })
 export class AccessStore {
-  private readonly accessApiService = inject(AccessManagementApiService);
+  private readonly loginApiEndpoint = inject(LoginApiEndpoint);
+  private readonly registerApiEndpoint = inject(RegisterApiEndpoint);
+  private readonly currentUserApiEndpoint = inject(CurrentUserApiEndpoint);
   private readonly tokenService = inject(TokenService);
+
+  constructor() {
+    if (this.tokenService.isAuthenticated()) {
+      this.loadCurrentUser();
+    }
+  }
 
   // Estado privado gestionado por BehaviorSubject
   private readonly state = new BehaviorSubject<AccessState>(initialState);
@@ -62,7 +72,7 @@ export class AccessStore {
     // 1. Actualizar el estado para indicar que la carga ha comenzado
     this.updateState({ isLoading: true, error: null });
 
-    this.accessApiService.login(credentials).subscribe({
+    this.loginApiEndpoint.login(credentials).subscribe({
       next: (response) => {
         // 3. Si la llamada es exitosa:
         // - Guardar el accessToken usando el TokenService
@@ -94,7 +104,7 @@ export class AccessStore {
   logout(): void {
     this.updateState({ isLoading: true, error: null });
 
-    this.accessApiService.logout().subscribe({
+    this.loginApiEndpoint.logout().subscribe({
       next: () => {
         // Limpiar el token del almacenamiento
         this.tokenService.clear();
@@ -129,7 +139,20 @@ export class AccessStore {
 
     this.updateState({ isLoading: true, error: null });
 
-    this.accessApiService.getCurrentUser().subscribe({
+    const token = this.tokenService.get();
+    const email = token ? this.extractEmailFromToken(token) : null;
+
+    if (!email) {
+      this.tokenService.clear();
+      this.updateState({
+        currentUser: null,
+        isLoading: false,
+        error: 'Token inválido'
+      });
+      return;
+    }
+
+    this.currentUserApiEndpoint.getByEmail(email).subscribe({
       next: (user) => {
         this.updateState({
           currentUser: user,
@@ -138,9 +161,11 @@ export class AccessStore {
         });
       },
       error: (error) => {
-        // Si falla cargar el usuario, probablemente el token es inválido
-        this.tokenService.clear();
-        const errorMessage = error?.error?.message || 'Error al cargar el usuario';
+        const errorMessage = error?.message || 'No se pudo cargar el usuario';
+        if (errorMessage === 'Usuario no encontrado') {
+          this.tokenService.clear();
+        }
+
         this.updateState({
           currentUser: null,
           isLoading: false,
@@ -152,18 +177,21 @@ export class AccessStore {
 
   /**
    * Implementa el caso de uso de registro
-   * @param credentials - Datos del nuevo usuario (name, email, password, role, phone)
+   * @param credentials - Datos del nuevo usuario (name, email, password, role)
    */
-  register(credentials: { name: string; email: string; password: string; role: string; phone: string }): void {
+  register(credentials: { name: string; email: string; password: string; role?: string }): void {
     // 1. Actualizar el estado para indicar que la carga ha comenzado
     this.updateState({ isLoading: true, error: null });
 
-    this.accessApiService.register(credentials).subscribe({
-      next: (user) => {
+    this.registerApiEndpoint.register(credentials).subscribe({
+      next: (response) => {
         // 2. Si el registro es exitoso:
+        // - Guardar el token
+        this.tokenService.set(response.accessToken, true);
+
         // - Actualizar el estado con el nuevo usuario registrado
         this.updateState({
-          currentUser: user,
+          currentUser: response.user,
           isLoading: false,
           error: null
         });
@@ -193,6 +221,16 @@ export class AccessStore {
     const currentState = this.state.value;
     const newState = { ...currentState, ...partial };
     this.state.next(newState);
+  }
+
+  private extractEmailFromToken(token: string): string | null {
+    try {
+      const decoded = atob(token);
+      const [email] = decoded.split(':');
+      return email?.trim() || null;
+    } catch {
+      return null;
+    }
   }
 
   /**

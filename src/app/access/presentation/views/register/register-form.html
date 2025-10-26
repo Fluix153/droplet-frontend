@@ -1,121 +1,120 @@
-<div class="register-container">
-    <mat-card class="register-card">
-        <mat-card-header class="mat-card-header">
-            <img ngSrc="/icons/droplet_logo.svg" width="156" height="56" alt="Droplet Register Logo"
-                 class="register-svg">
-            <div class="register-header">
-                <h1 class="register-title">Create your account</h1>
-                <p class="register-subtitle">Sign up to manage your liquids and recipes</p>
-            </div>
-        </mat-card-header>
-        <mat-card-content class="card-content-register">
-            <form [formGroup]="registerForm" class="register-form" (ngSubmit)="onSubmit()">
-                <div class="form-row">
-                    <div class="form-group">
-                        <mat-label>First Name</mat-label>
-                        <mat-form-field appearance="outline" class="form-field">
-                            <input matInput type="text" formControlName="firstName" placeholder="Enter your first name"
-                                   aria-label="First Name" aria-describedby="firstNameError">
-                        </mat-form-field>
-                    </div>
-                    <div class="form-group">
-                        <mat-label>Last Name</mat-label>
-                        <mat-form-field appearance="outline" class="form-field">
-                            <input matInput type="text" formControlName="lastName" placeholder="Enter your last name"
-                                   aria-label="Last Name" aria-describedby="lastNameError">
-                        </mat-form-field>
-                    </div>
-                </div>
-                <!-- Email Field -->
-                <mat-label>Email</mat-label>
-                <mat-form-field appearance="outline" class="form-field">
-                    <input matInput type="email" formControlName="email" placeholder="Enter your email"
-                           aria-label="Email" aria-describedby="emailError">
-                </mat-form-field>
-                <!-- Phone Field -->
-                <mat-label>Phone</mat-label>
-                <mat-form-field appearance="outline" class="form-field">
-                    <input matInput type="tel" formControlName="phone" placeholder="999 888 777"
-                           aria-label="Phone" aria-describedby="phoneError">
-                </mat-form-field>
-                <!-- Password Field -->
-                <mat-label>Password</mat-label>
-                <mat-form-field appearance="outline" class="form-field">
-                    <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password"
-                           placeholder="Create a strong password" aria-label="Password"
-                           aria-describedby="passwordError">
-                    <button mat-icon-button matSuffix type="button" (click)="togglePasswordVisibility()"
-                            [attr.aria-label]="'Toggle password visibility'" [attr.aria-pressed]="hidePassword">
-                        <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
-                    </button>
-                </mat-form-field>
-                <!-- Confirm Password Field -->
-                <mat-label>Confirm Password</mat-label>
-                <mat-form-field appearance="outline" class="form-field">
-                    <input matInput [type]="hideConfirmPassword ? 'password' : 'text'" formControlName="confirmPassword"
-                           placeholder="Repeat your password"
-                           aria-label="Confirm Password" aria-describedby="confirmPasswordError">
-                    <button mat-icon-button matSuffix type="button" (click)="toggleConfirmPasswordVisibility()"
-                            [attr.aria-label]="'Toggle confirm password visibility'"
-                            [attr.aria-pressed]="hideConfirmPassword">
-                        <mat-icon>{{ hideConfirmPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
-                    </button>
-                </mat-form-field>
-                <!-- Role Selection -->
-                <mat-label>Account Type</mat-label>
-                <mat-form-field appearance="outline" class="form-field">
-                    <mat-select formControlName="role" aria-label="Role" aria-describedby="roleError">
-                        <mat-option value="HOUSEHOLD_HEAD">Household Head</mat-option>
-                        <mat-option value="BREWMASTER">Brewmaster</mat-option>
-                        <mat-option value="ADMIN">Admin</mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <!-- Terms and Conditions -->
-                <mat-checkbox formControlName="terms" class="terms-checkbox" aria-label="Accept terms and conditions"
-                              aria-describedby="termsError">
-                    I agree to the <a href="#" class="terms-link">Terms Services</a> and <a href="#" class="terms-link">Privacy
-                    Policy</a>
-                </mat-checkbox>
-                <!-- Error Message -->
-                <div *ngIf="error$ | async as error" class="error-message">{{ error }}</div>
-                <!-- Submit Button -->
-                <button mat-raised-button color="primary" type="submit" class="create-account-button"
-                        aria-label="Create Account" style="width: 100%;">
-                    Create Account
-                </button>
-                <!-- Sign In Link -->
-                <div class="signin-link">
-                    <span class="signin-text">Already have an account?</span>
-                    <a routerLink="/auth/login" class="signin-anchor">Sign in</a>
-                </div>
-                <!-- Divider -->
-                <div class="divider-section-register">
-                    <mat-divider class="divider-mat" role="presentation"></mat-divider>
-                    <span class="divider-text">Or continue with</span>
-                    <mat-divider class="divider-mat" role="presentation"></mat-divider>
-                </div>
-                <!-- Social Media Buttons -->
-                <div class="container-social-buttons">
-                    <button
-                            mat-stroked-button
-                            class="social-button"
-                            type="button"
-                            (click)="$event.preventDefault()"
-                    >
-                        <img ngSrc="/icons/google.svg" width="24" height="24" alt="Google" class="social-icon">
-                        Google
-                    </button>
-                    <button
-                            mat-stroked-button
-                            class="social-button"
-                            type="button"
-                            (click)="$event.preventDefault()"
-                    >
-                        <img ngSrc="/icons/github.svg" width="24" height="24" alt="Twitter" class="social-icon">
-                        GitHub
-                    </button>
-                </div>
-            </form>
-        </mat-card-content>
-    </mat-card>
-</div>
+
+<mat-card class="register-card">
+  <mat-card-header class="mat-card-header">
+    <img ngSrc="/icons/droplet_logo.svg" width="156" height="56" alt="Droplet Register Logo"
+         class="register-svg">
+    <div class="register-header">
+      <h1 class="register-title">{{ 'auth.register.title' | translate }}</h1>
+      <p class="register-subtitle">{{ 'auth.register.subtitle' | translate }}</p>
+    </div>
+  </mat-card-header>
+    <mat-card-content class="card-content-register">
+      <form [formGroup]="registerForm" class="register-form" (ngSubmit)="onSubmit()">
+        <div class="form-row">
+          <div class="form-group">
+            <mat-label>{{ 'auth.register.labelName' | translate }}</mat-label>
+            <mat-form-field appearance="outline" class="form-field">
+                <input matInput type="text" formControlName="firstName" [placeholder]= " 'auth.register.inputName' | translate "
+                       aria-label="First Name" aria-describedby="firstNameError">
+            </mat-form-field>
+          </div>
+          <div class="form-group">
+            <mat-label>{{ 'auth.register.labelLastName' | translate }}</mat-label>
+            <mat-form-field appearance="outline" class="form-field">
+                <input matInput type="text" formControlName="lastName" [placeholder]= " 'auth.register.inputLastName' | translate "
+                       aria-label="Last Name" aria-describedby="lastNameError">
+            </mat-form-field>
+          </div>
+        </div>
+          <!-- Email Field -->
+          <mat-label>{{ 'auth.register.labelEmail' | translate }}</mat-label>
+          <mat-form-field appearance="outline" class="form-field">
+            <input matInput type="email" formControlName="email" [placeholder]= " 'auth.register.inputEmail' | translate "
+                   aria-label="Email" aria-describedby="emailError">
+          </mat-form-field>
+          <!-- Phone Field -->
+          <mat-label>{{ 'auth.register.labelPhone' | translate }}</mat-label>
+          <mat-form-field appearance="outline" class="form-field">
+            <input matInput type="tel" formControlName="phone" [placeholder]= " 'auth.register.inputPhone' | translate "
+                   aria-label="Phone" aria-describedby="phoneError">
+          </mat-form-field>
+          <!-- Password Field -->
+          <mat-label>{{ 'auth.register.labelPassword' | translate }}</mat-label>
+          <mat-form-field appearance="outline" class="form-field">
+            <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password"
+                   [placeholder]= " 'auth.register.inputPassword' | translate " aria-label="Password"
+                   aria-describedby="passwordError">
+            <button mat-icon-button matSuffix type="button" (click)="togglePasswordVisibility()"
+                    [attr.aria-label]="'Toggle password visibility'" [attr.aria-pressed]="hidePassword">
+                <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+          </mat-form-field>
+          <!-- Confirm Password Field -->
+          <mat-label>{{ 'auth.register.labelConfirmPassword' | translate }}</mat-label>
+          <mat-form-field appearance="outline" class="form-field">
+            <input matInput [type]="hideConfirmPassword ? 'password' : 'text'" formControlName="confirmPassword"
+                   [placeholder]= " 'auth.register.inputConfirmPassword' | translate "
+                   aria-label="Confirm Password" aria-describedby="confirmPasswordError">
+            <button mat-icon-button matSuffix type="button" (click)="toggleConfirmPasswordVisibility()"
+                    [attr.aria-label]="'Toggle confirm password visibility'"
+                    [attr.aria-pressed]="hideConfirmPassword">
+                <mat-icon>{{ hideConfirmPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+          </mat-form-field>
+          <!-- Role Selection -->
+          <mat-label>{{ 'auth.register.labelRole' | translate }}</mat-label>
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-select formControlName="role" aria-label="Role" [placeholder]= " 'auth.register.inputRole' | translate " aria-describedby="roleError">
+              <mat-option value="HOUSEHOLD_HEAD">{{ 'auth.register.roleHoldHead' | translate }}</mat-option>
+              <mat-option value="BREWMASTER">{{ 'auth.register.roleBrewmaster' | translate }}</mat-option>
+              <mat-option value="ADMIN">{{ 'auth.register.roleAdmin' | translate }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <!-- Terms and Conditions -->
+          <mat-checkbox formControlName="terms" class="terms-checkbox">
+            {{ 'auth.register.text1T' | translate }} <a href="#" class="terms-link">{{ 'auth.register.link1T' | translate }}</a>
+            {{ 'auth.register.text2T' | translate }} <a href="#" class="terms-link">{{ 'auth.register.link2T' | translate }}</a>
+          </mat-checkbox>
+          <!-- Error Message -->
+          <div *ngIf="error$ | async as error" class="error-message">{{ error }}</div>
+          <!-- Submit Button -->
+          <button mat-raised-button color="primary" type="submit" class="create-account-button"
+                  aria-label="Create Account" style="width: 100%;">
+            {{ 'auth.register.btn' | translate }}
+          </button>
+          <!-- Sign In Link -->
+          <div class="signin-link">
+            <span class="signin-text">{{ 'auth.register.haveAccount' | translate }}</span>
+            <a routerLink="/auth/login" class="signin-anchor">{{ 'auth.register.loginLink' | translate }}</a>
+          </div>
+          <!-- Divider -->
+          <div class="divider-section-register">
+            <mat-divider class="divider-mat" role="presentation"></mat-divider>
+            <span class="divider-text">{{ 'auth.register.loginLink' | translate }}</span>
+            <mat-divider class="divider-mat" role="presentation"></mat-divider>
+          </div>
+          <!-- Social Media Buttons -->
+          <div class="container-social-buttons">
+            <button
+              mat-stroked-button
+              class="social-button"
+              type="button"
+              (click)="$event.preventDefault()"
+            >
+              <img ngSrc="/icons/google.svg" width="24" height="24" alt="Google" class="social-icon">
+              Google
+            </button>
+            <button
+              mat-stroked-button
+              class="social-button"
+              type="button"
+              (click)="$event.preventDefault()"
+            >
+              <img ngSrc="/icons/github.svg" width="24" height="24" alt="Twitter" class="social-icon">
+              GitHub
+            </button>
+          </div>
+      </form>
+    </mat-card-content>
+</mat-card>
+
