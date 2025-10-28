@@ -1,0 +1,14 @@
+<div class="billing-settings">
+    <h3>Billing Settings</h3>
+    <label>
+        <input type="checkbox" [checked]="settings()?.autoPayEnabled" />
+        Auto-pay
+    </label>
+    <label>
+        <input type="checkbox" [checked]="settings()?.emailNotifications" />
+        Email Reminders
+    </label>
+    <p>Billing Cycle: {{ settings()?.billingCycle }}</p>
+    <p>Billing Day: 15th</p>
+    <button>Save Settings</button>
+</div>
