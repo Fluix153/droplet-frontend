@@ -1,0 +1,11 @@
+<div class="transactions">
+    <h3>Recent Transactions</h3>
+    <ul>
+        <li *ngFor="let tx of transactions()">
+            <span>{{ tx.date | date: 'MMM d, y' }}</span>
+            <span>{{ tx.description }}</span>
+            <span>{{ tx.amount | currency }}</span>
+        </li>
+    </ul>
+    <a href="#">View All Transactions</a>
+</div>
