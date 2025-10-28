@@ -1,0 +1,10 @@
+<div class="methods">
+    <h3>Payment Methods</h3>
+    <ul>
+        <li *ngFor="let method of methods()">
+            {{ method.label }}
+            <span *ngIf="method.isPrimary" class="primary">Primary</span>
+        </li>
+    </ul>
+    <button>Add Method</button>
+</div>
