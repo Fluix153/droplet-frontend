@@ -1,0 +1,6 @@
+{
+  "/methods": "/paymentMethods",
+  "/transactions": "/transactions",
+  "/settings": "/billingSettings",
+  "/wallet": "/wallet"
+}
