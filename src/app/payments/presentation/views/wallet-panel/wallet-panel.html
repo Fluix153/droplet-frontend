@@ -1,9 +1,18 @@
-<div class="wallet">
+<section class="wallet-panel panel">
     <h3>Droplet Wallet</h3>
-    <p>Balance: {{ wallet()?.getFormattedBalance() }}</p>
-    <p>Rewards Points: {{ wallet()?.rewardsPoints }}</p>
-    <p>Referral Bonus: $15.00</p>
-    <p>Total Saved: $23.50</p>
-    <button>Add Funds</button>
-    <button>Withdraw</button>
-</div>
+    <div class="balance">
+        <label>Available Balance:</label>
+        <span>{{ wallet().balance | currency }}</span>
+    </div>
+
+    <div class="wallet-actions">
+        <button>Add Funds</button>
+        <button>Withdraw</button>
+    </div>
+
+    <ul class="wallet-details">
+        <li><strong>Rewards Points:</strong> {{ wallet().rewardsPoints }} pts</li>
+        <li><strong>Cashback Rate:</strong> {{ wallet().cashbackRate }}%</li>
+        <li><strong>Next Reward:</strong> {{ wallet().nextReward | currency }}</li>
+    </ul>
+</section>
