@@ -1,14 +1,29 @@
-<div class="billing-settings">
+<section class="billing-settings panel">
     <h3>Billing Settings</h3>
-    <label>
-        <input type="checkbox" [checked]="settings()?.autoPayEnabled" />
-        Auto-pay
-    </label>
-    <label>
-        <input type="checkbox" [checked]="settings()?.emailNotifications" />
-        Email Reminders
-    </label>
-    <p>Billing Cycle: {{ settings()?.billingCycle }}</p>
-    <p>Billing Day: 15th</p>
-    <button>Save Settings</button>
-</div>
+    <form>
+        <label class="setting">
+            <input type="checkbox" [checked]="billingSettings().autoPay" />
+            Auto-pay enabled
+            <span class="description">Automatically charge your primary payment method</span>
+        </label>
+
+        <label class="setting">
+            <input type="checkbox" [checked]="billingSettings().emailNotifications" />
+            Email notifications
+            <span class="description">Receive billing reminders and receipts</span>
+        </label>
+
+        <label class="setting">
+            <input type="checkbox" [checked]="billingSettings().smsAlerts" />
+            SMS alerts
+            <span class="description">Get billing updates via text messages</span>
+        </label>
+
+        <div class="cycle">
+            <label>Billing Cycle:</label>
+            <span>{{ billingSettings().billingCycle }}</span>
+        </div>
+
+        <button type="submit">Save Settings</button>
+    </form>
+</section>
