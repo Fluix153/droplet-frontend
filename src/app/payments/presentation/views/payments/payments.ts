@@ -1,17 +1,45 @@
-import { HttpClient } from '@angular/common/http';
+import { Component, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { signal, effect } from '@angular/core';
-import { inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import {MethodSelectorView} from "../method-selector/method-selector";
+import {TransactionListView} from "../transaction-list/transaction-list";
+import {BillingSettingsView} from "../billing-settings/billing-settings";
+import {WalletPanelView} from "../wallet-panel/wallet-panel";
 
-const http = inject(HttpClient);
+export interface Metrics {
+    currentBalance: number;
+    nextPaymentDue: string;
+    monthlyAverage: number;
+}
 
-export const paymentMethods = signal<any[]>([]);
-export const transactions = signal<any[]>([]);
-export const billingSettings = signal<any>({});
-export const wallet = signal<any>({});
+@Component({
+    selector: 'app-payments',
+    standalone: true,
+    imports: [CommonModule],
+    templateUrl: './payments.html',
+    styleUrls: ['./payments.css']
+})
+export class PaymentsView {
+    readonly metrics = signal<Metrics>({
+        currentBalance: 0,
+        nextPaymentDue: '',
+        monthlyAverage: 0
+    });
 
-effect(() => {
-    http.get('/server/paymentMethods').subscribe(data => paymentMethods.set(data));
-    http.get('/server/transactions').subscribe(data => transactions.set(data));
-    http.get('/server/billingSettings').subscribe(data => billingSettings.set(data));
-    http.get('/server/wallet').subscribe(data => wallet.set(data));
-});
+    constructor() {
+        const http = inject(HttpClient);
+
+        effect(() => {
+            http.get<Metrics>('/server/metrics').subscribe({
+                next: data => this.metrics.set(data),
+                error: err => console.error('Error loading metrics:', err)
+            });
+        });
+    }
+
+    protected readonly MethodSelectorView = MethodSelectorView;
+    protected readonly TransactionListView = TransactionListView;
+    protected readonly BillingSettingsView = BillingSettingsView;
+    protected readonly WalletPanelView = WalletPanelView;
+}
