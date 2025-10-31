@@ -4,6 +4,6 @@ import { paymentsRoutes } from './payments/presentation/views/payments.routes';
 export const routes: Routes = [
     {
         path: '',
-        children: paymentsRoutes,
+        children: paymentsRoutes
     }
 ];
