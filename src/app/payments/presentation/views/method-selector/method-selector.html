@@ -1,10 +1,18 @@
-<div class="methods">
+<section class="payment-methods panel">
     <h3>Payment Methods</h3>
     <ul>
-        <li *ngFor="let method of methods()">
-            {{ method.label }}
-            <span *ngIf="method.isPrimary" class="primary">Primary</span>
-        </li>
+        @for (method of paymentMethods(); track method.id) {
+            <li>
+                <div class="method">
+                    <strong>{{ method.type }}</strong>
+                    @if (method.last4) { •••• {{ method.last4 }} }
+                    @if (method.email) { {{ method.email }} }
+                    @if (method.expires) {
+                        <div class="meta">Exp. {{ method.expires }} @if (method.primary) { — Primary }</div>
+                    }
+                </div>
+            </li>
+        }
     </ul>
     <button>Add Method</button>
-</div>
+</section>
