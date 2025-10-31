@@ -6,104 +6,23 @@
         <div class="metrics">
             <div class="metric">
                 <label>Current Balance</label>
-                <span>{{ wallet().balance | currency }}</span>
+                <span>{{ metrics().currentBalance | currency }}</span>
             </div>
             <div class="metric">
                 <label>Next Payment Due</label>
-                <span>Dec 15</span>
+                <span>{{ metrics().nextPaymentDue | date }}</span>
             </div>
             <div class="metric">
                 <label>Monthly Average</label>
-                <span>$189.30</span>
+                <span>{{ metrics().monthlyAverage | currency }}</span>
             </div>
         </div>
     </header>
 
     <div class="panel-grid">
-        <section class="payment-methods panel">
-            <h3>Payment Methods</h3>
-            <ul>
-                @for (method of paymentMethods(); track method.type) {
-                    <li>
-                        <div class="method">
-                            <strong>{{ method.type }}</strong>
-                            @if (method.last4) { •••• {{ method.last4 }} }
-                            @if (method.email) { {{ method.email }} }
-                            @if (method.expires) {
-                                <div class="meta">Exp. {{ method.expires }} @if (method.primary) { — Primary }</div>
-                            }
-                        </div>
-                    </li>
-                }
-            </ul>
-            <button>Add Method</button>
-        </section>
-
-        <section class="recent-transactions panel">
-            <h3>Recent Transactions</h3>
-            <ul>
-                @for (tx of transactions(); track tx.name) {
-                    <li>
-                        <div class="transaction">
-                            <div class="info">
-                                <span class="name">{{ tx.name }}</span>
-                                <span class="date">{{ tx.date }}</span>
-                            </div>
-                            <span class="amount" class:credit="{{ tx.amount < 0 }}">{{ tx.amount | currency }}</span>
-                        </div>
-                    </li>
-                }
-            </ul>
-            <a class="view-all" href="#">View All Transactions</a>
-        </section>
-
-        <section class="billing-settings panel">
-            <h3>Billing Settings</h3>
-            <form>
-                <label class="setting">
-                    <input type="checkbox" [checked]="billingSettings().autoPay" />
-                    Auto-pay enabled
-                    <span class="description">Automatically charge your primary payment method</span>
-                </label>
-
-                <label class="setting">
-                    <input type="checkbox" [checked]="billingSettings().emailNotifications" />
-                    Email notifications
-                    <span class="description">Receive billing reminders and receipts</span>
-                </label>
-
-                <label class="setting">
-                    <input type="checkbox" [checked]="billingSettings().smsAlerts" />
-                    SMS alerts
-                    <span class="description">Get billing updates via text messages</span>
-                </label>
-
-                <div class="cycle">
-                    <label>Billing Cycle:</label>
-                    <span>{{ billingSettings().billingCycle }}</span>
-                </div>
-
-                <button type="submit">Save Settings</button>
-            </form>
-        </section>
-
-        <section class="wallet-panel panel">
-            <h3>Droplet Wallet</h3>
-            <div class="balance">
-                <label>Available Balance:</label>
-                <span>{{ wallet().balance | currency }}</span>
-            </div>
-
-            <div class="wallet-actions">
-                <button>Add Funds</button>
-                <button>Withdraw</button>
-            </div>
-
-            <ul class="wallet-details">
-                <li><strong>Rewards Points:</strong> {{ wallet().rewardsPoints }} pts</li>
-                <li><strong>Cashback Rate:</strong> {{ wallet().cashbackRate }}%</li>
-                <li><strong>Next Reward:</strong> {{ wallet().nextReward | currency }}</li>
-            </ul>
-        </section>
+        <ng-container *ngComponentOutlet="MethodSelectorView" />
+        <ng-container *ngComponentOutlet="TransactionListView" />
+        <ng-container *ngComponentOutlet="BillingSettingsView" />
+        <ng-container *ngComponentOutlet="WalletPanelView" />
     </div>
 </section>
