@@ -1,11 +1,17 @@
-<div class="transactions">
+<section class="recent-transactions panel" xmlns:class="http://www.w3.org/1999/xhtml">
     <h3>Recent Transactions</h3>
     <ul>
-        <li *ngFor="let tx of transactions()">
-            <span>{{ tx.date | date: 'MMM d, y' }}</span>
-            <span>{{ tx.description }}</span>
-            <span>{{ tx.amount | currency }}</span>
-        </li>
+        @for (tx of transactions(); track tx.id) {
+            <li>
+                <div class="transaction">
+                    <div class="info">
+                        <span class="name">{{ tx.name }}</span>
+                        <span class="date">{{ tx.date | date }}</span>
+                    </div>
+                    <span class="amount" class:credit="{{ tx.amount < 0 }}">{{ tx.amount | currency }}</span>
+                </div>
+            </li>
+        }
     </ul>
-    <a href="#">View All Transactions</a>
-</div>
+    <a class="view-all" href="#">View All Transactions</a>
+</section>
