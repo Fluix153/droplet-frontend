@@ -20,10 +20,14 @@
         </label>
 
         <div class="cycle">
-            <label>Billing Cycle:</label>
-            <span>{{ billingSettings().billingCycle }}</span>
+            <label for="billingCycle">Billing Cycle:</label>
+            <select id="billingCycle" [(ngModel)]="billingSettings().billingCycle">
+                <option value="Monthly">Monthly</option>
+                <option value="Weekly">Weekly</option>
+                <option value="Annually">Annually</option>
+            </select>
         </div>
 
-        <button type="submit">Save Settings</button>
+        <button class="btn-primary" type="submit">Save Settings</button>
     </form>
 </section>

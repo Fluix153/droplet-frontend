@@ -5,17 +5,15 @@
     "monthlyAverage": 189.3
   },
   "paymentMethods": [
-    { "id": 1, "type": "Visa", "last4": "4222", "expires": "12/23", "primary": true },
-    { "id": 2, "type": "Mastercard", "last4": "8811", "expires": "11/25", "primary": false },
-    { "id": 3, "type": "PayPal", "email": "user@example.com" },
-    { "id": 4, "type": "Bank Transfer", "last4": "7003" },
-    { "id": 5, "type": "Amex", "last4": "3344", "expires": "08/26", "primary": false }
+    { "id": 1, "type": "Visa", "last4": "4242", "expires": "12/25", "primary": true },
+    { "id": 2, "type": "PayPal", "email": "user@example.com" },
+    { "id": 3, "type": "Bank Transfer", "last4": "7890" }
   ],
   "transactions": [
-    { "id": 1, "name": "Monthly Service", "date": "2024-11-12", "amount": 109.5 },
-    { "id": 2, "name": "Tank Refill", "date": "2024-11-12", "amount": 75.0 },
-    { "id": 3, "name": "Maintenance Fee", "date": "2024-11-12", "amount": 34.0 },
-    { "id": 4, "name": "Refund", "date": "2024-11-12", "amount": -25.0 },
+    { "id": 1, "name": "Monthly Service", "date": "2024-12-01", "amount": 189.3 },
+    { "id": 2, "name": "Tank Refill", "date": "2024-11-28", "amount": 75.0 },
+    { "id": 3, "name": "Maintenance Fee", "date": "2024-11-25", "amount": 45.0 },
+    { "id": 4, "name": "Refund", "date": "2024-11-20", "amount": 250.0 },
     { "id": 5, "name": "Cloud Storage", "date": "2024-11-15", "amount": 12.99 },
     { "id": 6, "name": "Domain Renewal", "date": "2024-11-20", "amount": 18.0 },
     { "id": 7, "name": "Support Fee", "date": "2024-11-22", "amount": 45.0 },
@@ -24,12 +22,12 @@
   "billingSettings": {
     "autoPay": true,
     "emailNotifications": true,
-    "smsAlerts": false,
+    "smsAlerts": true,
     "billingCycle": "Monthly"
   },
   "wallet": {
-    "balance": 26.75,
-    "rewardsPoints": 2120,
+    "balance": 125.75,
+    "rewardsPoints": 2340,
     "cashbackRate": 2.5,
     "nextReward": 5.00,
     "history": [
@@ -37,5 +35,14 @@
       { "date": "2024-10-15", "earned": 1.75 },
       { "date": "2024-11-01", "earned": 2.10 }
     ]
-  }
+  },
+  "user": {
+    "name": "Jafeth",
+    "email": "jafeth@example.com",
+    "plan": "Premium"
+  },
+  "notifications": [
+    { "id": 1, "type": "billing", "message": "Your payment was successful", "date": "2024-11-15" },
+    { "id": 2, "type": "reward", "message": "You earned 2.5% cashback", "date": "2024-11-01" }
+  ]
 }

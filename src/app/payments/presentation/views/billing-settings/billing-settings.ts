@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { signal, effect } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import {FormsModule} from "@angular/forms";
 
 export interface BillingSettings {
     autoPay: boolean;
@@ -13,7 +14,7 @@ export interface BillingSettings {
 @Component({
     selector: 'app-billing-settings',
     standalone: true,
-    imports: [CommonModule],
+    imports: [CommonModule, FormsModule],
     templateUrl: './billing-settings.html',
     styleUrls: ['./billing-settings.css']
 })

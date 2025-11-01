@@ -4,15 +4,15 @@
         <p class="subtitle">Manage your billing information, payment methods, and transaction history</p>
 
         <div class="metrics">
-            <div class="metric">
+            <div class="metric-box">
                 <label>Current Balance</label>
                 <span>{{ metrics().currentBalance | currency }}</span>
             </div>
-            <div class="metric">
+            <div class="metric-box">
                 <label>Next Payment Due</label>
                 <span>{{ metrics().nextPaymentDue | date }}</span>
             </div>
-            <div class="metric">
+            <div class="metric-box">
                 <label>Monthly Average</label>
                 <span>{{ metrics().monthlyAverage | currency }}</span>
             </div>

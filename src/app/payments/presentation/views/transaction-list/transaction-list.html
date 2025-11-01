@@ -1,17 +1,15 @@
-<section class="recent-transactions panel" xmlns:class="http://www.w3.org/1999/xhtml">
+<section class="recent-transactions panel">
     <h3>Recent Transactions</h3>
-    <ul>
+    <div class="transaction-list">
         @for (tx of transactions(); track tx.id) {
-            <li>
-                <div class="transaction">
-                    <div class="info">
-                        <span class="name">{{ tx.name }}</span>
-                        <span class="date">{{ tx.date | date }}</span>
-                    </div>
-                    <span class="amount" class:credit="{{ tx.amount < 0 }}">{{ tx.amount | currency }}</span>
+            <div class="transaction-card">
+                <div class="info">
+                    <span class="name">{{ tx.name }}</span>
+                    <span class="date">{{ tx.date | date }}</span>
                 </div>
-            </li>
+                <span class="amount" [class.credit]="tx.amount < 0">{{ tx.amount | currency }}</span>
+            </div>
         }
-    </ul>
+    </div>
     <a class="view-all" href="#">View All Transactions</a>
 </section>

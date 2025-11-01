@@ -1,18 +1,39 @@
 <section class="payment-methods panel">
     <h3>Payment Methods</h3>
-    <ul>
+    <div class="method-list">
         @for (method of paymentMethods(); track method.id) {
-            <li>
-                <div class="method">
-                    <strong>{{ method.type }}</strong>
-                    @if (method.last4) { •••• {{ method.last4 }} }
-                    @if (method.email) { {{ method.email }} }
-                    @if (method.expires) {
-                        <div class="meta">Exp. {{ method.expires }} @if (method.primary) { — Primary }</div>
+            <div class="method-card">
+                <div class="method-icon">
+                    @if (method.type === 'Visa') {
+                        <img src="/assets/icons/visa.png" alt="Visa" />
+                    }
+                    @if (method.type === 'Mastercard') {
+                        <span class="icon-placeholder">MC</span>
+                    }
+                    @if (method.type === 'PayPal') {
+                        <img src="/assets/icons/paypal.png" alt="PayPal" />
+                    }
+                    @if (method.type === 'Bank Transfer') {
+                        <img src="/assets/icons/bank.png" alt="Bank Transfer" />
                     }
                 </div>
-            </li>
+
+                <div class="method-info">
+                    <div class="method-header">
+                        <strong>{{ method.type }}</strong>
+                        @if (method.last4) { <div>•••• {{ method.last4 }}</div> }
+                        @if (method.primary) {
+                            <span class="tag">Primary</span>
+                        }
+                    </div>
+                    <div class="method-details">
+
+                        @if (method.email) { <div>{{ method.email }}</div> }
+                        @if (method.expires) { <div>Expires {{ method.expires }}</div> }
+                    </div>
+                </div>
+            </div>
         }
-    </ul>
-    <button>Add Method</button>
+    </div>
+    <button class="btn-primary">Add Method</button>
 </section>

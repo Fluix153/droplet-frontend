@@ -26,7 +26,7 @@ export class MethodSelectorView {
         const http = inject(HttpClient);
 
         effect(() => {
-            http.get<PaymentMethod[]>('/server/paymentMethods').subscribe({
+            http.get<PaymentMethod[]>('http://localhost:3000/paymentMethods').subscribe({
                 next: data => this.paymentMethods.set(data),
                 error: err => console.error('Error loading payment methods:', err)
             });
