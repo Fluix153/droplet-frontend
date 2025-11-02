@@ -1,33 +1,40 @@
 <section class="billing-settings panel">
     <h3>Billing Settings</h3>
-    <form>
-        <label class="setting">
-            <input type="checkbox" [checked]="billingSettings().autoPay" />
-            Auto-pay enabled
-            <span class="description">Automatically charge your primary payment method</span>
+
+    <div class="setting-group">
+        <label class="checkbox-row">
+            <input type="checkbox" [(ngModel)]="autoPay" />
+            <div>
+                <strong>Auto-pay enabled</strong>
+                <p>Automatically charge your primary payment method</p>
+            </div>
         </label>
 
-        <label class="setting">
-            <input type="checkbox" [checked]="billingSettings().emailNotifications" />
-            Email notifications
-            <span class="description">Receive billing reminders and receipts</span>
+        <label class="checkbox-row">
+            <input type="checkbox" [(ngModel)]="emailNotifications" />
+            <div>
+                <strong>Email notifications</strong>
+                <p>Receive billing reminders and receipts</p>
+            </div>
         </label>
 
-        <label class="setting">
-            <input type="checkbox" [checked]="billingSettings().smsAlerts" />
-            SMS alerts
-            <span class="description">Get billing updates via text messages</span>
+        <label class="checkbox-row">
+            <input type="checkbox" [(ngModel)]="smsAlerts" />
+            <div>
+                <strong>SMS alerts</strong>
+                <p>Get text messages for payment confirmations</p>
+            </div>
         </label>
+    </div>
 
-        <div class="cycle">
-            <label for="billingCycle">Billing Cycle:</label>
-            <select id="billingCycle" [(ngModel)]="billingSettings().billingCycle">
-                <option value="Monthly">Monthly</option>
-                <option value="Weekly">Weekly</option>
-                <option value="Annually">Annually</option>
-            </select>
-        </div>
+    <div class="billing-cycle">
+        <label for="cycle"><strong>Billing Cycle</strong></label>
+        <select id="cycle" [(ngModel)]="billingCycle">
+            <option>Monthly</option>
+            <option>Quarterly</option>
+            <option>Annually</option>
+        </select>
+    </div>
 
-        <button class="btn-primary" type="submit">Save Settings</button>
-    </form>
+    <button class="btn-primary">Save Settings</button>
 </section>
