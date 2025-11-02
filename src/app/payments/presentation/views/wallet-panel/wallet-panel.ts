@@ -1,6 +1,5 @@
-import { Component, inject, signal, effect } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
     selector: 'app-wallet-panel',
@@ -10,12 +9,16 @@ import { HttpClient } from '@angular/common/http';
     styleUrls: ['./wallet-panel.css']
 })
 export class WalletPanelView {
-    private http = inject(HttpClient);
-    wallet = signal<any>({});
+    balance = 125.75;
+    rewardsPoints = 2340;
+    cashbackRate = 2.5;
+    nextReward = 5.0;
 
-    constructor() {
-        effect(() => {
-            this.http.get('http://localhost:3000/wallet').subscribe(data => this.wallet.set(data));
-        });
+    addFunds() {
+        console.log('Add Funds clicked');
+    }
+
+    withdraw() {
+        console.log('Withdraw clicked');
     }
 }
