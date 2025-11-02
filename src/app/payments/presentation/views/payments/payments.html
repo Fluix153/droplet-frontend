@@ -5,17 +5,29 @@
 
         <div class="metrics">
             <div class="metric-box">
-                <label>Current Balance</label>
-                <span>{{ metrics().currentBalance | currency }}</span>
+                <div>
+                    <label>Current Balance</label>
+                    <span>{{ metrics().currentBalance | currency }}</span>
+                </div>
+                <img src="/assets/icons/card.png" alt="Balance" />
             </div>
+
             <div class="metric-box">
-                <label>Next Payment Due</label>
-                <span>{{ metrics().nextPaymentDue | date }}</span>
+                <div>
+                    <label>Next Payment Due</label>
+                    <span>{{ formatDate(metrics().nextPaymentDue) }}</span>
+                </div>
+                <img src="/assets/icons/calendar.png" alt="Next Payment" />
             </div>
+
             <div class="metric-box">
-                <label>Monthly Average</label>
-                <span>{{ metrics().monthlyAverage | currency }}</span>
+                <div>
+                    <label>Monthly Average</label>
+                    <span>{{ metrics().monthlyAverage | currency }}</span>
+                </div>
+                <img src="/assets/icons/graph.png" alt="Monthly Average" />
             </div>
+
         </div>
     </header>
 
