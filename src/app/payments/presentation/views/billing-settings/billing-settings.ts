@@ -1,15 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { signal, effect } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import {FormsModule} from "@angular/forms";
-
-export interface BillingSettings {
-    autoPay: boolean;
-    emailNotifications: boolean;
-    smsAlerts: boolean;
-    billingCycle: string;
-}
 
 @Component({
     selector: 'app-billing-settings',
@@ -19,21 +10,17 @@ export interface BillingSettings {
     styleUrls: ['./billing-settings.css']
 })
 export class BillingSettingsView {
-    readonly billingSettings = signal<BillingSettings>({
-        autoPay: false,
-        emailNotifications: false,
-        smsAlerts: false,
-        billingCycle: ''
-    });
+    autoPay = true;
+    emailNotifications = true;
+    smsAlerts = false;
+    billingCycle = 'Monthly';
 
-    constructor() {
-        const http = inject(HttpClient);
-
-        effect(() => {
-            http.get<BillingSettings>('/server/billingSettings').subscribe({
-                next: data => this.billingSettings.set(data),
-                error: err => console.error('Error loading billing settings:', err)
-            });
+    saveSettings() {
+        console.log('Settings saved:', {
+            autoPay: this.autoPay,
+            emailNotifications: this.emailNotifications,
+            smsAlerts: this.smsAlerts,
+            billingCycle: this.billingCycle
         });
     }
 }
