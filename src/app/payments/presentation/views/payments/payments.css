@@ -64,3 +64,15 @@
         grid-template-columns: 1fr;
     }
 }
+.metric-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+}
+
+.metric-box img {
+    width: 32px;
+    height: 32px;
+    margin-left: 1rem;
+}
