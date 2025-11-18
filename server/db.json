@@ -184,6 +184,16 @@
       "status": "Open",
       "createdAt": "2025-10-26T15:42:58.021Z",
       "id": "tuFNa4a"
+    },
+    {
+      "subject": "TypeNew",
+      "priority": "Critical",
+      "description": "Probando nueva funcion del support",
+      "userId": "n3RfeQx",
+      "ticketNumber": "109465",
+      "status": "Open",
+      "createdAt": "2025-10-26T19:54:45.093Z",
+      "id": "ze7g8Z7"
     }
   ],
   "alerts": [
@@ -227,7 +237,6 @@
       "Message": "Agujeros en inventario de agua de proceso, riesgo de parada de producción en microcervecería.",
       "TriggeredAt": "2025-10-08T12:00:00"
     }
-
   ],
   "sensors": [
     {
@@ -310,5 +319,5 @@
       "level": 55,
       "needRefill": true
     }
-  ] 
+  ]
 }

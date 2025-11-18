@@ -1,22 +1,20 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {Tank} from '../domain/model/tank.entity';
+import { TanksApiEndpoint } from './tanks-api-endpoint';
 
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
-  private apiUrl = 'http://localhost:3001/tanks';
-
-  constructor(private http: HttpClient) {}
+  constructor(private readonly tanksEndpoint: TanksApiEndpoint) {}
 
   getInventory(): Observable<Tank[]> {
-    return this.http.get<Tank[]>(this.apiUrl);
+    return this.tanksEndpoint.getAll();
   }
 
   addTank(tank: Tank): Observable<Tank> {
-    return this.http.post<Tank>(this.apiUrl, tank);
+    return this.tanksEndpoint.create(tank);
   }
 }

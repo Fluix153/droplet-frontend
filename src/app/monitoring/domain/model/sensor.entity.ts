@@ -1,57 +1,43 @@
-export class Sensor {
-  private _id: number;
-  private _DeviceCod: string;
-  private _Type: string;
-  private _Location: string;
-  private _Status: string;
+import { BaseEntity } from '../../../shared/infrastructure/base-entity';
 
-  constructor(Sensor:{id: number, DeviceCod: string,
-    Type: string, Location: string, Status: string}) {
-    this._id = Sensor.id;
-    this._DeviceCod = Sensor.DeviceCod;
-    this._Type = Sensor.Type;
-    this._Location = Sensor.Location;
-    this._Status = Sensor.Status;
+type SensorInit = {
+  id: number;
+  DeviceCod: string;
+  Type: string;
+  Location: string;
+  Status: string;
+};
+
+export class Sensor implements BaseEntity {
+  private constructor(private readonly props: SensorInit) {}
+
+  static create(input: SensorInit): Sensor {
+    return new Sensor({
+      id: input.id,
+      DeviceCod: input.DeviceCod,
+      Type: input.Type,
+      Location: input.Location,
+      Status: input.Status
+    });
   }
-
 
   get id(): number {
-    return this._id;
-  }
-
-  set id(value: number) {
-    this._id = value;
+    return this.props.id;
   }
 
   get DeviceCod(): string {
-    return this._DeviceCod;
-  }
-
-  set DeviceCod(value: string) {
-    this._DeviceCod = value;
+    return this.props.DeviceCod;
   }
 
   get Type(): string {
-    return this._Type;
-  }
-
-  set Type(value: string) {
-    this._Type = value;
+    return this.props.Type;
   }
 
   get Location(): string {
-    return this._Location;
-  }
-
-  set Location(value: string) {
-    this._Location = value;
+    return this.props.Location;
   }
 
   get Status(): string {
-    return this._Status;
-  }
-
-  set Status(value: string) {
-    this._Status = value;
+    return this.props.Status;
   }
 }

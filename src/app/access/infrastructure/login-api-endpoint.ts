@@ -1,48 +1,23 @@
-import { Injectable, inject } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { LoginCredentialsDto, LoginResponseDto } from './login-response';
-import { LoginAssembler } from './login-assembler';
+import { LoginCredentialsDto } from './login-response';
 import { User } from '../domain/models/user.entity';
-import { environment } from '../../../environments/environment.dev';
+import { UsersApiEndpoint } from './users-api-endpoint';
 
 @Injectable({ providedIn: 'root' })
 export class LoginApiEndpoint {
-  private readonly apiUrl = environment.apiBaseUrl;
-  private readonly loginAssembler = inject(LoginAssembler);
-
-  constructor(private http: HttpClient) {}
+  constructor(private readonly usersEndpoint: UsersApiEndpoint) {}
 
   /**
    * Realiza el login del usuario simulado con json-server
    * Busca el usuario en la base de datos por email y password
    */
   login(credentials: LoginCredentialsDto): Observable<{ accessToken: string; user: User }> {
-    const params = new HttpParams()
-      .set('email', credentials.email)
-      .set('password', credentials.password);
-
-    return this.http.get<any[]>(`${this.apiUrl}/users`, { params }).pipe(
-      map(users => {
-        if (!users || users.length === 0) {
-          throw new Error('Credenciales inválidas');
-        }
-
-        const userData = users[0];
-
-        // Validar que el usuario tenga todos los campos requeridos
-        if (!userData.id || !userData.name || !userData.email || !userData.role) {
-          throw new Error('Usuario incompleto en la base de datos');
-        }
-
-        // Simular un token de acceso
-        const fakeToken = btoa(`${userData.email}:${Date.now()}`);
-
-        return {
-          accessToken: fakeToken,
-          user: this.loginAssembler.toEntity(userData)
-        };
-      })
+    return this.usersEndpoint.findByCredentials(credentials).pipe(
+      map(user => ({
+        accessToken: this.generateToken(user.email),
+        user
+      }))
     );
   }
 
@@ -54,6 +29,10 @@ export class LoginApiEndpoint {
       observer.next();
       observer.complete();
     });
+  }
+
+  private generateToken(email: string): string {
+    return btoa(`${email}:${Date.now()}`);
   }
 }
 
