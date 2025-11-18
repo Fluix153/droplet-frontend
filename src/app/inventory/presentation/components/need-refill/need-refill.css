@@ -1,0 +1,18 @@
+.refill-list {
+  background-color: #ffffff;
+  border: 2px solid #0891b2;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.refill-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.refill-list li {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #333333;
+}

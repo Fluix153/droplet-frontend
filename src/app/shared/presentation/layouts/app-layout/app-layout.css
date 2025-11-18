@@ -1,0 +1,19 @@
+.sidenav-container { height: 100vh; }
+
+.sidenav {
+  border-color: #06B6D4;
+  width: 15.938rem;
+}
+
+.sidenav-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.main-content {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+}

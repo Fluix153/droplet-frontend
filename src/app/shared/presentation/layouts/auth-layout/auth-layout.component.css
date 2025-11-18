@@ -1,0 +1,12 @@
+.auth-layout-container {
+  background: linear-gradient(135deg, #F3F4F6 0%, #F0FDF4 100%);
+}
+
+.auth-layout-header {
+
+}
+
+.main-content {
+  display: flex;
+  justify-content: center;
+}

@@ -1,0 +1,70 @@
+{
+  "auth": {
+    "login": {
+      "title": "Bienvenido a Droplet",
+      "subtitle": "Inicia sesión en tu panel de gestión",
+      "labelEmail": "Dirección de Correo Electrónico",
+      "inputEmail": "Introduce tu correo electrónico",
+      "labelPassword": "Contraseña",
+      "inputPassword": "Introduce tu contraseña",
+      "rememberMe": "Recuérdame",
+      "forgotPassword": "¿Olvidaste tu contraseña?",
+      "signInButton": "Iniciar Sesión",
+      "noAccount": "¿No tienes una cuenta?",
+      "regLink": "Regístrate",
+      "divText": "O continúa con"
+    },
+    "register": {
+      "title": "Regístrate en Droplet",
+      "subtitle": "Crea tu cuenta",
+      "labelName": "Nombre",
+      "inputName": "Introduce tu nombre",
+      "labelLastName": "Apellido",
+      "inputLastName": "Introduce tu apellido",
+      "labelEmail": "Dirección de Correo Electrónico",
+      "inputEmail": "Introduce tu correo electrónico",
+      "labelPhone": "Número de Teléfono",
+      "inputPhone": "Introduce tu número de teléfono",
+      "labelPassword": "Contraseña",
+      "inputPassword": "Crea una contraseña",
+      "labelConfirmPassword": "Confirmar Contraseña",
+      "inputConfirmPassword": "Confirma tu contraseña",
+      "labelRole": "Tipo de Cuenta",
+      "inputRole": "Selecciona tu tipo de cuenta",
+      "roleHoldHead": "Jefe de Hogar",
+      "roleBrewmaster": "Maestro Cervecero",
+      "roleAdmin": "Administrador",
+      "text1T": "Estoy de acuerdo con los",
+      "link1T": "Términos de Servicio",
+      "text2T": "y ",
+      "link2T": "Política de Privacidad",
+      "btn": "Crear Cuenta",
+      "haveAccount": "¿Ya tienes una cuenta? ",
+      "loginLink": "Iniciar Sesión",
+      "divText": "O regístrate con"
+    },
+    "forgot": {
+      "title": "Recupera tu contraseña",
+      "subtitle": "Introduce tu dirección de correo electrónico y te enviaremos un enlace para restablecer tu contraseña",
+      "labelEmail": "Correo Electrónico",
+      "inputEmail": "Introduce tu dirección de correo electrónico",
+      "forgotBtn": "Enviar Enlace",
+      "backToLogin": "Volver al Inicio de Sesión"
+    }
+  },
+  "dashboard": {
+    "welcome": "Bienvenido al Panel",
+    "logout": "Cerrar Sesión"
+  },
+  "shared": {
+    "buttons": {
+      "save": "Guardar",
+      "cancel": "Cancelar",
+      "delete": "Eliminar"
+    },
+    "messages": {
+      "loading": "Cargando...",
+      "error": "Ocurrió un error. Por favor, inténtalo de nuevo."
+    }
+  }
+}

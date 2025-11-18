@@ -1,0 +1,52 @@
+<mat-card class="forgot-password-card">
+    <mat-card-header class="mat-card-header">
+        <img ngSrc="/icons/droplet_logo.svg" width="156" height="56" alt="Droplet Logo"
+             class="forgot-password-logo">
+        <div class="forgot-password-header">
+            <h1 class="forgot-password-title">{{ 'auth.forgot.title' | translate }}</h1>
+            <p class="forgot-password-subtitle">{{ 'auth.forgot.subtitle' | translate}}</p>
+        </div>
+    </mat-card-header>
+
+    <mat-card-content class="card-content-forgot-password">
+        <form [formGroup]="forgotPasswordForm" class="forgot-password-form" (ngSubmit)="onSubmit()">
+            <!-- Email Field -->
+            <mat-label>{{ 'auth.forgot.labelEmail' | translate }}</mat-label>
+            <mat-form-field appearance="outline" class="form-field">
+                <input matInput type="email" formControlName="email" [placeholder]=" 'auth.forgot.inputEmail' | translate "
+                       aria-label="Email" aria-describedby="emailError">
+                <mat-icon matSuffix>email</mat-icon>
+            </mat-form-field>
+
+            <!-- Success Message -->
+            @if (successMessage) {
+                <div class="success-message">{{ successMessage }}</div>
+            }
+
+            <!-- Error Message -->
+            @if (errorMessage) {
+                <div class="error-message">{{ errorMessage }}</div>
+            }
+
+            <!-- Submit Button -->
+            <button mat-raised-button color="primary" type="submit"
+                    class="send-reset-button" [disabled]="isLoading || !forgotPasswordForm.valid"
+                    aria-label="Send Reset Link" style="width: 100%;">
+                @if (!isLoading) {
+                    <span>{{ 'auth.forgot.forgotBtn' | translate }}</span>
+                }
+                @if (isLoading) {
+                    <span>Sending...</span>
+                }
+            </button>
+
+            <!-- Back to Login Link -->
+            <div class="back-to-login">
+                <button mat-button type="button" (click)="goBackToLogin()" class="back-button">
+                    <mat-icon>arrow_back</mat-icon>
+                  {{ 'auth.forgot.backToLogin' | translate }}
+                </button>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>
