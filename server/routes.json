@@ -2,7 +2,7 @@
   "/methods": "/paymentMethods",
   "/transactions": "/transactions",
   "/settings": "/billingSettings",
-  "/wallet": "/wallet".
+  "/wallet": "/wallet",
   "/api/auth/login": "/users",
   "/api/auth/register": "/users"
 }

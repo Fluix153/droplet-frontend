@@ -1,51 +1,4 @@
 {
-  "metrics": {
-    "currentBalance": 247.5,
-    "nextPaymentDue": "2025-12-15",
-    "monthlyAverage": 189.3
-  },
-  "paymentMethods": [
-    { "id": 1, "type": "Visa", "last4": "4242", "expires": "12/25", "primary": true },
-    { "id": 2, "type": "PayPal", "email": "user@example.com" },
-    { "id": 3, "type": "Bank Transfer", "last4": "7890" }
-  ],
-  "transactions": [
-    { "id": 1, "name": "Monthly Service", "date": "2024-12-01", "amount": 189.3 },
-    { "id": 2, "name": "Tank Refill", "date": "2024-11-28", "amount": 75.0 },
-    { "id": 3, "name": "Maintenance Fee", "date": "2024-11-25", "amount": 45.0 },
-    { "id": 4, "name": "Refund", "date": "2024-11-20", "amount": 250.0 },
-    { "id": 5, "name": "Cloud Storage", "date": "2024-11-15", "amount": 12.99 },
-    { "id": 6, "name": "Domain Renewal", "date": "2024-11-20", "amount": 18.0 },
-    { "id": 7, "name": "Support Fee", "date": "2024-11-22", "amount": 45.0 },
-    { "id": 8, "name": "Referral Bonus", "date": "2024-11-25", "amount": -10.0 }
-  ],
-  "billingSettings": {
-    "autoPay": true,
-    "emailNotifications": true,
-    "smsAlerts": true,
-    "billingCycle": "Monthly"
-  },
-  "wallet": {
-    "balance": 125.75,
-    "rewardsPoints": 2340,
-    "cashbackRate": 2.5,
-    "nextReward": 5.00,
-    "history": [
-      { "date": "2024-10-01", "earned": 3.25 },
-      { "date": "2024-10-15", "earned": 1.75 },
-      { "date": "2024-11-01", "earned": 2.10 }
-    ]
-  },
-  "user": {
-    "name": "Jafeth",
-    "email": "jafeth@example.com",
-    "plan": "Premium"
-  },
-  "notifications": [
-    { "id": 1, "type": "billing", "message": "Your payment was successful", "date": "2024-11-15" },
-    { "id": 2, "type": "reward", "message": "You earned 2.5% cashback", "date": "2024-11-01" }
-  ]
-}
   "users": [
     {
       "id": "u_000",
@@ -184,16 +137,6 @@
       "status": "Open",
       "createdAt": "2025-10-26T15:42:58.021Z",
       "id": "tuFNa4a"
-    },
-    {
-      "subject": "TypeNew",
-      "priority": "Critical",
-      "description": "Probando nueva funcion del support",
-      "userId": "n3RfeQx",
-      "ticketNumber": "109465",
-      "status": "Open",
-      "createdAt": "2025-10-26T19:54:45.093Z",
-      "id": "ze7g8Z7"
     }
   ],
   "alerts": [
@@ -237,6 +180,7 @@
       "Message": "Agujeros en inventario de agua de proceso, riesgo de parada de producción en microcervecería.",
       "TriggeredAt": "2025-10-08T12:00:00"
     }
+
   ],
   "sensors": [
     {
@@ -319,5 +263,51 @@
       "level": 55,
       "needRefill": true
     }
+  ],
+  "metrics": {
+    "currentBalance": 247.5,
+    "nextPaymentDue": "2025-12-15",
+    "monthlyAverage": 189.3
+  },
+  "paymentMethods": [
+    { "id": 1, "type": "Visa", "last4": "4242", "expires": "12/25", "primary": true },
+    { "id": 2, "type": "PayPal", "email": "user@example.com" },
+    { "id": 3, "type": "Bank Transfer", "last4": "7890" }
+  ],
+  "transactions": [
+    { "id": 1, "name": "Monthly Service", "date": "2024-12-01", "amount": 189.3 },
+    { "id": 2, "name": "Tank Refill", "date": "2024-11-28", "amount": 75.0 },
+    { "id": 3, "name": "Maintenance Fee", "date": "2024-11-25", "amount": 45.0 },
+    { "id": 4, "name": "Refund", "date": "2024-11-20", "amount": 250.0 },
+    { "id": 5, "name": "Cloud Storage", "date": "2024-11-15", "amount": 12.99 },
+    { "id": 6, "name": "Domain Renewal", "date": "2024-11-20", "amount": 18.0 },
+    { "id": 7, "name": "Support Fee", "date": "2024-11-22", "amount": 45.0 },
+    { "id": 8, "name": "Referral Bonus", "date": "2024-11-25", "amount": -10.0 }
+  ],
+  "billingSettings": {
+    "autoPay": true,
+    "emailNotifications": true,
+    "smsAlerts": true,
+    "billingCycle": "Monthly"
+  },
+  "wallet": {
+    "balance": 125.75,
+    "rewardsPoints": 2340,
+    "cashbackRate": 2.5,
+    "nextReward": 5.00,
+    "history": [
+      { "date": "2024-10-01", "earned": 3.25 },
+      { "date": "2024-10-15", "earned": 1.75 },
+      { "date": "2024-11-01", "earned": 2.10 }
+    ]
+  },
+  "user": {
+    "name": "Jafeth",
+    "email": "jafeth@example.com",
+    "plan": "Premium"
+  },
+  "notifications": [
+    { "id": 1, "type": "billing", "message": "Your payment was successful", "date": "2024-11-15" },
+    { "id": 2, "type": "reward", "message": "You earned 2.5% cashback", "date": "2024-11-01" }
   ]
 }

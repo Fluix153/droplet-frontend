@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 
-export const paymentsRoutes: Routes = [
+export const PAYMENTS_ROUTES: Routes = [
     {
         path: '',
         loadComponent: () => import('./payments/payments').then(m => m.PaymentsView)

@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { paymentsRoutes } from './payments/presentation/views/payments.routes';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/auth/login', pathMatch: 'full',},
@@ -17,6 +16,8 @@ export const routes: Routes = [
         title: 'Inventory' },
       { path: 'monitoring', loadChildren: () => import('./monitoring/presentation/views/monitoring.routes').then(m => m.MONITORING_ROUTES),
         title: 'Monitoring' },
+      { path: 'payments', loadChildren: () => import('./payments/presentation/views/payments.routes').then(m => m.PAYMENTS_ROUTES),
+        title: 'Payments' },
     ],
   },
   { path: '**', loadComponent: () => import('./shared/presentation/views/page-not-found/page-not-found').then(m => m.PageNotFound),
