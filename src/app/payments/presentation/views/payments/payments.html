@@ -1,0 +1,40 @@
+<section class="dashboard">
+    <header class="summary">
+        <h2>Billing & Payments</h2>
+        <p class="subtitle">Manage your billing information, payment methods, and transaction history</p>
+
+        <div class="metrics">
+            <div class="metric-box">
+                <div>
+                    <label>Current Balance</label>
+                    <span>{{ metrics().currentBalance | currency }}</span>
+                </div>
+                <img src="/assets/icons/card.png" alt="Balance" />
+            </div>
+
+            <div class="metric-box">
+                <div>
+                    <label>Next Payment Due</label>
+                    <span>{{ formatDate(metrics().nextPaymentDue) }}</span>
+                </div>
+                <img src="/assets/icons/calendar.png" alt="Next Payment" />
+            </div>
+
+            <div class="metric-box">
+                <div>
+                    <label>Monthly Average</label>
+                    <span>{{ metrics().monthlyAverage | currency }}</span>
+                </div>
+                <img src="/assets/icons/graph.png" alt="Monthly Average" />
+            </div>
+
+        </div>
+    </header>
+
+    <div class="panel-grid">
+        <ng-container *ngComponentOutlet="MethodSelectorView" />
+        <ng-container *ngComponentOutlet="TransactionListView" />
+        <ng-container *ngComponentOutlet="BillingSettingsView" />
+        <ng-container *ngComponentOutlet="WalletPanelView" />
+    </div>
+</section>

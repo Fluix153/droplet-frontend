@@ -1,0 +1,23 @@
+<section class="wallet-panel panel">
+    <h3>Droplet Wallet</h3>
+
+    <div class="wallet-icon">
+        <img src="/assets/icons/wallet.png" alt="Wallet" />
+    </div>
+
+    <div class="wallet-balance">
+        <strong class="amount">${{ balance.toFixed(2) }}</strong>
+        <span class="label">Available Balance</span>
+    </div>
+
+    <div class="wallet-actions">
+        <button class="btn-primary">Add Funds</button>
+        <button class="btn-secondary">Withdraw</button>
+    </div>
+
+    <div class="wallet-summary">
+        <div><strong>Rewards Points:</strong> {{ rewardsPoints }} pts</div>
+        <div><strong>Cashback Rate:</strong> {{ cashbackRate }}%</div>
+        <div><strong>Next Reward:</strong> ${{ nextReward.toFixed(2) }}</div>
+    </div>
+</section>
